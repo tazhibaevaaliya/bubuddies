@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class UserDetails {
     static String username = "";
-    static String password = "";
-    static String chatWith = "";
+    static String chatwithid = "";
+    static String chatwithname = "";
     static ArrayList<String> contacts = null;
     static String uid = "";
 }

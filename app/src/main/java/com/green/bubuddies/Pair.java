@@ -64,6 +64,8 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
             curr_user = "0srmamAQZ6NkALd7JzqBRickByF3";
         }
 
+        UserDetails.uid = curr_user;
+
         //initialize references to views
         txt_name = findViewById(R.id.txt_name);
         txt_bio = findViewById(R.id.txt_bio);
@@ -227,7 +229,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
                 startActivity(new Intent(Pair.this, MainActivity.class)); // can remove this line
                 break;
             case (BottomMenu.MESSAGE):
-                startActivity(new Intent(Pair.this, MainActivity.class));
+                startActivity(new Intent(Pair.this, Users.class));
                 break;
             case (BottomMenu.STORE):
                 startActivity(new Intent(Pair.this, MainActivity.class));
@@ -236,9 +238,14 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
     }
 
     @Override
-    public void newConversation(String msg){
+    public void newConversation(){
         //code here to add user as a friend
-        startActivity(new Intent(Pair.this, MainActivity.class)); // change to messaging tab.
+        Intent i = new Intent(Pair.this,Chat.class);
+//        i.putExtra("uid",curr_user);
+        i.putExtra("chatwithid",pair_user);
+//        Log.e("Passing uid",curr_user);
+        Log.e("Passing chatwithid", pair_user);
+        startActivity(i); // change to messaging tab.
     }
 
 }

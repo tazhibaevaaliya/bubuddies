@@ -39,7 +39,7 @@ public class Chat extends AppCompatActivity {
     ScrollView scrollView;
     String selfimg,img;
     ArrayList<Message> messages = new ArrayList<>();
-    FirebaseAuth fauth;
+//    FirebaseAuth fauth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,23 +50,35 @@ public class Chat extends AppCompatActivity {
 
         sendButton = findViewById(R.id.sendButton);
         messageArea = findViewById(R.id.messageArea);
+
 //        msgList = findViewById(R.id.msgList);
 
+        Log.e("uid before get",UserDetails.uid);
+        Log.e("chatwithid before get", UserDetails.chatwithid);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras!= null) {
+            UserDetails.chatwithid = extras.getString("chatwithid");
+        } else {
+        }
+
+        Log.e("uid after get",UserDetails.uid);
+        Log.e("chatwithid after get", UserDetails.chatwithid);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        fauth = FirebaseAuth.getInstance();
-        UserDetails.uid = fauth.getCurrentUser().getUid();
+//        fauth = FirebaseAuth.getInstance();
+//        UserDetails.uid = fauth.getCurrentUser().getUid();
 
-        DatabaseReference getName = FirebaseDatabase.getInstance().getReference("Profiles").child(UserDetails.uid);
-        getName.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserDetails.username = snapshot.child("name").getValue().toString();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+//        DatabaseReference getName = FirebaseDatabase.getInstance().getReference("Profiles").child(UserDetails.uid);
+//        getName.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                UserDetails.username = snapshot.child("name").getValue().toString();
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
 
 
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -77,15 +89,14 @@ public class Chat extends AppCompatActivity {
                 if(!messageText.equals("")){
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("user", UserDetails.username);
+                    map.put("user", UserDetails.uid);
                     // put the info of user and message to the database
 
-                    if(!UserDetails.contacts.contains(UserDetails.chatWith)) {
-                        reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.chatWith);
-                        reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.username);
+                    if(!UserDetails.contacts.contains(UserDetails.chatwithid)) {
+                        reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.chatwithid);
                     }
-                    reference.child("Messages").child(UserDetails.username + "_" + UserDetails.chatWith).push().setValue(map);
-                    reference.child("Messages").child(UserDetails.chatWith + "_" + UserDetails.username).push().setValue(map);
+                    reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).push().setValue(map);
+                    reference.child("Messages").child(UserDetails.chatwithid + "_" + UserDetails.uid).push().setValue(map);
                     InputMethodManager imm = (InputMethodManager) Chat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(),0);
                     messageArea.setText("");
@@ -93,7 +104,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-        reference.child("Profile").child(UserDetails.uid).child("picture").addValueEventListener(new ValueEventListener() {
+        reference.child("Profiles").child(UserDetails.uid).child("picture").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 selfimg = snapshot.getValue().toString();
@@ -106,7 +117,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-        reference.child("Users").child(UserDetails.chatWith).child("img").addValueEventListener(new ValueEventListener() {
+        reference.child("Profiles").child(UserDetails.chatwithid).child("picture").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 img = snapshot.getValue().toString();
@@ -123,7 +134,7 @@ public class Chat extends AppCompatActivity {
 //        msgList.setAdapter(adapter);
 
         // Get the previous msgs
-        reference.child("Messages").child(UserDetails.username + "_" + UserDetails.chatWith).addChildEventListener(new ChildEventListener() {
+        reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String message = snapshot.child("message").getValue().toString();
@@ -132,11 +143,11 @@ public class Chat extends AppCompatActivity {
 //                Log.e("msg",snapshot.child("message").getValue().toString());
                 Log.e("msg",messages.toString());
 //                adapter.notifyDataSetChanged();
-                if(userName.equals(UserDetails.username)){
+                if(userName.equals(UserDetails.uid)){
                     addMessageBox("You: " + message, 1);
                 }
                 else{
-                    addMessageBox(UserDetails.chatWith + ": " + message, 2);
+                    addMessageBox(UserDetails.chatwithname + ": " + message, 2);
                 }
             }
 

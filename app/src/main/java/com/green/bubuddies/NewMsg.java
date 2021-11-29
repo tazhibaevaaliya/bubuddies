@@ -51,13 +51,13 @@ public class NewMsg extends Fragment {
         btn_newMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentAct.newConversation(txt_msg.getText().toString());
+                currentAct.newConversation();
             }
         });
     }
 
     public interface newMsgActivity {
-        void newConversation(String msg);
+        void newConversation();
     }
 
     public void onAttach(Context c){

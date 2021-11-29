@@ -157,7 +157,10 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
                 startActivity(i);
                 break;
             case (BottomMenu.MESSAGE):
-                startActivity(new Intent(MainActivity.this, User.class));
+                Log.d("Messaging", "Starting message Activity");
+                i = new Intent(MainActivity.this, Users.class);
+                i.putExtra("UID",string_uid);
+                startActivity(i);
                 break;
             case (BottomMenu.STORE):
                 startActivity(new Intent(MainActivity.this, StoreActivity.class));

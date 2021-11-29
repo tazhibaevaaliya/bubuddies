@@ -28,7 +28,7 @@ public class BottomMenu extends Fragment {
     private Button btn_store;
 
     //Reference to context containing the BtmMenu
-    private BtmMenuActivity currentAct;
+    public BtmMenuActivity currentAct;
 
     public BottomMenu() {
         // Required empty public constructor
