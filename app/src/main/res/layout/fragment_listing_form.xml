@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.green.bubuddies.Listing_form">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Textbook Full Name"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            />
+
+        <EditText
+            android:id="@+id/txtListedBookName"
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Title of the Book"
+            android:layout_marginLeft="30dp"
+            />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:text="Selling Price" />
+
+        <EditText
+            android:id="@+id/txtListedBookPrice"
+            android:layout_width="258dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Price of the Book" />
+
+        <Button
+            android:id="@+id/btnPost"
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="30dp"
+            android:text="Post" />
+    </LinearLayout>
+
+</FrameLayout>
