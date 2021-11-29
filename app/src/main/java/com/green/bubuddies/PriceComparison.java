@@ -14,9 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,25 +32,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class fragment_eBay extends Fragment {
+
+public class PriceComparison extends AppCompatActivity {
 
     private Button btnFind;
+    public String url;
+    TextView txtBookName;
     static ArrayList<String> names;
     static ArrayList<String> prices;
     private ListView lv_items;
     private ListAdapter lvAdapter;
-    TextView txtBookName;
-    public String url;
 
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ebay,container,false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_price_compare);
+
 
         //Boiler Plate: creating Views
-        btnFind = (Button) view.findViewById(R.id.btnFindPrice);
-        txtBookName = (TextView) view.findViewById(R.id.txtBookName);
-        lv_items = (ListView) view.findViewById(R.id.lv_items);
+        btnFind = (Button) findViewById(R.id.btnFindPrice);
+        txtBookName = (TextView) findViewById(R.id.txtBookName);
+        lv_items = (ListView) findViewById(R.id.lv_items);
 
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +61,7 @@ public class fragment_eBay extends Fragment {
                 //url = "https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=" + txtBookName.getText().toString()+"&limit=5";
                 //https://api.ebay.com/buy/browse/v1/item_summary/search?q=drone&limit=3
 //                token = "AgAAAA**AQAAAA**aAAAAA**OmmcYQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4aiDZmKoQqdj6x9nY+seQ**R7YFAA**AAMAAA**yIdyYgpPLCGK2ybuko9Ykb8/eSIls1Oxc+f5F5qRNAw/m3xw4oJQAFX75v2uWnQsipBQmF7fAlb9zzsoVCzT1Q5Pm+tiod2raJh2gXX9USrwo4IB7YjwDishK21d8CKhu4DCXrgEFSIlq/+6KOcMF2nVnS8J6jci3/R9MzwyaJM6ydeBu/3zxRP+3FVoVgpMiDw73cV5xiJaWb2XZZxM7QpU5ae+WD8CXdCkO6/XB1VHrNSfQrJn+tl5Fv0kWtD/iwqxCcQ6ZEca2vHMuSRkvweiisUQGY5eRRNDLY6L1N2W1RYaOcCXmpi56GY6kGntVM7WlRJ2+tXDikSbpxiAE3bwuA9aGpS0f01KpyRE4k/kQoOiJxlP9embaVwBys2R4yP4VNHwiaXd7nluInunCXP+voSkeEe1rKGDLOafGBCSCeJm58rjaG+YpQy70n8Ou84ikRa5Yj6hNm3drssoOZ7I6oBvc9wKgwFE98RO3bXc19vH/EQ16qDmsEOP3NpHojR1IJLd2EyKDPnU0P5oSAY4EtgVPfeF8a7E7+56Bv9OzxOvC+//lSVgm6s3vJl4pnayiIhQS537IohuzfzrHhu/+YfyPQvSZ9/+X112PXarOdHp3BpA+VPS3lvGUwSDzBX+TebC5awjz4SxsrYYKcb+y0sjPH4xBQAkt6p5B/M1zOfyLB+l+BGFY0YGjXX1aiFkBCJ6tmXVLstcxg3viAsLONwTWkv7q5YuJMHwRNWyv+bWcDClaw11c7gjm18y";
-                RequestQueue queue = Volley.newRequestQueue(getContext()); // preparing the request object and requesting a queue using Volley library
+                RequestQueue queue = Volley.newRequestQueue(getBaseContext()); // preparing the request object and requesting a queue using Volley library
                 url = "https://ebay-search.p.rapidapi.com/search.php?query="+txtBookName.getText().toString(); // inserting the query parameter (name of object)
                 // from user input to TextView "txtBookName"
 
@@ -81,12 +82,12 @@ public class fragment_eBay extends Fragment {
                                 parseData(items); //parse the data
 
                                 if(names.size()!=0){
-                                    lvAdapter = new MyCustomAdapter(getContext());  //instead of passing the boring default string adapter, let's pass our own, see class MyCustomAdapter below!
+                                    lvAdapter = new MyCustomAdapter(getBaseContext());  //instead of passing the boring default string adapter, let's pass our own, see class MyCustomAdapter below!
                                     lv_items.setAdapter(lvAdapter);
-                                    Toast.makeText(getContext(),"Successful",Toast.LENGTH_SHORT).show(); //displaying a success message in the case of
+                                    Toast.makeText(getBaseContext(),"Successful",Toast.LENGTH_SHORT).show(); //displaying a success message in the case of
                                 }
                                 else{
-                                    Toast.makeText(getContext(), "No items found! Try something else!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getBaseContext(), "No items found! Try something else!", Toast.LENGTH_LONG).show();
                                 }
 
                                 // successful request of an API
@@ -95,7 +96,7 @@ public class fragment_eBay extends Fragment {
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),"It did not work!",Toast.LENGTH_SHORT).show(); //displaying an error message in the case of
+                        Toast.makeText(getBaseContext(),"It did not work!",Toast.LENGTH_SHORT).show(); //displaying an error message in the case of
                         //failure to get an access an API
                     }
                 })
@@ -116,7 +117,6 @@ public class fragment_eBay extends Fragment {
             }
 
         });
-        return view;
     }
 
     private void parseData(JSONArray items){
@@ -149,8 +149,8 @@ public class fragment_eBay extends Fragment {
 class MyCustomAdapter extends BaseAdapter {
 
     private
-    String[] titles = new String[fragment_eBay.names.size()];             //Keeping it simple.  Using Parallel arrays is the introductory way to store the List data.
-    String[]  prices = new String[fragment_eBay.prices.size()];  //the "better" way is to encapsulate the list items into an object, then create an arraylist of objects.
+    String[] titles = new String[PriceComparison.names.size()];             //Keeping it simple.  Using Parallel arrays is the introductory way to store the List data.
+    String[]  prices = new String[PriceComparison.prices.size()];  //the "better" way is to encapsulate the list items into an object, then create an arraylist of objects.
     //     int episodeImages[];         //this approach is fine for now.
     ArrayList<Integer> episodeImages;  //Well, we can use one arrayList too...  Just mixing it up here, Arrays or Templated ArrayLists, you choose.
 
@@ -170,9 +170,9 @@ class MyCustomAdapter extends BaseAdapter {
 //        episodes =aContext.getResources().getStringArray(R.array.episodes);  //retrieving list of episodes predefined in strings-array "episodes" in strings.xml
 //        episodeDescriptions = aContext.getResources().getStringArray(R.array.episode_descriptions);
 
-        for(int i=0; i<fragment_eBay.names.size();i++){
-            titles[i] = fragment_eBay.names.get(i);
-            prices[i] = fragment_eBay.prices.get(i);
+        for(int i=0; i<PriceComparison.names.size();i++){
+            titles[i] = PriceComparison.names.get(i);
+            prices[i] = PriceComparison.prices.get(i);
         }
 
     }
