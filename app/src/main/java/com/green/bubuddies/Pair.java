@@ -104,6 +104,10 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 gradYear = snapshot.child("graduationYear").getValue(String.class);
+                for (DataSnapshot child: snapshot.child("classes").getChildren()){
+                    String data = child.getKey();
+                    classList.add(data);
+                }
             }
 
             @Override
@@ -111,12 +115,11 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
 
             }
         });
-        ref.child(curr_user).child("classes").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Users").child(curr_user).child("Contacts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    String data = child.getKey();
-                    classList.add(data);
+                    deniedMates.add(child.getValue(String.class));
                 }
                 findPair2();
             }
