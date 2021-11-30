@@ -1,6 +1,8 @@
 package com.green.bubuddies;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,6 +53,17 @@ public class StoreActivity extends AppCompatActivity {
                 createNewListingWindow();
             }
         });
+        Toast.makeText(StoreActivity.this, "check out intent starting in 5 seconds", Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(StoreActivity.this, "check out intent starts", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(StoreActivity.this,CheckoutActivity.class);
+                String listId = "-MpOoxYKfvW1Kk3HphAt"; //example
+                i.putExtra("ListingID", listId);
+                startActivity(i);
+            }
+        }, 5000);
 
     }
 
@@ -68,6 +81,10 @@ public class StoreActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.shopping_cart:
                 Toast.makeText(StoreActivity.this, "check out intent starts", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(StoreActivity.this, CheckoutActivity.class);
+                String listId = "-MpOoxYKfvW1Kk3HphAt"; //example
+                i.putExtra("ListingID", listId);
+                startActivity(i);
                 break;
             case R.id.new_listing:
                 //calling a new intent for listing form

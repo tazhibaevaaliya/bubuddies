@@ -5,15 +5,19 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1203125" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.20199275362318841" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/activity_pair.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.10520833333333333" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.10520833333333333" />
-        <entry key="app/src/main/res/layout/activity_store.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/layout/activity_store.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_users.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_bottom_menu.xml" value="0.13722826086956522" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.20199275362318841" />
+        <entry key="app/src/main/res/layout/fragment_main2.xml" value="0.20199275362318841" />
         <entry key="app/src/main/res/layout/fragment_new_msg.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/layout/fragment_store.xml" value="0.20199275362318841" />
         <entry key="app/src/main/res/layout/userlist_row.xml" value="0.1" />
         <entry key="app/src/main/res/menu/contextual_menu.xml" value="0.2171875" />
       </map>
