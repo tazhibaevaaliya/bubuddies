@@ -1,18 +1,3 @@
-/*
- * Copyright 2020 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.green.bubuddies;
 
@@ -93,6 +78,7 @@ public class CheckoutActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
 
     listingID = getIntent().getExtras().getString("ListingID");
+    if(listingID == null) listingID = "-MpOoxYKfvW1Kk3HphAt";
 
     initializeUi();
 
@@ -112,13 +98,13 @@ public class CheckoutActivity extends AppCompatActivity {
     // The Google Pay button is a layout file – take the root view
     googlePayButton = layoutBinding.googlePayButton.getRoot();
     googlePayButton.setOnClickListener(
-        new View.OnClickListener() {
-          @RequiresApi(api = Build.VERSION_CODES.N)
-          @Override
-          public void onClick(View view) {
-            requestPayment(view);
-          }
-        });
+            new View.OnClickListener() {
+              @RequiresApi(api = Build.VERSION_CODES.N)
+              @Override
+              public void onClick(View view) {
+                requestPayment(view);
+              }
+            });
   }
 
   private void displayProduct() {
@@ -179,16 +165,16 @@ public class CheckoutActivity extends AppCompatActivity {
     IsReadyToPayRequest request = IsReadyToPayRequest.fromJson(isReadyToPayJson.get().toString());
     Task<Boolean> task = paymentsClient.isReadyToPay(request);
     task.addOnCompleteListener(this,
-        new OnCompleteListener<Boolean>() {
-          @Override
-          public void onComplete(@NonNull Task<Boolean> task) {
-            if (task.isSuccessful()) {
-              setGooglePayAvailable(task.getResult());
-            } else {
-              Log.w("isReadyToPay failed", task.getException());
-            }
-          }
-        });
+            new OnCompleteListener<Boolean>() {
+              @Override
+              public void onComplete(@NonNull Task<Boolean> task) {
+                if (task.isSuccessful()) {
+                  setGooglePayAvailable(task.getResult());
+                } else {
+                  Log.w("isReadyToPay failed", task.getException());
+                }
+              }
+            });
   }
 
   /**
@@ -231,18 +217,18 @@ public class CheckoutActivity extends AppCompatActivity {
 
       if ("PAYMENT_GATEWAY".equals(tokenizationType) && "examplePaymentMethodToken".equals(token)) {
         new AlertDialog.Builder(this)
-            .setTitle("Warning")
-            .setMessage(getString(R.string.gateway_replace_name_example))
-            .setPositiveButton("OK", null)
-            .create()
-            .show();
+                .setTitle("Warning")
+                .setMessage(getString(R.string.gateway_replace_name_example))
+                .setPositiveButton("OK", null)
+                .create()
+                .show();
       }
 
       final JSONObject info = paymentMethodData.getJSONObject("info");
       final String billingName = info.getJSONObject("billingAddress").getString("name");
       Toast.makeText(
-          this, getString(R.string.payments_show_name, billingName),
-          Toast.LENGTH_LONG).show();
+              this, getString(R.string.payments_show_name, billingName),
+              Toast.LENGTH_LONG).show();
 
       // Logging token string.
       Log.d("Google Pay token: ", token);
@@ -282,15 +268,15 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     PaymentDataRequest request =
-        PaymentDataRequest.fromJson(paymentDataRequestJson.get().toString());
+            PaymentDataRequest.fromJson(paymentDataRequestJson.get().toString());
 
     // Since loadPaymentData may show the UI asking the user to select a payment method, we use
     // AutoResolveHelper to wait for the user interacting with it. Once completed,
     // onActivityResult will be called with the result.
     if (request != null) {
       AutoResolveHelper.resolveTask(
-          paymentsClient.loadPaymentData(request),
-          this, LOAD_PAYMENT_DATA_REQUEST_CODE);
+              paymentsClient.loadPaymentData(request),
+              this, LOAD_PAYMENT_DATA_REQUEST_CODE);
     }
 
   }
@@ -306,7 +292,6 @@ public class CheckoutActivity extends AppCompatActivity {
             PaymentData paymentData = PaymentData.getFromIntent(data);
             handlePaymentSuccess(paymentData);
             Intent i = new Intent(CheckoutActivity.this, StoreActivity.class);
-            StoreActivity.example = false;
             startActivity(i);
             break;
 

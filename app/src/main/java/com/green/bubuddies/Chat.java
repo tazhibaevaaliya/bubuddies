@@ -107,8 +107,8 @@ public class Chat extends AppCompatActivity {
         reference.child("Profiles").child(UserDetails.uid).child("picture").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                selfimg = snapshot.getValue().toString();
-                Log.e("selfimg",selfimg);
+                selfimg = snapshot.getValue(String.class);
+                if(selfimg != null) Log.e("selfimg",selfimg);
             }
 
             @Override
@@ -120,8 +120,8 @@ public class Chat extends AppCompatActivity {
         reference.child("Profiles").child(UserDetails.chatwithid).child("picture").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                img = snapshot.getValue().toString();
-                Log.e("img",img);
+                img = snapshot.getValue(String.class);
+                if(img!=null) Log.e("img",img);
             }
 
             @Override
