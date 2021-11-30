@@ -51,14 +51,14 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
         setContentView(R.layout.activity_users);
 
         usersList = findViewById(R.id.usersList);
-        usersList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, display_names));
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,display_names);
 
 
         pd = new ProgressDialog(Users.this);
         pd.setMessage("Loading...");
         pd.show();
-        MyAdapter adapter= new MyAdapter(this.getBaseContext(),display_names,display_msgs,display_imgs);
-//        usersList.setAdapter(adapter);
+//        MyAdapter adapter= new MyAdapter(this.getBaseContext(),display_names,display_msgs,display_imgs);
+        usersList.setAdapter(adapter);
 
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
