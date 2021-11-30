@@ -294,4 +294,35 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
   }
+
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    switch (requestCode) {
+      // value passed in AutoResolveHelper
+      case LOAD_PAYMENT_DATA_REQUEST_CODE:
+        switch (resultCode) {
+
+          case Activity.RESULT_OK:
+            PaymentData paymentData = PaymentData.getFromIntent(data);
+            handlePaymentSuccess(paymentData);
+            Intent i = new Intent(CheckoutActivity.this, StoreActivity.class);
+            StoreActivity.example = false;
+            startActivity(i);
+            break;
+
+          case Activity.RESULT_CANCELED:
+            // The user cancelled the payment attempt
+            break;
+
+          case AutoResolveHelper.RESULT_ERROR:
+            Status status = AutoResolveHelper.getStatusFromIntent(data);
+            handleError(status.getStatusCode());
+            break;
+        }
+
+        // Re-enables the Google Pay payment button.
+        googlePayButton.setClickable(true);
+    }
+  }
+
 }

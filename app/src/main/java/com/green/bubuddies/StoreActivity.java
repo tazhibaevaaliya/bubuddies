@@ -32,6 +32,7 @@ public class StoreActivity extends AppCompatActivity {
     private Button btnPost, btnCancel;
     private TextView txtListedBookName;
     private TextView txtListedBookPrice;
+    public static boolean example = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +54,19 @@ public class StoreActivity extends AppCompatActivity {
                 createNewListingWindow();
             }
         });
-        Toast.makeText(StoreActivity.this, "check out intent starting in 5 seconds", Toast.LENGTH_LONG).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(StoreActivity.this, "check out intent starts", Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(StoreActivity.this,CheckoutActivity.class);
-                String listId = "-MpOoxYKfvW1Kk3HphAt"; //example
-                i.putExtra("ListingID", listId);
-                startActivity(i);
-            }
-        }, 5000);
+        if(example) {
+            Toast.makeText(StoreActivity.this, "check out intent starting in 5 seconds", Toast.LENGTH_LONG).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(StoreActivity.this, "check out intent starts", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(StoreActivity.this, CheckoutActivity.class);
+                    String listId = "-MpOoxYKfvW1Kk3HphAt"; //example
+                    i.putExtra("ListingID", listId);
+                    startActivity(i);
+                }
+            }, 5000);
+        }
 
     }
 
