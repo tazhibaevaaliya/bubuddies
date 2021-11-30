@@ -47,7 +47,7 @@
 
     <ListView
         android:id="@+id/lv_items"
-        android:layout_width="wrap_content"
+        android:layout_width="421dp"
         android:layout_height="191dp"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
