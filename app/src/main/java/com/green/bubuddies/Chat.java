@@ -94,6 +94,8 @@ public class Chat extends AppCompatActivity {
 
                     if(!UserDetails.contacts.contains(UserDetails.chatwithid)) {
                         reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.chatwithid);
+                        reference.child("Users").child(UserDetails.chatwithid).child("Contacts").push().setValue(UserDetails.uid);
+
                     }
                     reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).push().setValue(map);
                     reference.child("Messages").child(UserDetails.chatwithid + "_" + UserDetails.uid).push().setValue(map);
