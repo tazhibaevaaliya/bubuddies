@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/usersList"
         android:layout_width="match_parent"
-        android:layout_height="537dp"
+        android:layout_height="602dp"
         android:paddingTop="60dp" />
 
     <androidx.fragment.app.FragmentContainerView
