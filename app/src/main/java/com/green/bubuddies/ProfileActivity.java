@@ -129,7 +129,6 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
-                        Log.e("TESTING", dataSnapshot.getValue().toString());
                         if (dataSnapshot.exists()) {
                             List<String> classList = new ArrayList<String>();
                             for(DataSnapshot d : dataSnapshot.getChildren()) {
