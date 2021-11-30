@@ -42,7 +42,10 @@
         <activity android:name=".StoreActivity"
             android:exported="true"
             android:screenOrientation="portrait"></activity>
-
+        <activity
+            android:name=".PriceComparison"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CheckoutActivity"
             android:label="@string/store_name"
