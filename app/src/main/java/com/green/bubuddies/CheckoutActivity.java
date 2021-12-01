@@ -78,7 +78,7 @@ public class CheckoutActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
 
     listingID = getIntent().getExtras().getString("ListingID");
-    if(listingID == null) listingID = "-MpOoxYKfvW1Kk3HphAt";
+    if(listingID == null) listingID = "-MpOD-j6mZMu-UuLKXJC";
 
     initializeUi();
 
