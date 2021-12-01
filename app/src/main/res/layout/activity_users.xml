@@ -10,8 +10,9 @@
     <ListView
         android:id="@+id/usersList"
         android:layout_width="match_parent"
-        android:layout_height="602dp"
-        android:paddingTop="60dp" />
+        android:layout_height="531dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/users_btmFrag"
