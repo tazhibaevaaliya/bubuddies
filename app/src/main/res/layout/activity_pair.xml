@@ -55,7 +55,7 @@
             android:textSize="14dp" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView3"
+            android:id="@+id/fragment_newMsg"
             android:name="com.green.bubuddies.NewMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

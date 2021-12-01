@@ -11,6 +11,8 @@
         <entry key="app/src/main/res/drawable/rounded_corner1.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/rounded_corner2.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/font/font.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.18297101449275363" />
+        <entry key="app/src/main/res/layout/activity_pair.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_price_compare.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18297101449275363" />
