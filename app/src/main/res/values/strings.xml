@@ -22,4 +22,24 @@
     <string name="gateway_replace_name_example">"Gateway name set to \"example\" - please modify Constants.java and replace it with your own gateway."</string>
     <string name="checkout_item_description">Description</string>
 
+
+    <string name="register">REGISTER</string>
+    <string name="LOGIN">LOGIN</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmpassword">Confirm Password</string>
+    <string name="alreadyHaveAccount">Already have an account? Login here.</string>
+    <string name="forgotpassword">Forgot password?</string>
+    <string name="dontHaveAccount">Don\'t have an account? Create one here.</string>
+    <string name="resend">resend</string>
+    <string name="notVerified">YOU ARE NOT VERIFIED YET! IF THIS IS A MISTAKE, PLEASE RELOG.</string>
+    <string name="editProfile">EDIT PROFILE</string>
+    <string name="logout">LOGOUT</string>
+    <string name="welcomeUser">Welcome, User</string>
+    <string name="updateProfile">UPDATE PROFILE</string>
+    <string name="updatePicture">UPDATE PICTURE</string>
+    <string name="back">BACK</string>
+
+
 </resources>

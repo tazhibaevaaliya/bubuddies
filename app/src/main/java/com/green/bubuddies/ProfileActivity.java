@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        // Load data
+        // Load user profile data.
         DatabaseReference getName = FirebaseDatabase.getInstance().getReference("Profiles").child(currentUser.getUid());
         getName.addValueEventListener(new ValueEventListener() {
            @Override
@@ -113,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
         getPFP.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Glide.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).into(PFP);
+                Picasso.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).fit().centerCrop().into(PFP);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -121,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-        //Get datasnapshot at your "users" root node
+        //Get datasnapshot at your "users" root node ; Grabs data of user's classes.
         DatabaseReference getClasses = FirebaseDatabase.getInstance().getReference("Profiles").child(currentUser.getUid()).child("classes");
         getClasses.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -138,7 +139,6 @@ public class ProfileActivity extends AppCompatActivity {
                             classes.setText(String.join(", ", classList));
                         }
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         //handle databaseError
@@ -199,9 +199,8 @@ public class ProfileActivity extends AppCompatActivity {
         if(requestCode == 100) {
             if(resultCode == Activity.RESULT_OK) {
                 Uri imageURI = data.getData();
-                PFP.setImageURI(imageURI);
-
                 uploadImage(imageURI);
+                Picasso.with(getApplicationContext()).load(imageURI).fit().centerCrop().into(PFP);
             }
         }
     }

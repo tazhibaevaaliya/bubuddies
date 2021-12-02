@@ -43,7 +43,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
     private ArrayList<String> classList;
     private String gradYear;
 
-    //Databse values
+    //Database values
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("Profiles");
 
@@ -55,13 +55,13 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         if(savedInstanceState != null){
             curr_user = savedInstanceState.getString("UID");
         } else {
-            curr_user = "0srmamAQZ6NkALd7JzqBRickByF3"; //hard coded user for testing
+            curr_user = "2ax0y5TP9gRs9JV31d3JKSRjNz52"; //hard coded user for testing
         }
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
             curr_user = extras.getString("UID");
         } else {
-            curr_user = "0srmamAQZ6NkALd7JzqBRickByF3";
+            curr_user = "2ax0y5TP9gRs9JV31d3JKSRjNz52";
         }
 
         UserDetails.uid = curr_user;
@@ -190,9 +190,9 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 txt_name.setText(snapshot.child("name").getValue(String.class));
-                txt_bio.setText("About me: " + snapshot.child("aboutMe").getValue(String.class) +
+                txt_bio.setText("About Me: " + snapshot.child("aboutMe").getValue(String.class) +
                         "\nMajor: " + snapshot.child("major").getValue(String.class) +
-                        "\nClass year: " + snapshot.child("graduationYear").getValue(String.class)
+                        "\nGraduation Year: " + snapshot.child("graduationYear").getValue(String.class)
                     );
                 btn_next.setClickable(true);
                 String img = snapshot.child("picture").getValue(String.class);

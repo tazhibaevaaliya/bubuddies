@@ -1,6 +1,7 @@
 package com.green.bubuddies;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -91,24 +92,28 @@ public class BottomMenu extends Fragment {
         switch(act) {
             case (PROFILE):
                 btn_profile.setClickable(false);
+                btn_profile.setAlpha(.5f);
                 btn_store.setClickable(true);
                 btn_pair.setClickable(true);
                 btn_message.setClickable(true);
                 break;
             case (MESSAGE):
                 btn_message.setClickable(false);
+                btn_message.setAlpha(.5f);
                 btn_store.setClickable(true);
                 btn_pair.setClickable(true);
                 btn_profile.setClickable(true);
                 break;
             case (PAIR):
                 btn_pair.setClickable(false);
+                btn_pair.setAlpha(.5f);
                 btn_store.setClickable(true);
                 btn_profile.setClickable(true);
                 btn_message.setClickable(true);
                 break;
             case(STORE):
                 btn_store.setClickable(false);
+                btn_store.setAlpha(.5f);
                 btn_profile.setClickable(true);
                 btn_pair.setClickable(true);
                 btn_message.setClickable(true);

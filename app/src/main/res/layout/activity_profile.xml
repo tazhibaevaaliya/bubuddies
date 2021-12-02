@@ -22,6 +22,10 @@
                 android:id="@+id/profilePic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="60dp"
                 android:layout_weight="0.5"
                 app:srcCompat="@drawable/ic_launcher_background"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -36,22 +40,28 @@
                     android:id="@+id/button_updateProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="UPDATE" />
+                    android:text="@string/updateProfile" />
 
                 <Button
                     android:id="@+id/button_updatePic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="UPDATE PFP" />
+                    android:text="@string/updatePicture" />
 
                 <Button
                     android:id="@+id/button_back"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="BACK" />
+                    android:text="@string/back" />
             </LinearLayout>
         </LinearLayout>
 
@@ -80,7 +90,7 @@
             android:layout_weight="0.75"
             android:ems="10"
             android:hint="YOG"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/classes"

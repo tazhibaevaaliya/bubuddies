@@ -16,8 +16,8 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Enter New Message Here" />
+            android:hint="Enter your message here..."
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/btn_newMsg"

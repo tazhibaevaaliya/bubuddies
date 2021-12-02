@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
                 finish();
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
             }
         });
 
