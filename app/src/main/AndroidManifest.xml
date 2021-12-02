@@ -26,12 +26,16 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".MainActivity"
             android:label="@string/profile_name"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".splash"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
