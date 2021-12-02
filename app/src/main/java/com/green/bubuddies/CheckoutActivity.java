@@ -64,7 +64,7 @@ public class CheckoutActivity extends AppCompatActivity {
   private String title;
   private Double price;
   private String picture;
-  private String description = "Message the user for more information on the product";
+  private String description = "Message the user for more information on the product and to discuss delivery/pick-up options prior to purchasing";
   private String ownerId;
 
   /**
