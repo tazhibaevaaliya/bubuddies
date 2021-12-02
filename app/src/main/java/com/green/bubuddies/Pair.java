@@ -226,16 +226,24 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         //switch cases to correct activity in final implementation.
         switch(nextAct) {
             case (BottomMenu.PROFILE):
-                startActivity(new Intent(Pair.this, MainActivity.class));
+                Intent i = new Intent(Pair.this, MainActivity.class);
+                i.putExtra("UID", curr_user);
+                startActivity(i);
                 break;
             case (BottomMenu.PAIR):
-                startActivity(new Intent(Pair.this, Pair.class)); // can remove this line
+                i = new Intent(Pair.this, Pair.class);
+                i.putExtra("UID", curr_user);
+                startActivity(i);
                 break;
             case (BottomMenu.MESSAGE):
-                startActivity(new Intent(Pair.this, Users.class));
+                i = new Intent(Pair.this, Users.class);
+                i.putExtra("UID",curr_user);
+                startActivity(i);
                 break;
             case (BottomMenu.STORE):
-                startActivity(new Intent(Pair.this, StoreActivity.class));
+                i = new Intent(Pair.this, StoreActivity.class);
+                i.putExtra("UID", curr_user);
+                startActivity(i);
                 break;
         }
     }
