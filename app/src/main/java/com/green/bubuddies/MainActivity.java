@@ -163,7 +163,10 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
                 startActivity(i);
                 break;
             case (BottomMenu.STORE):
-                startActivity(new Intent(MainActivity.this, StoreActivity.class));
+                Log.d("Store", "Starting store Activity");
+                i = new Intent(MainActivity.this, StoreActivity.class);
+                i.putExtra("UID", string_uid);
+                startActivity(i);
                 break;
         }
     }
