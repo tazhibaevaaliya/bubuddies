@@ -68,8 +68,11 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
 
         //initialize references to views
         txt_name = findViewById(R.id.txt_name);
+        txt_name.setClipToOutline(true);
         txt_bio = findViewById(R.id.txt_bio);
+        txt_bio.setClipToOutline(true);
         txt_classes = findViewById(R.id.txt_classes);
+        txt_classes.setClipToOutline(true);
         img_pfp = findViewById(R.id.img_pfp);
         btn_next = findViewById(R.id.btn_next);
         btn_next.setClickable(false);
