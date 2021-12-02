@@ -8,13 +8,13 @@ public class Listing {
     private String title;
     private int price;
     private String owner;
-    private String imageURI;
+    private String picture;
 
     public Listing(String title, int price, String owner, String imageURI) {
         this.title = title;
         this.price = price;
         this.owner = owner;
-        this.imageURI = imageURI;
+        this.picture = imageURI;
     }
 
     public String getTitle() {
@@ -30,7 +30,7 @@ public class Listing {
     }
 
     public String getImageURI(){
-        return this.imageURI;
+        return this.picture;
     }
 
 

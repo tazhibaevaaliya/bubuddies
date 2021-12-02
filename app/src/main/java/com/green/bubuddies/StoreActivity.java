@@ -52,7 +52,7 @@ public class StoreActivity extends AppCompatActivity {
     private TextView txtListedBookName;
     private TextView txtListedBookPrice;
     //private ActivityStoreBinding binding;
-    private ListView listView;
+    private RecyclerView listView;
     ArrayList<String> titles = new ArrayList<String>();
     ArrayList<String> prices = new ArrayList<String>();
     ArrayList<String> ids = new ArrayList<String>();
@@ -60,7 +60,7 @@ public class StoreActivity extends AppCompatActivity {
     int clickedRow = -1;
     private RecyclerView courseRV;
     FirebaseAuth fAuth;
-    String string_uid;
+    String curr_user;
     StorageReference storageReference;
     String imageURI;
 
@@ -72,11 +72,17 @@ public class StoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras!= null) {
+            curr_user = extras.getString("UID");
+        } else {
+            curr_user = UserDetails.uid;
+        }
+
         fAuth = FirebaseAuth.getInstance(); //getting user UID
         FirebaseUser currentUser = fAuth.getCurrentUser();
-        string_uid = currentUser.getUid();
 
-        listView = (ListView) findViewById(R.id.idRVListing);
+        listView = (RecyclerView) findViewById(R.id.idRVListing);
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,titles);
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -123,7 +129,11 @@ public class StoreActivity extends AppCompatActivity {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String title = child.child("title").getValue().toString(); //getting the title of each listing
                     String price = child.child("price").getValue().toString(); //getting the price of each listing
-                    String image = child.child("imageURI").getValue().toString(); //getting the image URI String
+//                    if(child.child("picture").getValue().toString()==null){
+//                        image =
+//                    }
+                    String image = child.child("picture").getValue().toString(); //getting the image URI String
+
                     //Glide.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).into(PFP);
                     ids.add(child.getKey().toString()); //getting ids of each listing
                     titles.add(title);
@@ -266,7 +276,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     private void uploadImage(Uri imageUri) {
-        StorageReference fileRef = storageReference.child(fAuth.getCurrentUser().getUid() + ".jpg");
+        StorageReference fileRef = storageReference.child(curr_user + ".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -312,7 +322,7 @@ public class StoreActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference();
 
         //creating a new instance of listing object
-        Listing listing = new Listing(title,price,string_uid,imageURI);
+        Listing listing = new Listing(title,price,curr_user,imageURI);
         myRef.child("listings").push().setValue(listing); //writing to the database
 
 
