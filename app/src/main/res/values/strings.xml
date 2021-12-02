@@ -1,14 +1,19 @@
 <resources>
-    <string name="app_name">BuBuddies</string>
+    <string name="app_name">BU Buddies</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="tab_text_1">Compare</string>
     <string name="tab_text_2">Buy</string>
 
-    <!-- Google Pay/Checkout Implementation Strings -->
-    <string name="store_name" translatable="false">BU Buddies Shop</string>
+    <!-- Strings for Titles of each Page-->
+    <string name="checkout_name" translatable="false">BU Buddies - Checkout</string>
+    <string name="pair_name" translatable="false">BU Buddies - Pairing</string>
+    <string name="store_name" translatable="false">BU Buddies - Store</string>
+    <string name="profile_name" translatable="false">BU Buddies - Profile</string>
+    <string name="message_name" translatable="false">BU Buddies - Message</string>
 
+    <!-- Google Pay/Checkout Implementation Strings -->
     <!-- Payment notification -->
     <string name="channel_name">Payment Channel</string>
     <string name="send_notification">Send Notification</string>
@@ -21,6 +26,7 @@
     <string name="payments_show_name">Successfully received payment data for %s!</string>
     <string name="gateway_replace_name_example">"Gateway name set to \"example\" - please modify Constants.java and replace it with your own gateway."</string>
     <string name="checkout_item_description">Description</string>
+    <string name="book_image">Image</string>
 
 
     <string name="register">REGISTER</string>

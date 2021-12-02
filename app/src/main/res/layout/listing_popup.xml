@@ -42,16 +42,15 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.218" />
+        app:layout_constraintVertical_bias="0.131" />
 
     <EditText
         android:id="@+id/txtListedBookPrice"
         android:layout_width="343dp"
         android:layout_height="0dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="Price of the Book"
@@ -62,28 +61,58 @@
         app:layout_constraintTop_toBottomOf="@+id/txtListedBookName" />
 
     <Button
-        android:id="@+id/btnPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Post"
+        app:icon="@drawable/upload"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:id="@+id/btnUpload"
+        android:layout_width="342dp"
+        android:layout_height="57dp"
+        android:background="@drawable/field"
+        android:textColor="@color/price_button_grey"
+        android:text="Upload"
+        android:textAlignment="center"
+        android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtListedBookPrice"
-        app:layout_constraintVertical_bias="0.504" />
+        app:layout_constraintVertical_bias="0.217" />
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="160dp"
+        android:layout_height="44dp"
+        android:background="@drawable/field"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:text="POST"
+        android:textColor="@color/element_white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:layout_width="160dp"
+        android:layout_height="43dp"
+        android:background="@drawable/field"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:text="CANCEL"
+        android:textColor="@color/element_white"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.849"
+        app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtListedBookPrice"
-        app:layout_constraintVertical_bias="0.504" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

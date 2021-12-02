@@ -13,19 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuBuddies">
         <activity
-            android:name=".splash"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".Pair"
+            android:label="@string/pair_name"
             android:exported="true" />
         <activity
             android:name=".ProfileActivity"
+            android:label="@string/profile_name"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
@@ -34,29 +27,37 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
+            android:label="@string/profile_name"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Users" />
         <activity android:name=".Chat" />
-        <activity
-            android:name=".StoreActivity"
+        <activity android:name=".StoreActivity"
+            android:label="@string/store_name"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".PriceComparison"
+            android:label="@string/store_name"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".CheckoutActivity"
-            android:exported="true"
-            android:label="@string/store_name"
+            android:label="@string/checkout_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat"
+            android:exported="true">
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"

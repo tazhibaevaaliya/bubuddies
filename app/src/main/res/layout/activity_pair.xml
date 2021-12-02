@@ -24,8 +24,10 @@
             android:layout_weight="1"
             android:padding="15dp"
             android:text="Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#000000"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/img_pfp"
@@ -52,12 +54,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="Common Classes:"
+            android:text="Classes:"
             android:textColor="#000000"
             android:textSize="14dp" />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView3"
+            android:id="@+id/fragment_newMsg"
             android:name="com.green.bubuddies.NewMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
