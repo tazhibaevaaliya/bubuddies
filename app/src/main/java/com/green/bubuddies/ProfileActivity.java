@@ -200,6 +200,7 @@ public class ProfileActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK) {
                 Uri imageURI = data.getData();
                 uploadImage(imageURI);
+                // Set Image
                 Picasso.with(getApplicationContext()).load(imageURI).fit().centerCrop().into(PFP);
             }
         }
