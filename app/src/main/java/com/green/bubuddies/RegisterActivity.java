@@ -180,6 +180,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 finish();
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
             }
         });
     }

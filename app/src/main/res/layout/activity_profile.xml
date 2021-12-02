@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="235dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <ImageView
@@ -23,9 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
                 android:layout_weight="0.5"
                 app:srcCompat="@drawable/ic_launcher_background"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -72,7 +72,8 @@
             android:layout_weight="0.75"
             android:ems="10"
             android:hint="Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="32" />
 
         <EditText
             android:id="@+id/edit_major"
@@ -81,7 +82,8 @@
             android:layout_weight="0.75"
             android:ems="10"
             android:hint="Major"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="32" />
 
         <EditText
             android:id="@+id/edit_gradYear"
@@ -90,7 +92,8 @@
             android:layout_weight="0.75"
             android:ems="10"
             android:hint="YOG"
-            android:inputType="number" />
+            android:inputType="number"
+            android:maxLength="4" />
 
         <TextView
             android:id="@+id/classes"
@@ -103,11 +106,12 @@
             android:id="@+id/edit_classes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="0.5"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
-            tools:layout_weight="1" />
+            android:hint="Enter your classes here, separated by a comma."
+            android:inputType="text"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/aboutMe"
@@ -120,11 +124,13 @@
             android:id="@+id/edit_aboutMe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="3"
             android:ems="10"
             android:focusable="auto"
             android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:hint="Say something about yourself!"
+            android:inputType="textMultiLine"
+            android:maxLines="3" />
 
     </LinearLayout>
 

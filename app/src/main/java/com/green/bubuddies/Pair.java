@@ -229,21 +229,25 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
                 Intent i = new Intent(Pair.this, MainActivity.class);
                 i.putExtra("UID", curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.PAIR):
                 i = new Intent(Pair.this, Pair.class);
                 i.putExtra("UID", curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.MESSAGE):
                 i = new Intent(Pair.this, Users.class);
                 i.putExtra("UID",curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.STORE):
                 i = new Intent(Pair.this, StoreActivity.class);
                 i.putExtra("UID", curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
         }
     }

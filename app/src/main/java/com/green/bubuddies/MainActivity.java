@@ -166,18 +166,21 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
                 Intent i = new Intent(MainActivity.this, Pair.class);
                 i.putExtra("UID", string_uid);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.MESSAGE):
                 Log.d("Messaging", "Starting message Activity");
                 i = new Intent(MainActivity.this, Users.class);
                 i.putExtra("UID",string_uid);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.STORE):
                 Log.d("Store", "Starting store Activity");
                 i = new Intent(MainActivity.this, StoreActivity.class);
                 i.putExtra("UID", string_uid);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
         }
     }
