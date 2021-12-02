@@ -77,7 +77,7 @@ public class CheckoutActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    listingID = getIntent().getExtras().getString("ListingID");
+    listingID = getIntent().getExtras().getString("Listing ID");
     if(listingID == null) listingID = "-MpOD-j6mZMu-UuLKXJC";
 
     initializeUi();
@@ -114,9 +114,15 @@ public class CheckoutActivity extends AppCompatActivity {
       public void onDataChange(@NonNull DataSnapshot snapshot) {
         title = snapshot.child("title").getValue(String.class);
         price = snapshot.child("price").getValue(Double.class);
-        picture = snapshot.child("picture").getValue(String.class);
         ownerId = snapshot.child("owner").getValue(String.class);
-
+        try {
+          picture = snapshot.child("picture").getValue(String.class);
+        } catch (Exception e){
+          picture = "https://firebasestorage.googleapis.com/v0/b/bubuddies-3272b.appspot.com/o/defaultcheckoutimg.jpg?alt=media&token=7c03e99d-b526-47cc-9756-f505e2c934c6";
+        }
+        if (picture == null){
+          picture = "https://firebasestorage.googleapis.com/v0/b/bubuddies-3272b.appspot.com/o/defaultcheckoutimg.jpg?alt=media&token=7c03e99d-b526-47cc-9756-f505e2c934c6";
+        }
         layoutBinding.btnMessageOwner.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -291,6 +297,7 @@ public class CheckoutActivity extends AppCompatActivity {
           case Activity.RESULT_OK:
             PaymentData paymentData = PaymentData.getFromIntent(data);
             handlePaymentSuccess(paymentData);
+            ref.child(listingID).removeValue();
             Intent i = new Intent(CheckoutActivity.this, StoreActivity.class);
             startActivity(i);
             break;
