@@ -22,14 +22,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/reg_username"
+        android:id="@+id/reg_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="101dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
-        android:hint="@string/username"
+        android:hint="@string/editName"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/reg_email"
         app:layout_constraintEnd_toEndOf="parent"

@@ -56,16 +56,15 @@
         android:id="@+id/fab"
         android:layout_width="58dp"
         android:layout_height="93dp"
-        android:layout_marginStart="336dp"
+        android:padding="10dp"
         android:scaleType="center"
         android:src="@drawable/ic_add_listing"
-        android:layout_marginTop="656dp"
-        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
 
     <View
         android:id="@+id/divider2"

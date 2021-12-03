@@ -16,6 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="235dp"
             android:layout_weight="1"
+            android:background="@color/teal_200"
+            android:elevation="20dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -24,10 +26,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginBottom="40dp"
                 android:layout_weight="0.5"
-                app:srcCompat="@drawable/ic_launcher_background"
+                android:elevation="50dp"
+                app:srcCompat="@drawable/txtviewshadow"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
@@ -37,15 +40,6 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button_updateProfile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:text="@string/updateProfile" />
-
-                <Button
                     android:id="@+id/button_updatePic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,6 +47,15 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:text="@string/updatePicture" />
+
+                <Button
+                    android:id="@+id/button_updateProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/updateProfile" />
 
                 <Button
                     android:id="@+id/button_back"
@@ -65,33 +68,66 @@
             </LinearLayout>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="0.1"
+            android:text="@string/profileName" />
+
         <EditText
             android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="0.75"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/editName"
             android:inputType="textPersonName"
             android:maxLength="32" />
+
+        <TextView
+            android:id="@+id/label_major"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="0.1"
+            android:text="@string/profileMajor" />
 
         <EditText
             android:id="@+id/edit_major"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="0.75"
             android:ems="10"
-            android:hint="Major"
+            android:hint="@string/editMajor"
             android:inputType="textPersonName"
             android:maxLength="32" />
+
+        <TextView
+            android:id="@+id/label_yog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="0.1"
+            android:text="@string/profileYOG" />
 
         <EditText
             android:id="@+id/edit_gradYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="0.75"
             android:ems="10"
-            android:hint="YOG"
+            android:hint="@string/editYOG"
             android:inputType="number"
             android:maxLength="4" />
 
@@ -99,17 +135,21 @@
             android:id="@+id/classes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="0.5"
-            android:text="CLASSES" />
+            android:text="@string/profileClasses" />
 
         <EditText
             android:id="@+id/edit_classes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="0.5"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Enter your classes here, separated by a comma."
+            android:hint="@string/editClasses"
             android:inputType="text"
             android:maxLines="1" />
 
@@ -117,18 +157,22 @@
             android:id="@+id/aboutMe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="0.5"
-            android:text="ABOUT ME" />
+            android:text="@string/profileAboutMe" />
 
         <EditText
             android:id="@+id/edit_aboutMe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="3"
             android:ems="10"
             android:focusable="auto"
             android:gravity="start|top"
-            android:hint="Say something about yourself!"
+            android:hint="@string/editAboutMe"
             android:inputType="textMultiLine"
             android:maxLines="3" />
 

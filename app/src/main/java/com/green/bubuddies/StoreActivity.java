@@ -52,17 +52,21 @@ public class StoreActivity extends AppCompatActivity {
     private TextView txtListedBookName;
     private TextView txtListedBookPrice;
     //private ActivityStoreBinding binding;
-    private ListView listView;
+    private RecyclerView listView;
     ArrayList<String> titles = new ArrayList<String>();
     ArrayList<String> prices = new ArrayList<String>();
     ArrayList<String> ids = new ArrayList<String>();
+    ArrayList<String> imageURIs = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     int clickedRow = -1;
-    private RecyclerView courseRV;
+    private RecyclerView listingRV;
     FirebaseAuth fAuth;
-    String string_uid;
+    String curr_user;
     StorageReference storageReference;
     String imageURI;
+    LinearLayoutManager linearLayoutManager;
+    ListingAdapter listingAdapter;
+    final String default_picture = "https://firebasestorage.googleapis.com/v0/b/bubuddies-3272b.appspot.com/o/books_default.gif?alt=media&token=29717e83-fa20-49f3-8da1-8a082a14c7cc"; //default picture for each listing
 
     // Arraylist for storing data
     private ArrayList<ListingModel> listingModelArrayList;
@@ -72,11 +76,24 @@ public class StoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
+        // here we have created new array list and added data to it.
+        listingModelArrayList = new ArrayList<>();
+
+        Bundle extras = getIntent().getExtras();
+        if(extras!= null) {
+            curr_user = extras.getString("UID");
+        } else {
+            curr_user = UserDetails.uid;
+        }
+
+        getData();
+
+
+
         fAuth = FirebaseAuth.getInstance(); //getting user UID
         FirebaseUser currentUser = fAuth.getCurrentUser();
-        string_uid = currentUser.getUid();
 
-        listView = (ListView) findViewById(R.id.idRVListing);
+        listingRV = (RecyclerView) findViewById(R.id.idRVListing);
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,titles);
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -84,9 +101,6 @@ public class StoreActivity extends AppCompatActivity {
 //                clickedRow = position;
 //            }
 //        });
-
-        //reading data from Firebase and saving it into listings
-        getData();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -106,49 +120,58 @@ public class StoreActivity extends AppCompatActivity {
 
     }
 
-    public void getData(){
+public void getData(){
+    //reading data from Firebase and saving it into listings----------------------------------------------------------------------------------
+    //getting a database reference
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("listings");
 
-        //getting a database reference
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("listings");
+    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                // here we have created new array list and added data to it.
-                listingModelArrayList = new ArrayList<>();
-
-                //Load Data (title, price and image)
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    String title = child.child("title").getValue().toString(); //getting the title of each listing
-                    String price = child.child("price").getValue().toString(); //getting the price of each listing
-                    String image = child.child("imageURI").getValue().toString(); //getting the image URI String
-                    //Glide.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).into(PFP);
-                    ids.add(child.getKey().toString()); //getting ids of each listing
-                    titles.add(title);
-                    prices.add(price);
-                    listingModelArrayList.add(new ListingModel(title,price,image,getBaseContext()));
+            //Load Data (title, price and image)
+            for (DataSnapshot child : snapshot.getChildren()) {
+                String title = child.child("title").getValue().toString(); //getting the title of each listing
+                String price = child.child("price").getValue().toString(); //getting the price of each listing
+                if(!child.child("picture").exists()){
+                    imageURIs.add(default_picture);
+                }
+                else{
+                    imageURIs.add(child.child("picture").getValue().toString()); //getting the image URI String
                 }
 
-                // we are initializing our adapter class and passing our arraylist to it.
-                ListingAdapter listingAdapter = new ListingAdapter(getBaseContext(), listingModelArrayList);
 
-                // below line is for setting a layout manager for our recycler view.
-                // here we are creating vertical list so we will provide orientation as vertical
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
-
-                // in below two lines we are setting layoutmanager and adapter to our recycler view.
-                courseRV.setLayoutManager(linearLayoutManager);
-                courseRV.setAdapter(listingAdapter);
+                //Glide.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).into(PFP);
+                ids.add(child.getKey().toString()); //getting ids of each listing
+                titles.add(title);
+                prices.add(price);
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                return;
+            for(int i=0; i<titles.size(); i++){
+                listingModelArrayList.add(new ListingModel(titles.get(i),prices.get(i),imageURIs.get(i),getBaseContext()));
             }
-        });
-    }
+
+            // we are initializing our adapter class and passing our arraylist to it.
+            listingAdapter = new ListingAdapter(getBaseContext(), listingModelArrayList);
+
+            // below line is for setting a layout manager for our recycler view.
+            // here we are creating vertical list so we will provide orientation as vertical
+            linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
+
+
+            // in below two lines we are setting layoutmanager and adapter to our recycler view.
+            listingRV.setLayoutManager(linearLayoutManager);
+            listingRV.setAdapter(listingAdapter);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+            return;
+        }
+    });
+}
 
 
 
@@ -266,7 +289,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     private void uploadImage(Uri imageUri) {
-        StorageReference fileRef = storageReference.child(fAuth.getCurrentUser().getUid() + ".jpg");
+        StorageReference fileRef = storageReference.child(curr_user + ".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -312,7 +335,7 @@ public class StoreActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference();
 
         //creating a new instance of listing object
-        Listing listing = new Listing(title,price,string_uid,imageURI);
+        Listing listing = new Listing(title,price,curr_user,imageURI, default_picture);
         myRef.child("listings").push().setValue(listing); //writing to the database
 
 
