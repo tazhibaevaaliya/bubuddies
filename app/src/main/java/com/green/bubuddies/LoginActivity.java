@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPass, register;
     Button login;
     FirebaseAuth fAuth;
-    GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 120;
 
 
 
@@ -64,21 +62,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }
-
-        // Configure Google Sign In.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                // For some reason, default_web_client_id will not work. Have to hardcode idtoken as result from values.xml
-                .requestIdToken("935525663116-k8n9tckl0u39bdkq073m2oiqv876enme.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        findViewById(R.id.button_googSignIn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("TESTING", "google sign in button clicked");
-                signIn();
-            }
-        });
 
 
 
@@ -135,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
                 finish();
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
             }
         });
 
@@ -183,191 +167,5 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-
-
-
-
-
-
-    // Google sign-in related methods
-    private void signIn() {
-        Log.d("TESTING", "inside google sign in");
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if(task.isSuccessful()) {
-                Log.d("TESTING", "task successful");
-                try {
-                    // Google Sign In was successful, authenticate with Firebase
-                    GoogleSignInAccount account = task.getResult(ApiException.class);
-                    Log.d("TESTING", "firebaseAuthWithGoogle:" + account.getId());
-                    firebaseAuthWithGoogle(account.getIdToken());
-                } catch (ApiException e) {
-                    // Google Sign In failed, update UI appropriately
-                    Log.d("TESTING", "Google sign in failed", e);
-                }
-            }
-
-        }
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        Log.e("TESTING", "FIREBASEAUTH " + credential.toString());
-        Log.e("TESTING", "FIREBASEAUTH " + idToken);
-        fAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("TESTING", "signInWithCredential: success");
-
-                            // Is this google account new? If so, require them to make a username first.
-                            Query query = FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("uid").equalTo(fAuth.getCurrentUser().getUid());
-                            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    // They were not found in the database.
-                                    if (snapshot.getChildrenCount() < 1) {
-                                        Log.d("TESTING", fAuth.getCurrentUser().getUid().toString());
-                                        Log.d("TESTING", snapshot.toString());
-                                        Log.d("TESTING", "There isn't an entry for the google account yet.");
-
-                                        // Pop-up alert for entering a username.
-                                        EditText enterUser = new EditText(LoginActivity.this);
-                                        AlertDialog.Builder createUser = new AlertDialog.Builder(LoginActivity.this);
-
-                                        createUser.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                            @Override
-                                            public void onCancel(DialogInterface dialogInterface) {
-                                                cancelLogin();
-                                            }
-                                        });
-
-                                        createUser.setTitle("Please create a username for yourself.");
-                                        createUser.setMessage("Enter username here.");
-                                        createUser.setView(enterUser);
-
-                                        createUser.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                String c_username = enterUser.getText().toString();
-                                                // Check if the username is taken already
-                                                Query query = FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("username").equalTo(c_username);
-                                                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                        if (snapshot.getChildrenCount() > 0) {
-                                                            Toast.makeText(LoginActivity.this, "This username is already taken. Please try another one.", Toast.LENGTH_SHORT).show();
-                                                        } else {
-                                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                                            finish();
-
-                                                            // Put the Google user into the database
-                                                            User user = new User(c_username, fAuth.getCurrentUser().getEmail(), fAuth.getCurrentUser().getUid());
-
-                                                            FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid())
-                                                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    Toast.makeText(LoginActivity.this, "User Successfully Created!", Toast.LENGTH_SHORT).show();
-
-
-                                                                    // Make a profile for the user if one does not exist.
-                                                                    Query query = FirebaseDatabase.getInstance().getReference().child("Profiles").orderByChild("uid").equalTo(fAuth.getCurrentUser().getUid());
-                                                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                        @Override
-                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                            if (snapshot.getChildrenCount() < 1) {
-                                                                                Log.d("TESTING", "No profile found. Creating new one.");
-                                                                                Profile profile = new Profile(fAuth.getCurrentUser().getUid());
-                                                                                FirebaseDatabase.getInstance().getReference("Profiles").child(fAuth.getCurrentUser().getUid())
-                                                                                        .setValue(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                    @Override
-                                                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                                                        Intent i = new Intent(getApplicationContext(),MainActivity.class);
-                                                                                        i.putExtra("ID_TOKEN", idToken);
-                                                                                        Log.d("TESTING", "PUTEXTRA " + idToken);
-                                                                                        startActivity(i);
-                                                                                        finish();
-                                                                                    }
-                                                                                });
-                                                                            }
-                                                                        }
-                                                                        @Override
-                                                                        public void onCancelled(@NonNull DatabaseError error) {
-                                                                        }
-                                                                    });
-                                                                }
-                                                            });
-                                                        }
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                                    }
-                                                });
-                                            }
-                                        });
-
-                                        createUser.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                Log.d("TESTING", "PROCESS CANCELLED");
-                                                cancelLogin();
-                                            }
-                                        });
-                                        createUser.create().show();
-                                    } else {
-                                        Intent i = new Intent(getApplicationContext(),MainActivity.class);
-                                        i.putExtra("ID_TOKEN", idToken);
-                                        Log.d("TESTING", "PUTEXTRA " + idToken);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TESTING", "signInWithCredential:failure", task.getException());
-                        }
-                    }
-                });
-    }
-
-    // In case user app crashes or clicks out of the pop-up alert for creating username in Google account, to prevent bugs.
-    private void cancelLogin() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        fAuth.signOut();
-                    }
-                });
-    }
-
-    protected void onStop() {
-        super.onStop();
-        cancelLogin();
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-        cancelLogin();
     }
 }

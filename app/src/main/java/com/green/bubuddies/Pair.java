@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,9 +45,11 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
     private ArrayList<String> classList;
     private String gradYear;
 
-    //Databse values
+    //Firebase values
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("Profiles");
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = fAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +59,24 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         if(savedInstanceState != null){
             curr_user = savedInstanceState.getString("UID");
         } else {
-            curr_user = "0srmamAQZ6NkALd7JzqBRickByF3"; //hard coded user for testing
+            curr_user = "2ax0y5TP9gRs9JV31d3JKSRjNz52"; //hard coded user for testing
         }
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
             curr_user = extras.getString("UID");
         } else {
-            curr_user = "0srmamAQZ6NkALd7JzqBRickByF3";
+            curr_user = "2ax0y5TP9gRs9JV31d3JKSRjNz52";
         }
 
         UserDetails.uid = curr_user;
 
         //initialize references to views
         txt_name = findViewById(R.id.txt_name);
+        txt_name.setClipToOutline(true);
         txt_bio = findViewById(R.id.txt_bio);
+        txt_bio.setClipToOutline(true);
         txt_classes = findViewById(R.id.txt_classes);
+        txt_classes.setClipToOutline(true);
         img_pfp = findViewById(R.id.img_pfp);
         btn_next = findViewById(R.id.btn_next);
         btn_next.setClickable(false);
@@ -189,10 +196,21 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         ref.child(pair_uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                txt_name.setText(snapshot.child("name").getValue(String.class));
-                txt_bio.setText("About me: " + snapshot.child("aboutMe").getValue(String.class) +
+                DatabaseReference username = FirebaseDatabase.getInstance().getReference("Users").child(snapshot.child("uid").getValue().toString());
+                username.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        txt_name.setText(dataSnapshot.child("username").getValue().toString());
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("TESTING", "onCancelled", databaseError.toException());
+                    }
+                });
+
+                txt_bio.setText("About Me: " + snapshot.child("aboutMe").getValue(String.class) +
                         "\nMajor: " + snapshot.child("major").getValue(String.class) +
-                        "\nClass year: " + snapshot.child("graduationYear").getValue(String.class)
+                        "\nGraduation Year: " + snapshot.child("graduationYear").getValue(String.class)
                     );
                 btn_next.setClickable(true);
                 String img = snapshot.child("picture").getValue(String.class);
@@ -229,21 +247,25 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
                 Intent i = new Intent(Pair.this, MainActivity.class);
                 i.putExtra("UID", curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.PAIR):
                 i = new Intent(Pair.this, Pair.class);
                 i.putExtra("UID", curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.MESSAGE):
                 i = new Intent(Pair.this, Users.class);
                 i.putExtra("UID",curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.STORE):
                 i = new Intent(Pair.this, StoreActivity.class);
                 i.putExtra("UID", curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
         }
     }
