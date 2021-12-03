@@ -11,8 +11,9 @@
         <entry key="app/src/main/res/drawable/rounded_corner1.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/rounded_corner2.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/font/font.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.18297101449275363" />
-        <entry key="app/src/main/res/layout/activity_pair.xml" value="0.18297101449275363" />
+        <entry key="app/src/main/res/layout/activity_channel.xml" value="0.11865942028985507" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.103125" />
         <entry key="app/src/main/res/layout/activity_price_compare.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18297101449275363" />
@@ -21,8 +22,15 @@
         <entry key="app/src/main/res/layout/fragment_bottom_menu.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/fragment_listing_form.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/fragment_new_msg.xml" value="0.18297101449275363" />
+        <entry key="app/src/main/res/layout/item_chat_me.xml" value="0.11865942028985507" />
+        <entry key="app/src/main/res/layout/item_chat_other.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/item_listing.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/listview_row.xml" value="0.26721014492753625" />
+        <entry key="app/src/main/res/layout/message_area.xml" value="0.103125" />
+        <entry key="app/src/main/res/layout/message_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/msg_me.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/msg_other.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/msg_row.xml" value="0.10260416666666666" />
         <entry key="app/src/main/res/layout/userlist_row.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/menu/contextual_menu.xml" value="0.3333333333333333" />
       </map>

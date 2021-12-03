@@ -8,4 +8,6 @@ public class UserDetails {
     static String chatwithname = "";
     static ArrayList<String> contacts = null;
     static String uid = "";
+    static String selfpic = "";
+    static String chatwithpic = "";
 }
