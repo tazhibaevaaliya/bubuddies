@@ -9,12 +9,14 @@ public class Listing {
     private int price;
     private String owner;
     private String picture;
+    private String default_picture;
 
-    public Listing(String title, int price, String owner, String imageURI) {
+    public Listing(String title, int price, String owner, String imageURI, String default_picture) {
         this.title = title;
         this.price = price;
         this.owner = owner;
         this.picture = imageURI;
+        this.default_picture = default_picture;
     }
 
     public String getTitle() {
