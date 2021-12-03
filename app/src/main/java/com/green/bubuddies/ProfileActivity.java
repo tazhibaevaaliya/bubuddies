@@ -70,11 +70,11 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         // Load user profile data.
-        DatabaseReference getName = FirebaseDatabase.getInstance().getReference("Profiles").child(currentUser.getUid());
+        DatabaseReference getName = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         getName.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
-               name.setText(snapshot.child("name").getValue().toString());
+               name.setText(snapshot.child("username").getValue().toString());
            }
            @Override
            public void onCancelled(@NonNull DatabaseError error) {
@@ -170,11 +170,13 @@ public class ProfileActivity extends AppCompatActivity {
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DatabaseReference nData = FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid());
+                nData.child("username").setValue(name.getText().toString());
+
                 DatabaseReference mData = FirebaseDatabase.getInstance().getReference("Profiles").child(fAuth.getCurrentUser().getUid());
                 mData.child("aboutMe").setValue(about_me.getText().toString());
                 mData.child("graduationYear").setValue(yog.getText().toString());
                 mData.child("major").setValue(major.getText().toString());
-                mData.child("name").setValue(name.getText().toString());
                 Log.e("TESTING", classes.getText().toString());
                 List<String> classUpdate = new ArrayList<String>(Arrays.asList(classes.getText().toString().replaceAll("\\s+","").split(",")));
                 Log.e("TESTING", classUpdate.toString());

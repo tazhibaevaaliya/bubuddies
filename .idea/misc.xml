@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.10092592592592593" />
+        <entry key="..\:/bubuddies/app/src/main/res/drawable/txtviewshadow.xml" value="0.2703125" />
         <entry key="..\:/bubuddies/app/src/main/res/layout/activity_chat.xml" value="0.25416666666666665" />
         <entry key="..\:/bubuddies/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/bubuddies/app/src/main/res/layout/activity_pair.xml" value="0.25416666666666665" />
         <entry key="..\:/bubuddies/app/src/main/res/layout/activity_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/bubuddies/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/bubuddies/app/src/main/res/layout/activity_splash.xml" value="0.13020833333333334" />
         <entry key="..\:/bubuddies/app/src/main/res/layout/message_area.xml" value="0.25416666666666665" />
         <entry key="..\:/bubuddies/app/src/main/res/layout/userlist_row.xml" value="0.25416666666666665" />

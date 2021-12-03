@@ -30,7 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMenuActivity{
     Button logout, resend, editProfile;
     TextView uid, welcome, email, warningMessage;
-    //GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth fAuth;
     String string_uid;
 
@@ -38,22 +37,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        String googToken;
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            googToken = extras.getString("ID_TOKEN");
-//        } else {
-//            googToken = "";
-//        }
-//        Log.e("TESTING", "ID_TOKEN " + googToken);
-        // Configure Google Sign In.
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                // For some reason, default_web_client_id will not work. Have to hardcode idtoken as result from values.xml
-//                .requestIdToken("935525663116-k8n9tckl0u39bdkq073m2oiqv876enme.apps.googleusercontent.com")
-//                .requestEmail()
-//                .build();
-//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
 
         uid = findViewById(R.id.text_userID);
         welcome = findViewById(R.id.welcomeUser);
@@ -64,10 +47,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
         FirebaseUser currentUser = fAuth.getCurrentUser();
         Log.e("TESTING", fAuth.toString());
         Log.e("TESTING", currentUser.toString());
-        Log.e("TESTING", Boolean.toString(isSignedIn()));
-
-
-
 
 
         resend = findViewById(R.id.resendVerify);
@@ -123,14 +102,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
-//                mGoogleSignInClient.signOut()
-//                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                // Have to do this too to sign user out of app completely.
-//
-//                            }
-//                        });
             }
         });
 
@@ -143,10 +114,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
             }
         });
 
-    }
-
-    private boolean isSignedIn() {
-        return GoogleSignIn.getLastSignedInAccount(getApplicationContext()) != null;
     }
 
     @Override

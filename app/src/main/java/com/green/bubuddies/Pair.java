@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,9 +45,11 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
     private ArrayList<String> classList;
     private String gradYear;
 
-    //Database values
+    //Firebase values
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference("Profiles");
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = fAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,7 +196,18 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         ref.child(pair_uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                txt_name.setText(snapshot.child("name").getValue(String.class));
+                DatabaseReference username = FirebaseDatabase.getInstance().getReference("Users").child(snapshot.child("uid").getValue().toString());
+                username.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        txt_name.setText(dataSnapshot.child("username").getValue().toString());
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("TESTING", "onCancelled", databaseError.toException());
+                    }
+                });
+
                 txt_bio.setText("About Me: " + snapshot.child("aboutMe").getValue(String.class) +
                         "\nMajor: " + snapshot.child("major").getValue(String.class) +
                         "\nGraduation Year: " + snapshot.child("graduationYear").getValue(String.class)

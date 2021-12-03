@@ -32,7 +32,6 @@
 
     <string name="register">REGISTER</string>
     <string name="LOGIN">LOGIN</string>
-    <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirmpassword">Confirm Password</string>
@@ -44,9 +43,19 @@
     <string name="editProfile">EDIT PROFILE</string>
     <string name="logout">LOGOUT</string>
     <string name="welcomeUser">Welcome, User</string>
-    <string name="updateProfile">UPDATE PROFILE</string>
+    <string name="updateProfile">SAVE PROFILE</string>
     <string name="updatePicture">UPDATE PICTURE</string>
     <string name="back">BACK</string>
+    <string name="profileName"><u>NAME</u></string>
+    <string name="profileMajor"><u>MAJOR</u></string>
+    <string name="profileYOG"><u>GRADUATION YEAR</u></string>
+    <string name="profileClasses"><u>CLASSES</u></string>
+    <string name="profileAboutMe"><u>ABOUT ME</u></string>
+    <string name="editName">Name</string>
+    <string name="editMajor">Major</string>
+    <string name="editYOG">YOG</string>
+    <string name="editClasses">Enter your classes here, separated by a comma.</string>
+    <string name="editAboutMe">Say something about yourself!</string>
 
 
 </resources>
