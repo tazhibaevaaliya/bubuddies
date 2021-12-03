@@ -20,8 +20,10 @@
         <TextView
             android:id="@+id/txt_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/txtviewshadow"
             android:padding="5dp"
@@ -34,63 +36,81 @@
         <ImageView
             android:id="@+id/img_pfp"
             android:layout_width="match_parent"
-            android:layout_height="141dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="75dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
             android:layout_weight="3"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/txt_bio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="2"
             android:background="@drawable/txtviewshadow"
             android:padding="5dp"
-            android:text="Bio"
+            android:text="Bio: Example, I enjoy listening to Taylor Swift while doing programming assignments."
             android:textColor="#000000"
-            android:textSize="14dp" />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/txt_classes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
             android:layout_weight="1"
             android:background="@drawable/txtviewshadow"
             android:padding="5dp"
-            android:text="Classes: EX101, EX102, EX103, EX104, EX105"
+            android:text="Classes: EX101, EX102, EX103, EX104, EX105, EX106, EX107, EX108, EX109"
             android:textColor="#000000"
-            android:textSize="14dp" />
+            android:textSize="16dp" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_newMsg"
-            android:name="com.green.bubuddies.NewMsg"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout="@layout/fragment_new_msg"
-            tools:layout_margin="15dp" />
-
-        <Button
-            android:id="@+id/btn_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:text="Next Pairing"
-            android:textSize="14dp" />
+            android:orientation="horizontal"
+            android:weightSum="2"
+            tools:layout_weight="1">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_newMsg"
+                android:name="com.green.bubuddies.NewMsg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout="@layout/fragment_new_msg" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:text="Next Pairing"
+                android:textSize="14dp" />
+        </LinearLayout>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/btmFragmentPair"
             android:name="com.green.bubuddies.BottomMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             tools:layout="@layout/fragment_bottom_menu" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
