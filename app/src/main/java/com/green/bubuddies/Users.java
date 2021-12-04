@@ -185,21 +185,25 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
         switch(nextAct) {
             case (BottomMenu.PROFILE):
                 startActivity(new Intent(Users.this, MainActivity.class)); // can remove this line
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.PAIR):
                 Log.d("Pairing", "Starting pair Activity");
                 Intent i = new Intent(Users.this, Pair.class);
                 i.putExtra("UID", curr_user);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.MESSAGE):
                 Log.d("Messaging", "Starting message Activity");
                 i = new Intent(Users.this, Users.class);
                 i.putExtra("UID",curr_user);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 startActivity(i);
                 break;
             case (BottomMenu.STORE):
                 startActivity(new Intent(Users.this, StoreActivity.class));
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
         }
     }

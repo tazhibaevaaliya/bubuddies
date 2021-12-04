@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/purple_500"
             android:text="Profile" />
 
         <Button
@@ -22,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/purple_500"
             android:text="Pair" />
 
         <Button
@@ -29,13 +31,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Message" />
+            android:background="@color/purple_500"
+            android:text="Message"
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/btn_store"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/purple_500"
             android:text="Store" />
     </LinearLayout>
 </FrameLayout>

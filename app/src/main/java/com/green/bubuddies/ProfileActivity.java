@@ -200,7 +200,6 @@ public class ProfileActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK) {
                 Uri imageURI = data.getData();
                 PFP.setImageURI(imageURI);
-
                 uploadImage(imageURI);
             }
         }

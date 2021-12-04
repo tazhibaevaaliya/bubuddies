@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="WELCOMEUSERMESSAGE"
+            android:text="@string/welcomeUser"
             android:textSize="24sp" />
 
         <TextView
@@ -58,26 +58,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal"
             android:weightSum="2">
 
             <TextView
                 android:id="@+id/userNotVerified"
-                android:layout_width="match_parent"
+                android:layout_width="225dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="YOU ARE NOT VERIFIED YET! IF THIS IS A MISTAKE, PLEASE RELOG."
+                android:text="@string/notVerified"
                 android:textColor="#FA0000" />
 
             <Button
                 android:id="@+id/resendVerify"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1"
-                android:text="RESEND" />
+                android:layout_width="114dp"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:foregroundGravity="center"
+                android:text="@string/resend" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,19 +91,23 @@
                 android:id="@+id/button_editProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:text="EDIT PROFILE" />
+                android:text="@string/editProfile" />
 
             <Button
                 android:id="@+id/button_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:text="LOGOUT" />
+                android:text="@string/logout" />
         </LinearLayout>
 
         <androidx.fragment.app.FragmentContainerView

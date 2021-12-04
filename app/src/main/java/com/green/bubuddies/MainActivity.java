@@ -1,6 +1,7 @@
 package com.green.bubuddies;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/** This is the user's dashboard. They may edit profile, or logout here. It also displays their specific information. */
 public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMenuActivity{
     Button logout, resend, editProfile;
     TextView uid, welcome, email, warningMessage;
-    GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth fAuth;
     String string_uid;
 
@@ -36,34 +37,17 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String googToken;
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            googToken = extras.getString("ID_TOKEN");
-        } else {
-            googToken = "";
-        }
-        Log.e("TESTING", "ID_TOKEN " + googToken);
 
         uid = findViewById(R.id.text_userID);
         welcome = findViewById(R.id.welcomeUser);
         email = findViewById(R.id.text_userEmail);
         logout = findViewById(R.id.button_logout);
         editProfile = findViewById(R.id.button_editProfile);
-
-        // Configure Google Sign In.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                // For some reason, default_web_client_id will not work. Have to hardcode idtoken as result from values.xml
-                .requestIdToken("935525663116-k8n9tckl0u39bdkq073m2oiqv876enme.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = fAuth.getCurrentUser();
         Log.e("TESTING", fAuth.toString());
         Log.e("TESTING", currentUser.toString());
-        Log.e("TESTING", Boolean.toString(isSignedIn()));
+
 
         resend = findViewById(R.id.resendVerify);
         warningMessage = findViewById(R.id.userNotVerified);
@@ -88,9 +72,14 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
             warningMessage.setVisibility(View.INVISIBLE);
         }
 
+
+
+
+
+
         string_uid = currentUser.getUid();
-        uid.setText(string_uid);
-        email.setText(currentUser.getEmail());
+        uid.setText("Your User ID is:\n " + string_uid);
+        email.setText("Your Email is:\n " + currentUser.getEmail());
         DatabaseReference username = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         username.addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,16 +99,9 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mGoogleSignInClient.signOut()
-                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                // Have to do this too to sign user out of app completely.
-                                FirebaseAuth.getInstance().signOut();
-                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                                finish();
-                            }
-                        });
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
             }
         });
 
@@ -132,10 +114,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
             }
         });
 
-    }
-
-    private boolean isSignedIn() {
-        return GoogleSignIn.getLastSignedInAccount(getApplicationContext()) != null;
     }
 
     @Override
@@ -155,15 +133,21 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
                 Intent i = new Intent(MainActivity.this, Pair.class);
                 i.putExtra("UID", string_uid);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.MESSAGE):
                 Log.d("Messaging", "Starting message Activity");
                 i = new Intent(MainActivity.this, Users.class);
                 i.putExtra("UID",string_uid);
                 startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
             case (BottomMenu.STORE):
-                startActivity(new Intent(MainActivity.this, StoreActivity.class));
+                Log.d("Store", "Starting store Activity");
+                i = new Intent(MainActivity.this, StoreActivity.class);
+                i.putExtra("UID", string_uid);
+                startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
                 break;
         }
     }

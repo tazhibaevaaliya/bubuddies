@@ -18,11 +18,15 @@
             android:exported="true" />
         <activity
             android:name=".ProfileActivity"
-            android:label="@string/profile_name"
+            android:label="@string/editprofile_name"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
@@ -31,8 +35,9 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".splash"
             android:exported="true"
+            android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

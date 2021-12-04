@@ -10,7 +10,8 @@
     <string name="checkout_name" translatable="false">BU Buddies - Checkout</string>
     <string name="pair_name" translatable="false">BU Buddies - Pairing</string>
     <string name="store_name" translatable="false">BU Buddies - Store</string>
-    <string name="profile_name" translatable="false">BU Buddies - Profile</string>
+    <string name="profile_name" translatable="false">BU Buddies - My Profile</string>
+    <string name="editprofile_name" translatable="false">BU Buddies - Edit Profile</string>
     <string name="message_name" translatable="false">BU Buddies - Message</string>
 
     <!-- Google Pay/Checkout Implementation Strings -->
@@ -26,5 +27,35 @@
     <string name="payments_show_name">Successfully received payment data for %s!</string>
     <string name="gateway_replace_name_example">"Gateway name set to \"example\" - please modify Constants.java and replace it with your own gateway."</string>
     <string name="checkout_item_description">Description</string>
+    <string name="book_image">Image</string>
+
+
+    <string name="register">REGISTER</string>
+    <string name="LOGIN">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmpassword">Confirm Password</string>
+    <string name="alreadyHaveAccount">Already have an account? Login here.</string>
+    <string name="forgotpassword">Forgot password?</string>
+    <string name="dontHaveAccount">Don\'t have an account? Create one here.</string>
+    <string name="resend">resend</string>
+    <string name="notVerified">YOU ARE NOT VERIFIED YET! IF THIS IS A MISTAKE, PLEASE RELOG.</string>
+    <string name="editProfile">EDIT PROFILE</string>
+    <string name="logout">LOGOUT</string>
+    <string name="welcomeUser">Welcome, User</string>
+    <string name="updateProfile">SAVE PROFILE</string>
+    <string name="updatePicture">UPDATE PICTURE</string>
+    <string name="back">BACK</string>
+    <string name="profileName"><u>NAME</u></string>
+    <string name="profileMajor"><u>MAJOR</u></string>
+    <string name="profileYOG"><u>GRADUATION YEAR</u></string>
+    <string name="profileClasses"><u>CLASSES</u></string>
+    <string name="profileAboutMe"><u>ABOUT ME</u></string>
+    <string name="editName">Name</string>
+    <string name="editMajor">Major</string>
+    <string name="editYOG">YOG</string>
+    <string name="editClasses">Enter your classes here, separated by a comma.</string>
+    <string name="editAboutMe">Say something about yourself!</string>
+
 
 </resources>
