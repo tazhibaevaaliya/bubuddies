@@ -2,117 +2,102 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="414dp"
+        android:layout_height="347dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25">
 
-    <TextView
-        android:id="@+id/textView5"
+        <!--ImageVIew to display our Course Image-->
+        <ImageView
+            android:id="@+id/idIVBookImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/book_image"
+            android:padding="5dp"
+            android:src="@drawable/books" />
+
+        <!--Text View to display Course Name-->
+        <TextView
+            android:id="@+id/idPopUpBookTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/idIVBookImage"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!--Text VIew to display COurse Rating-->
+        <!--Image used in present in drawable folder-->
+        <TextView
+            android:id="@+id/idPopUpBookPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idPopUpBookTitle"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="39dp"
+            android:layout_toEndOf="@id/idIVBookImage"
+            android:drawablePadding="2dp"
+            android:text="Price" />
+
+        <TextView
+            android:id="@+id/idPopUpBookDescription"
+            android:layout_width="352dp"
+            android:layout_height="127dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/idPopUpBookPrice"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="93dp"
+            android:text="Description"
+            android:textSize="12dp"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/btnCheckOut"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="271dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="37dp"
+            android:background="@drawable/field"
+            app:icon="@drawable/ic_shopping_cart_icon" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Book Details"
-        android:textSize="40dp"
+        android:text="Close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintHorizontal_bias="0.917"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="211dp"
-        android:layout_height="178dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.16"
-        app:srcCompat="@drawable/books" />
-
-    <EditText
-        android:id="@+id/txtListedBookName"
-        android:layout_width="351dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:hint="Title of the Book"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.131" />
-
-    <EditText
-        android:id="@+id/txtListedBookPrice"
-        android:layout_width="343dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:hint="Price of the Book"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtListedBookName" />
-
-    <Button
-        app:icon="@drawable/upload"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:id="@+id/btnUpload"
-        android:layout_width="342dp"
-        android:layout_height="57dp"
-        android:background="@drawable/field"
-        android:textColor="@color/price_button_grey"
-        android:text="Upload"
-        android:textAlignment="center"
-        android:elevation="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.608"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtListedBookPrice"
-        app:layout_constraintVertical_bias="0.217" />
-
-    <Button
-        android:id="@+id/btnPost"
-        android:layout_width="160dp"
-        android:layout_height="44dp"
-        android:background="@drawable/field"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:text="POST"
-        android:textColor="@color/element_white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="160dp"
-        android:layout_height="43dp"
-        android:background="@drawable/field"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:text="CANCEL"
-        android:textColor="@color/element_white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.893"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintVertical_bias="0.081" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

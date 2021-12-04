@@ -14,11 +14,6 @@
         app:showAsAction="always"
         />
 
-    <item android:title="Check Out"
-        android:icon="@drawable/shopping_cart"
-        android:id="@+id/shopping_cart"
-        app:showAsAction="always"
-        />
 <!--    <item android:title="Add Listing"-->
 <!--        android:icon="@drawable/ic_add_listing"-->
 <!--        android:id="@+id/new_listing"-->

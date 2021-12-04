@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item android:drawable="@color/price_button_grey" android:state_pressed="true"></item>-->
+<!--    <item android:drawable="@color/price_button_grey" android:state_selected="true"></item>-->
+<!--    <item android:drawable="@color/white"></item>-->
+<!--    <item android:state_pressed="true">-->
+<!--        <shape>-->
+<!--            <solid android:color="@color/price_button_grey" />-->
+<!--        </shape>-->
+<!--    </item>-->
+
+<!--    <item android:state_pressed="false">-->
+<!--        <shape>-->
+<!--            <solid android:color="@android:color/transparent" />-->
+<!--        </shape>-->
+<!--    </item>-->
+    <item android:state_selected="true" android:drawable="@color/price_button_grey" />
+    <item android:drawable="@android:color/transparent" />
+</selector>

@@ -13,45 +13,57 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="388dp"
+        android:layout_height="53dp"
         android:layout_margin="10dp"
         android:fontFamily="@font/playfair_display_regular"
         android:text="Compare"
         android:textAlignment="center"
-        android:textSize="50dp" />
+        android:textSize="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_weight="1">
+        android:layout_marginBottom="5dp"
+        android:layout_weight="0.3"
+        android:orientation="horizontal">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtBookName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="248dp"
+            android:layout_height="64dp"
+            android:layout_weight="2"
             android:hint="Title of the Book"
-            android:inputType="textPersonName" />
+            android:textAlignment="center"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconMode="clear_text"
+            app:shapeAppearance="@style/Rounded">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btnFindPrice"
-            android:layout_width="167dp"
-            android:layout_height="63dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="4dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
             android:layout_weight="1"
-            android:text="Display" />
+            android:background="@drawable/field"
+            app:icon="@drawable/ic_search" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_items"
-        android:layout_width="wrap_content"
-        android:layout_height="191dp"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="true"
-        android:layout_weight="4"
-        android:fastScrollAlwaysVisible="false" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVListingeBay"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="3" />
 
 </LinearLayout>

@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,11 +40,16 @@ public class PriceComparison extends AppCompatActivity {
 
     private Button btnFind;
     public String url;
-    TextView txtBookName;
+    TextInputLayout txtBookName;
     static ArrayList<String> names;
     static ArrayList<String> prices;
+    static ArrayList<String> images;
     private ListView lv_items;
     private ListAdapter lvAdapter;
+    private RecyclerView listingRV;
+    // Arraylist for storing data
+    private ArrayList<ListingModel> listingModelArrayList;
+    final String default_picture = "https://lh3.googleusercontent.com/proxy/yS_DrYbvuDF-noQIDvVJk9Die3h8Gf1v3eYi0k16S_xxT_NoQTRkSaWF1BSWQZMO-MhLecz_eqyJtLcsPy9WBoBW"; //default picture for each listing
 
 
     @Override
@@ -52,8 +60,14 @@ public class PriceComparison extends AppCompatActivity {
 
         //Boiler Plate: creating Views
         btnFind = (Button) findViewById(R.id.btnFindPrice);
-        txtBookName = (TextView) findViewById(R.id.txtBookName);
-        lv_items = (ListView) findViewById(R.id.lv_items);
+
+        // here we have created new array list and added data to it.
+        listingModelArrayList = new ArrayList<>();
+
+        listingRV = (RecyclerView) findViewById(R.id.idRVListingeBay);
+
+        txtBookName = (TextInputLayout) findViewById(R.id.txtBookName);
+        //lv_items = (ListView) findViewById(R.id.lv_items);
 
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +76,7 @@ public class PriceComparison extends AppCompatActivity {
                 //https://api.ebay.com/buy/browse/v1/item_summary/search?q=drone&limit=3
 //                token = "AgAAAA**AQAAAA**aAAAAA**OmmcYQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4aiDZmKoQqdj6x9nY+seQ**R7YFAA**AAMAAA**yIdyYgpPLCGK2ybuko9Ykb8/eSIls1Oxc+f5F5qRNAw/m3xw4oJQAFX75v2uWnQsipBQmF7fAlb9zzsoVCzT1Q5Pm+tiod2raJh2gXX9USrwo4IB7YjwDishK21d8CKhu4DCXrgEFSIlq/+6KOcMF2nVnS8J6jci3/R9MzwyaJM6ydeBu/3zxRP+3FVoVgpMiDw73cV5xiJaWb2XZZxM7QpU5ae+WD8CXdCkO6/XB1VHrNSfQrJn+tl5Fv0kWtD/iwqxCcQ6ZEca2vHMuSRkvweiisUQGY5eRRNDLY6L1N2W1RYaOcCXmpi56GY6kGntVM7WlRJ2+tXDikSbpxiAE3bwuA9aGpS0f01KpyRE4k/kQoOiJxlP9embaVwBys2R4yP4VNHwiaXd7nluInunCXP+voSkeEe1rKGDLOafGBCSCeJm58rjaG+YpQy70n8Ou84ikRa5Yj6hNm3drssoOZ7I6oBvc9wKgwFE98RO3bXc19vH/EQ16qDmsEOP3NpHojR1IJLd2EyKDPnU0P5oSAY4EtgVPfeF8a7E7+56Bv9OzxOvC+//lSVgm6s3vJl4pnayiIhQS537IohuzfzrHhu/+YfyPQvSZ9/+X112PXarOdHp3BpA+VPS3lvGUwSDzBX+TebC5awjz4SxsrYYKcb+y0sjPH4xBQAkt6p5B/M1zOfyLB+l+BGFY0YGjXX1aiFkBCJ6tmXVLstcxg3viAsLONwTWkv7q5YuJMHwRNWyv+bWcDClaw11c7gjm18y";
                 RequestQueue queue = Volley.newRequestQueue(getBaseContext()); // preparing the request object and requesting a queue using Volley library
-                url = "https://ebay-search.p.rapidapi.com/search.php?query="+txtBookName.getText().toString(); // inserting the query parameter (name of object)
+                url = "https://ebay-search.p.rapidapi.com/search.php?query="+txtBookName.getEditText().getText().toString().trim(); // inserting the query parameter (name of object)
                 // from user input to TextView "txtBookName"
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, // Request a string response from the provided URL.
@@ -82,8 +96,8 @@ public class PriceComparison extends AppCompatActivity {
                                 parseData(items); //parse the data
 
                                 if(names.size()!=0){
-                                    lvAdapter = new MyCustomAdapter(getBaseContext());  //instead of passing the boring default string adapter, let's pass our own, see class MyCustomAdapter below!
-                                    lv_items.setAdapter(lvAdapter);
+                                    //lvAdapter = new MyCustomAdapter(getBaseContext());  //instead of passing the boring default string adapter, let's pass our own, see class MyCustomAdapter below!
+                                    //lv_items.setAdapter(lvAdapter);
                                     Toast.makeText(getBaseContext(),"Successful",Toast.LENGTH_SHORT).show(); //displaying a success message in the case of
                                 }
                                 else{
@@ -123,6 +137,7 @@ public class PriceComparison extends AppCompatActivity {
         JSONObject item = null;
         names = new ArrayList<String>();
         prices = new ArrayList<String>();
+        images = new ArrayList<String>();
 
         //parsing through the data
         if(items.length()>0){
@@ -142,6 +157,22 @@ public class PriceComparison extends AppCompatActivity {
                 prices.add(item.optString("price")); //adding the price information to the ArrayList
                 Log.d("Size", String.valueOf(prices.size()));
             }
+        }
+
+        if(names.size()!=0){
+            for(int i=0; i<names.size(); i++){
+                listingModelArrayList.add(new ListingModel(names.get(i),prices.get(i),default_picture,getBaseContext()));
+            }
+            // we are initializing our adapter class and passing our arraylist to it.
+            ListingFromEbayAdapter courseAdapter = new ListingFromEbayAdapter(getBaseContext(), listingModelArrayList);
+
+            // below line is for setting a layout manager for our recycler view.
+            // here we are creating vertical list so we will provide orientation as vertical
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
+
+            // in below two lines we are setting layoutmanager and adapter to our recycler view.
+            listingRV.setLayoutManager(linearLayoutManager);
+            listingRV.setAdapter(courseAdapter);
         }
     }
 }
