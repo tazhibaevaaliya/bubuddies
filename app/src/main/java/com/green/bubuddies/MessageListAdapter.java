@@ -1,6 +1,7 @@
 package com.green.bubuddies;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
-    private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
+    private static final int VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY = 2;
+
+    private static final int VIEW_TYPE_MESSAGE_RECEIVED = 3;
+    private static final int VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY = 4;
+
+    private Date now = new Date();
+
 
     private
     Context mContext;
@@ -35,13 +45,18 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         Message message = mMessageList.get(position);
+        Date temp = new Date(message.getTimestamp());
+        Long diff = now.getTime() - temp.getTime();
+        long day_diff = TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS);
 
         if (message.getUser().equals(UserDetails.uid)) {
             // If the current user is the sender of the message
-            return VIEW_TYPE_MESSAGE_SENT;
+            if(day_diff > 0 || position == 0) return VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY;
+            else return VIEW_TYPE_MESSAGE_SENT;
         } else {
             // If some other user sent the message
-            return VIEW_TYPE_MESSAGE_RECEIVED;
+            if(day_diff > 0 || position == 0) return VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY;
+            else return VIEW_TYPE_MESSAGE_RECEIVED;
         }
     }
 
@@ -52,9 +67,17 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         if (viewType == VIEW_TYPE_MESSAGE_SENT) {
             view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.msg_me_today, parent, false);
+            return new SentMessageTodayHolder(view);
+        } else if (viewType == VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY) {
+            view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.msg_me, parent, false);
             return new SentMessageHolder(view);
         } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.msg_other_today, parent, false);
+            return new ReceivedMessageTodayHolder(view);
+        } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.msg_other, parent, false);
             return new ReceivedMessageHolder(view);
@@ -70,23 +93,29 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
+                ((SentMessageTodayHolder) holder).bind(message);
+                break;
+            case VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY:
                 ((SentMessageHolder) holder).bind(message);
                 break;
             case VIEW_TYPE_MESSAGE_RECEIVED:
+                ((ReceivedMessageTodayHolder) holder).bind(message);
+                break;
+            case VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY:
                 ((ReceivedMessageHolder) holder).bind(message);
         }
     }
 
     private class SentMessageHolder extends RecyclerView.ViewHolder {
-        TextView messageText, timeText, nameText;
+        TextView messageText, timeText, dateText;
         ImageView profileImage;
 
         SentMessageHolder(View itemView) {
             super(itemView);
 
             messageText = (TextView) itemView.findViewById(R.id.msgtext_me);
+            dateText = (TextView) itemView.findViewById(R.id.msg_date);
             timeText = (TextView) itemView.findViewById(R.id.time_me);
-            nameText = (TextView) itemView.findViewById(R.id.user_me);
             profileImage = (ImageView) itemView.findViewById(R.id.pic_me);
         }
 
@@ -94,9 +123,38 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(message.getMsg());
 
             // Format the stored timestamp into a readable String using method.
-//            timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            String dateString = formatter.format(new Date(message.getTimestamp()));
+            timeText.setText(dateString);
 
-            nameText.setText(UserDetails.username);
+            formatter = new SimpleDateFormat("EEE, MMM d");
+            dateString = formatter.format(new Date(message.getTimestamp()));
+            dateText.setText(dateString);
+
+            // Insert the profile image from the URL into the ImageView.
+            Picasso.with(mContext).load(UserDetails.selfpic).transform(new CircleTransform()).into(profileImage);
+        }
+    }
+
+    private class SentMessageTodayHolder extends RecyclerView.ViewHolder {
+        TextView messageText, timeText, nameText;
+        ImageView profileImage;
+
+        SentMessageTodayHolder(View itemView) {
+            super(itemView);
+
+            messageText = (TextView) itemView.findViewById(R.id.msgtext_me);
+            timeText = (TextView) itemView.findViewById(R.id.time_me);
+            profileImage = (ImageView) itemView.findViewById(R.id.pic_me);
+        }
+
+        void bind(Message message) {
+            messageText.setText(message.getMsg());
+
+            // Format the stored timestamp into a readable String using method.
+            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            String dateString = formatter.format(new Date(message.getTimestamp()));
+            timeText.setText(dateString);
 
             // Insert the profile image from the URL into the ImageView.
             Picasso.with(mContext).load(UserDetails.selfpic).transform(new CircleTransform()).into(profileImage);
@@ -105,7 +163,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
 
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
-        TextView messageText, timeText, nameText;
+        TextView messageText, timeText, nameText, dateText;
         ImageView profileImage;
 
         ReceivedMessageHolder(View itemView) {
@@ -113,7 +171,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
             messageText = (TextView) itemView.findViewById(R.id.latest_msg);
             timeText = (TextView) itemView.findViewById(R.id.time_other);
-            nameText = (TextView) itemView.findViewById(R.id.user_name);
+            dateText = (TextView) itemView.findViewById(R.id.msg_date);
             profileImage = (ImageView) itemView.findViewById(R.id.user_pic);
         }
 
@@ -121,9 +179,38 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(message.getMsg());
 
             // Format the stored timestamp into a readable String using method.
-//            timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
+            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            String dateString = formatter.format(new Date(message.getTimestamp()));
+            timeText.setText(dateString);
 
-            nameText.setText(UserDetails.chatwithname);
+            formatter = new SimpleDateFormat("EEE, MMM d");
+            dateString = formatter.format(new Date(message.getTimestamp()));
+            dateText.setText(dateString);
+
+            // Insert the profile image from the URL into the ImageView.
+            Picasso.with(mContext).load(UserDetails.chatwithpic).transform(new CircleTransform()).into(profileImage);
+        }
+    }
+
+    private class ReceivedMessageTodayHolder extends RecyclerView.ViewHolder {
+        TextView messageText, timeText, nameText;
+        ImageView profileImage;
+
+        ReceivedMessageTodayHolder(View itemView) {
+            super(itemView);
+
+            messageText = (TextView) itemView.findViewById(R.id.latest_msg);
+            timeText = (TextView) itemView.findViewById(R.id.time_other);
+            profileImage = (ImageView) itemView.findViewById(R.id.user_pic);
+        }
+
+        void bind(Message message) {
+            messageText.setText(message.getMsg());
+
+            // Format the stored timestamp into a readable String using method.
+            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            String dateString = formatter.format(new Date(message.getTimestamp()));
+            timeText.setText(dateString);
 
             // Insert the profile image from the URL into the ImageView.
             Picasso.with(mContext).load(UserDetails.chatwithpic).transform(new CircleTransform()).into(profileImage);

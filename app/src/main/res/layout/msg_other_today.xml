@@ -7,42 +7,27 @@
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp">
 
-    <TextView
-        android:id="@+id/msg_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
-        android:text="June 10"
-        android:textColor="#C0C0C0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <ImageView
-        android:id="@+id/pic_me"
+        android:id="@+id/user_pic"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="User Icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/msg_date" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_gchat_message_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="5dp"
-        app:cardBackgroundColor="@color/purple_500"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="17dp"
+        app:cardBackgroundColor="#eef1f6"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
-        app:layout_constraintEnd_toStartOf="@id/pic_me"
+        app:layout_constraintStart_toEndOf="@+id/user_pic"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -52,7 +37,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/msgtext_me"
+                android:id="@+id/latest_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -61,23 +46,22 @@
                 android:paddingTop="8dp"
                 android:paddingRight="12dp"
                 android:text="Message"
-                android:textAlignment="viewEnd"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+
     <TextView
-        android:id="@+id/time_me"
+        android:id="@+id/time_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:text="8:00"
         android:textColor="#C0C0C0"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/card_gchat_message_other"
-        app:layout_constraintEnd_toStartOf="@+id/card_gchat_message_other" />
+        app:layout_constraintStart_toEndOf="@+id/card_gchat_message_other" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

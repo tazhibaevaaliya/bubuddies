@@ -29,9 +29,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark">
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:titleMarginEnd="105dp"
+                app:titleMarginStart="105dp">
 
             </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/bar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/delete"

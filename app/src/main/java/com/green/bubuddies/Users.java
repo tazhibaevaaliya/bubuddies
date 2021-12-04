@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -136,6 +138,8 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
                         @Override
                         public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                             user.setMsg(snapshot.child("message").getValue().toString());
+                            user.setMsg_time((Long)snapshot.child("timestamp").getValue());
+                            Collections.sort(contacts,Contact.contactsComparator);
                             mContactAdapter.notifyDataSetChanged();
                         }
 

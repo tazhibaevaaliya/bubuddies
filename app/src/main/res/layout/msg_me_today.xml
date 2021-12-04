@@ -7,35 +7,21 @@
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp">
 
-    <TextView
-        android:id="@+id/msg_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
-        android:text="June 10"
-        android:textColor="#C0C0C0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <ImageView
         android:id="@+id/pic_me"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="User Icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/msg_date" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_gchat_message_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="5dp"
         app:cardBackgroundColor="@color/purple_500"
         app:cardCornerRadius="12dp"
