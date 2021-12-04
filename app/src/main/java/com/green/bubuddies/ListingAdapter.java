@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewholder> {
+public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewholder> implements View.OnClickListener {
 
     private Context context;
     private ArrayList<ListingModel> listingModelArrayList;
@@ -30,6 +30,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewhold
         // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listing_card_layout, parent, false);
         return new Viewholder(view);
+
     }
 
     @Override
@@ -39,6 +40,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewhold
         holder.courseNameTV.setText(model.getTitle());
         holder.courseRatingTV.setText(model.getPrice());
         Glide.with(model.getContext()).load(model.getImage()).into(holder.courseIV);
+        holder.itemView.setSelected(false);
     }
 
     @Override
@@ -46,6 +48,14 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewhold
         // this method is used for showing number
         // of card items in recycler view.
         return listingModelArrayList.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        v.setSelected(true);
+        //or new Handler().postDelayed(new Runnable...
+
+        //your onClick action
     }
 
     // View holder class for initializing of
@@ -56,9 +66,10 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewhold
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
+            itemView.setClickable(true);
             courseIV = itemView.findViewById(R.id.idIVBookImage);
-            courseNameTV = itemView.findViewById(R.id.idTVCourseName);
-            courseRatingTV = itemView.findViewById(R.id.idTVBookPrice);
+            courseNameTV = itemView.findViewById(R.id.idPopUpBookTitle);
+            courseRatingTV = itemView.findViewById(R.id.idPopUpBookPrice);
         }
     }
 }

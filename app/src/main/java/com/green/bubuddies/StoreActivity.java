@@ -10,10 +10,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +24,10 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,6 +38,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 
@@ -49,14 +49,18 @@ public class StoreActivity extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private Button btnPost, btnCancel, btnUpload;
-    private TextView txtListedBookName;
-    private TextView txtListedBookPrice;
+    private Button btnClose, btnCheckOut;
+    private TextInputLayout txtListedBookName;
+    private TextInputLayout txtListedBookPrice;
+    private TextView txtListedBookDescription;
+    private TextView idPopUpBookPrice, idPopUpBookTitle, idPopUpBookDescription;
     //private ActivityStoreBinding binding;
     private RecyclerView listView;
     ArrayList<String> titles = new ArrayList<String>();
     ArrayList<String> prices = new ArrayList<String>();
     ArrayList<String> ids = new ArrayList<String>();
     ArrayList<String> imageURIs = new ArrayList<String>();
+    ArrayList<String> listingDescriptions = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     int clickedRow = -1;
     private RecyclerView listingRV;
@@ -94,6 +98,18 @@ public class StoreActivity extends AppCompatActivity {
         FirebaseUser currentUser = fAuth.getCurrentUser();
 
         listingRV = (RecyclerView) findViewById(R.id.idRVListing);
+        listingRV.addOnItemTouchListener(
+                new RecyclerItemClickListener(getBaseContext(), listingRV ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        createListingWindow(position);
+                        Toast.makeText(getBaseContext(),"Clicked row is" + String.valueOf(position), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,titles);
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -120,7 +136,7 @@ public class StoreActivity extends AppCompatActivity {
 
     }
 
-public void getData(){
+    public void getData(){
     //reading data from Firebase and saving it into listings----------------------------------------------------------------------------------
     //getting a database reference
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -141,12 +157,16 @@ public void getData(){
                 else{
                     imageURIs.add(child.child("picture").getValue().toString()); //getting the image URI String
                 }
+                if(!child.child("description").exists() | child.child("description").getValue().equals("")){
+                    listingDescriptions.add("Sorry! There is not any description");
+                }else{
+                    listingDescriptions.add(child.child("picture").getValue().toString());
+                }
 
-
-                //Glide.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).into(PFP);
                 ids.add(child.getKey().toString()); //getting ids of each listing
                 titles.add(title);
                 prices.add(price);
+
             }
 
             for(int i=0; i<titles.size(); i++){
@@ -172,6 +192,55 @@ public void getData(){
         }
     });
 }
+
+    public void createListingWindow(int position){
+        dialogBuilder = new AlertDialog.Builder(StoreActivity.this);
+        final View listingPopupWindow = getLayoutInflater().inflate(R.layout.listing_popup,null);
+
+        //creating reference to the Views
+        btnClose = (Button) listingPopupWindow.findViewById(R.id.btnClose);
+        btnCheckOut = (Button) listingPopupWindow.findViewById(R.id.btnCheckOut);
+
+        imageURI = null; //initializing URI for book image
+
+        idPopUpBookTitle = (TextView) listingPopupWindow.findViewById(R.id.idPopUpBookTitle);
+        idPopUpBookPrice = (TextView) listingPopupWindow.findViewById(R.id.idPopUpBookPrice);
+        idPopUpBookDescription = (TextView) listingPopupWindow.findViewById(R.id.idPopUpBookDescription);
+
+        //populating the title, price and description of the listing
+        idPopUpBookPrice.setText(prices.get(position));
+        idPopUpBookTitle.setText(titles.get(position));
+        idPopUpBookDescription.setText(listingDescriptions.get(position));
+
+        dialogBuilder.setView(listingPopupWindow);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        //binding an event:
+        btnCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedRow = position;
+                //Toast.makeText(getBaseContext(),"Item was successfully checked out!",Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(StoreActivity.this,CheckoutActivity.class);
+                intent.putExtra("Listing ID", ids.get(clickedRow));
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+    }
+
+
 
 
 
@@ -209,16 +278,9 @@ public void getData(){
                 Intent intent1 = new Intent(StoreActivity.this,PriceComparison.class);
                 startActivity(intent1);
                 break;
-            case R.id.shopping_cart:
-                if(clickedRow==-1){
-                    Toast.makeText(StoreActivity.this, "Please Select an Item first!", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Intent intent = new Intent(StoreActivity.this,CheckoutActivity.class);
-                    intent.putExtra("Listing ID", ids.get(clickedRow));
-                    startActivity(intent);
-                }
-                break;
+//            case R.id.shopping_cart:
+//
+//                break;
 //            case R.id.new_listing:
 //                //calling a new intent for listing form
 //                Intent intent = new Intent(MainActivity.this, ItemListing.class);
@@ -235,7 +297,7 @@ public void getData(){
 
     public void createNewListingWindow(){
         dialogBuilder = new AlertDialog.Builder(StoreActivity.this);
-        final View listingPopupWindow = getLayoutInflater().inflate(R.layout.listing_popup,null);
+        final View listingPopupWindow = getLayoutInflater().inflate(R.layout.new_listing_popup,null);
 
         //creating reference to the Views
         btnPost = (Button) listingPopupWindow.findViewById(R.id.btnPost);
@@ -244,8 +306,9 @@ public void getData(){
 
         imageURI = null; //initializing URI for book image
 
-        txtListedBookName = (TextView) listingPopupWindow.findViewById(R.id.txtListedBookName);
-        txtListedBookPrice = (TextView) listingPopupWindow.findViewById(R.id.txtListedBookPrice);
+        txtListedBookName = (TextInputLayout) listingPopupWindow.findViewById(R.id.txtListedBookName);
+        txtListedBookPrice = (TextInputLayout) listingPopupWindow.findViewById(R.id.txtListedBookPrice);
+        txtListedBookDescription = (TextView) listingPopupWindow.findViewById(R.id.txtListedBookDescription);
 
         dialogBuilder.setView(listingPopupWindow);
         dialog = dialogBuilder.create();
@@ -318,16 +381,26 @@ public void getData(){
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = fAuth.getCurrentUser();
 
-        if(txtListedBookName.getText().toString().equals("")){
+        if(txtListedBookName.getEditText().getText().equals("")){
             txtListedBookName.setError("REQUIRED");
             return;
         }
 
-        final String title = txtListedBookName.getText().toString();
-        final int price = Integer.parseInt(txtListedBookPrice.getText().toString());
+        if(txtListedBookPrice.getEditText().getText().equals("")){
+            txtListedBookPrice.setError("REQUIRED");
+            return;
+        }
+
+        if(txtListedBookDescription.getText().toString().equals("")){
+            txtListedBookName.setError("REQUIRED");
+            return;
+        }
+        final String title = txtListedBookName.getEditText().getText().toString().trim();
+        final int price = Integer.parseInt(txtListedBookPrice.getEditText().getText().toString().trim());
+        final String description = txtListedBookDescription.getText().toString();
 
         if(imageURI==null){
-            dialog.dismiss(); //if there is no image close Menu window pop-up
+            imageURI = default_picture; //if there is no image close Menu window pop-up
         }
 
         //getting a database reference
@@ -335,7 +408,7 @@ public void getData(){
         DatabaseReference myRef = database.getReference();
 
         //creating a new instance of listing object
-        Listing listing = new Listing(title,price,curr_user,imageURI, default_picture);
+        Listing listing = new Listing(title,price,curr_user,imageURI,description);
         myRef.child("listings").push().setValue(listing); //writing to the database
 
 

@@ -42,6 +42,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVListing"
         android:layout_width="match_parent"
+        android:background="@drawable/recycle_view_item_selected"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
         android:layout_height="426dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="136dp"
@@ -72,6 +75,7 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

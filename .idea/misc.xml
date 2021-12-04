@@ -5,23 +5,19 @@
       <map>
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.10092592592592593" />
         <entry key="../../../../layout/custom_preview.xml" value="0.10092592592592593" />
-        <entry key="..\:/bubuddies/app/src/main/res/drawable/txtviewshadow.xml" value="0.2703125" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/activity_chat.xml" value="0.25416666666666665" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/activity_pair.xml" value="0.25416666666666665" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/activity_profile.xml" value="0.25416666666666665" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/activity_splash.xml" value="0.13020833333333334" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/message_area.xml" value="0.25416666666666665" />
-        <entry key="..\:/bubuddies/app/src/main/res/layout/userlist_row.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable-v24/ic_compare.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable-v24/ic_search.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/field.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_add_listing.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_banner_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart_icon.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable/image.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/recycle_view_item_selected.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/round_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_corner1.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/rounded_corner2.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable/txtviewshadow.xml" value="0.1" />
         <entry key="app/src/main/res/font/font.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_pair.xml" value="0.18297101449275363" />
