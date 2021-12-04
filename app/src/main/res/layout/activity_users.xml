@@ -7,11 +7,11 @@
     tools:context=".Users"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/usersList"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/users_list"
         android:layout_width="match_parent"
-        android:layout_height="602dp"
-        android:paddingTop="60dp" />
+        android:layout_height="543dp"
+        android:layout_weight="1" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/users_btmFrag"

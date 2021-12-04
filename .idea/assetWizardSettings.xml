@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -18,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/image/baseline_image_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/more_horiz/baseline_more_horiz_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="image" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_baseline_more_horiz_24" />
                           </map>
                         </option>
                       </PersistentState>

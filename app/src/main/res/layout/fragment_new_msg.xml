@@ -10,15 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/txt_msg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:ems="10"
-            android:hint="Enter New Message Here"
-            android:inputType="textPersonName" />
-
         <Button
             android:id="@+id/btn_newMsg"
             android:layout_width="match_parent"

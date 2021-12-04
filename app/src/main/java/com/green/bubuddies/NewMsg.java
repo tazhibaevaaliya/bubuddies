@@ -40,7 +40,6 @@ public class NewMsg extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_new_msg, container, false);
         btn_newMsg = v.findViewById(R.id.btn_newMsg);
-        txt_msg = v.findViewById(R.id.txt_msg);
 
         return v;
     }
