@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +45,7 @@ public class Chat extends AppCompatActivity {
     ImageButton deleteContact;
     ImageView sendButton;
     EditText messageArea;
+    TextView title;
     String selfimg,img;
     ArrayList<Message> messages = new ArrayList<>();
 
@@ -53,14 +58,37 @@ public class Chat extends AppCompatActivity {
         sendButton = findViewById(R.id.sendButton);
         messageArea = findViewById(R.id.messageArea);
         deleteContact = findViewById(R.id.delete);
+        title = findViewById(R.id.bar_title);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mMessageRecycler = findViewById(R.id.recycler_chat);
         mMessageAdapter = new MessageListAdapter(this, messages);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
         mMessageRecycler.setAdapter(mMessageAdapter);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-        mToolbar.setTitle(getString(R.string.app_name));
-        mToolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras!= null) {
+            UserDetails.chatwithid = extras.getString("chatwithid");
+            Log.e("chatwithid",UserDetails.chatwithid);
+            Query query = reference.child("Users").child(UserDetails.chatwithid);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    UserDetails.chatwithname = snapshot.child("username").getValue().toString();
+                    title.setText(UserDetails.chatwithname);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        else{
+            title.setText(UserDetails.chatwithname);
+        }
+
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,19 +104,6 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-        Log.e("uid before get",UserDetails.uid);
-        Log.e("chatwithid before get", UserDetails.chatwithid);
-
-        Bundle extras = getIntent().getExtras();
-        if(extras!= null) {
-            UserDetails.chatwithid = extras.getString("chatwithid");
-        } else {
-        }
-
-        Log.e("uid after get",UserDetails.uid);
-        Log.e("chatwithid after get", UserDetails.chatwithid);
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,48 +111,11 @@ public class Chat extends AppCompatActivity {
                 String messageText = messageArea.getText().toString();
 
                 if(!messageText.equals("")){
-                    Map<String, String> map = new HashMap<String, String>();
+                    Map<String, Object> map = new HashMap<String, Object>();
                     map.put("message", messageText);
                     map.put("user", UserDetails.uid);
+                    map.put("timestamp",ServerValue.TIMESTAMP);
                     // put the info of user and message to the database
-
-//                    ArrayList<String> my_contacts = new ArrayList<>();
-//                    ArrayList<String> other_contacts = new ArrayList<>();
-//                    reference.child("Users").child(UserDetails.uid).child("Contacts").addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot data : snapshot.getChildren()) {
-//                                my_contacts.add(data.getValue().toString());
-//                            }
-//                        }
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//
-//                    reference.child("Users").child(UserDetails.chatwithid).child("Contacts").addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot data:snapshot.getChildren()){
-//                                other_contacts.add(data.getValue().toString());
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-
-//                    if(!my_contacts.contains(UserDetails.chatwithid)){
-//                        reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.chatwithid);
-//                    }
-//
-//                    if(!other_contacts.contains(UserDetails.uid)){
-//                        reference.child("Users").child(UserDetails.chatwithid).child("Contacts").push().setValue(UserDetails.uid);
-//                    }
-
 
                     if(!UserDetails.contacts.contains(UserDetails.chatwithid)) {
                         reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.chatwithid);
@@ -187,9 +165,8 @@ public class Chat extends AppCompatActivity {
         reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                messages.add(new Message(snapshot.child("user").getValue().toString(),snapshot.child("message").getValue().toString()));
+                messages.add(new Message(snapshot.child("user").getValue().toString(),snapshot.child("message").getValue().toString(), (Long) snapshot.child("timestamp").getValue()));
                 Log.e("msg",snapshot.child("message").getValue().toString());
-                Log.e("msg",messages.toString());
                 mMessageRecycler.smoothScrollToPosition(messages.size()-1);
                 mMessageAdapter.notifyDataSetChanged();
             }
@@ -217,8 +194,10 @@ public class Chat extends AppCompatActivity {
     }
 
     public void deleteContact(){
+        // Delete previous messages in the firebase
         FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).removeValue();
         FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.chatwithid + "_" + UserDetails.uid).removeValue();
+        // Update contact list
         UserDetails.contacts.remove(UserDetails.chatwithid);
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserDetails.uid).child("Contacts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -251,6 +230,7 @@ public class Chat extends AppCompatActivity {
 
             }
         });
+        // jump to the contact page
         startActivity(new Intent(Chat.this,Users.class));
     }
 }

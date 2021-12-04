@@ -32,7 +32,9 @@
         <entry key="app/src/main/res/layout/message_area.xml" value="0.103125" />
         <entry key="app/src/main/res/layout/message_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/msg_me.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/msg_me_today.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/msg_other.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/msg_other_today.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/msg_row.xml" value="0.10260416666666666" />
         <entry key="app/src/main/res/layout/userlist_row.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/menu/chat_menu.xml" value="0.2171875" />

@@ -1,15 +1,27 @@
 package com.green.bubuddies;
 
+import java.util.Map;
+
 public class Message {
     String user;
     String msg;
+    Long timestamp;
 
     public Message() {
     }
 
-    public Message(String user, String msg) {
+    public Message(String user, String msg, Long timestamp) {
         this.user = user;
         this.msg = msg;
+        this.timestamp = timestamp;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getUser() {

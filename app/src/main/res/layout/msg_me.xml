@@ -26,26 +26,16 @@
         android:id="@+id/pic_me"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="User Icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/msg_date" />
-
-    <TextView
-        android:id="@+id/user_me"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="John Grady Cole"
-        android:textAlignment="viewEnd"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/pic_me"
         app:layout_constraintTop_toBottomOf="@+id/msg_date" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_gchat_message_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="5dp"
         app:cardBackgroundColor="@color/purple_500"
         app:cardCornerRadius="12dp"
@@ -53,7 +43,7 @@
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toStartOf="@id/pic_me"
-        app:layout_constraintTop_toBottomOf="@+id/user_me">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layout_gchat_container_other"

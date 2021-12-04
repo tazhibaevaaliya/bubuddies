@@ -17,7 +17,7 @@
         android:maxWidth="50dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="278dp"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:orientation="vertical">
@@ -35,12 +35,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="260dp"
+            android:paddingStart="1dp"
             android:paddingTop="10dp"
             android:text="Message"
             android:textAlignment="viewStart"
             android:textColor="#000000"
             android:textSize="16sp" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/msg_time"
+        android:layout_width="56dp"
+        android:layout_height="31dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="8:00"
+        android:textAlignment="center"
+        android:textColor="#C0C0C0"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_gchat_message_other"
+        app:layout_constraintEnd_toStartOf="@+id/card_gchat_message_other" />
 
 
 </LinearLayout>
