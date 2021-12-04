@@ -33,6 +33,16 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewhold
 
     }
 
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<ListingModel> filterllist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        listingModelArrayList = filterllist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ListingAdapter.Viewholder holder, int position) {
         // to set data to textview and imageview of each card layout

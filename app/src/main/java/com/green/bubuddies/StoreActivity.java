@@ -102,7 +102,6 @@ public class StoreActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(getBaseContext(), listingRV ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         createListingWindow(position);
-                        Toast.makeText(getBaseContext(),"Clicked row is" + String.valueOf(position), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -157,9 +156,13 @@ public class StoreActivity extends AppCompatActivity {
                 else{
                     imageURIs.add(child.child("picture").getValue().toString()); //getting the image URI String
                 }
-                if(!child.child("description").exists() | child.child("description").getValue().equals("")){
+                if(!child.child("description").exists()){
                     listingDescriptions.add("Sorry! There is not any description");
-                }else{
+                }
+                else if(child.child("description").getValue().equals("")){
+                    listingDescriptions.add("Empty Description! Nothing to report");
+                }
+                else{
                     listingDescriptions.add(child.child("picture").getValue().toString());
                 }
 
@@ -262,7 +265,7 @@ public class StoreActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                arrayAdapter.getFilter().filter(newText);
+                filter(newText);
                 return false;
             }
         });
@@ -278,14 +281,6 @@ public class StoreActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(StoreActivity.this,PriceComparison.class);
                 startActivity(intent1);
                 break;
-//            case R.id.shopping_cart:
-//
-//                break;
-//            case R.id.new_listing:
-//                //calling a new intent for listing form
-//                Intent intent = new Intent(MainActivity.this, ItemListing.class);
-//                startActivity(intent);
-//                break;
 
             //createNewListingWindow();
 
@@ -293,6 +288,30 @@ public class StoreActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<ListingModel> filteredlist = new ArrayList<>();
+
+        // running a for loop to compare elements.
+        for (ListingModel item : listingModelArrayList) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            listingAdapter.filterList(filteredlist);
+        }
     }
 
     public void createNewListingWindow(){
@@ -319,7 +338,6 @@ public class StoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 submitPost();
-                Toast.makeText(getBaseContext(),"Item was successfully posted!",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
         });
@@ -381,35 +399,44 @@ public class StoreActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = fAuth.getCurrentUser();
 
-        if(txtListedBookName.getEditText().getText().equals("")){
-            txtListedBookName.setError("REQUIRED");
-            return;
+        if(txtListedBookName.getEditText().getText().toString().equals("") |  txtListedBookPrice.getEditText().getText().toString().equals("") | txtListedBookDescription.getText().toString().equals("")){
+            Toast.makeText(getBaseContext(),"Empty Field(s)! Need an input", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
+        else{
+            final String title = txtListedBookName.getEditText().getText().toString().trim();
+            final int price = Integer.parseInt(txtListedBookPrice.getEditText().getText().toString());
+            final String description = txtListedBookDescription.getText().toString();
+
+            if(imageURI==null){
+                imageURI = default_picture; //if there is no image close Menu window pop-up
+            }
+
+            //getting a database reference
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference();
+
+            //creating a new instance of listing object
+            Listing listing = new Listing(title,price,curr_user,imageURI,description);
+            myRef.child("listings").push().setValue(listing); //writing to the database
         }
 
-        if(txtListedBookPrice.getEditText().getText().equals("")){
-            txtListedBookPrice.setError("REQUIRED");
-            return;
-        }
+//        if(txtListedBookName.getEditText().getText().toString().equals("")){
+//            txtListedBookName.setError("REQUIRED");
+//            txtListedBookName.setError(null);
+//        }
+//
+//        if(txtListedBookPrice.getEditText().getText().toString().equals("")){
+//            txtListedBookPrice.setError("REQUIRED");
+//            txtListedBookPrice.setError(null);
+//
+//        }
+//
+//        if(txtListedBookDescription.getText().toString().equals("")){
+//            txtListedBookDescription.setError("REQUIRED");
+//            txtListedBookDescription.setError(null);
+//        }
 
-        if(txtListedBookDescription.getText().toString().equals("")){
-            txtListedBookName.setError("REQUIRED");
-            return;
-        }
-        final String title = txtListedBookName.getEditText().getText().toString().trim();
-        final int price = Integer.parseInt(txtListedBookPrice.getEditText().getText().toString().trim());
-        final String description = txtListedBookDescription.getText().toString();
-
-        if(imageURI==null){
-            imageURI = default_picture; //if there is no image close Menu window pop-up
-        }
-
-        //getting a database reference
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-
-        //creating a new instance of listing object
-        Listing listing = new Listing(title,price,curr_user,imageURI,description);
-        myRef.child("listings").push().setValue(listing); //writing to the database
 
 
 

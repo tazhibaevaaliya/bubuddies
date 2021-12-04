@@ -39,12 +39,40 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             app:layout_constraintVertical_bias="0.03" />
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtListedBookName"
-            android:layout_width="326dp"
-            android:layout_height="57dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="248dp"
+            android:layout_height="64dp"
             android:layout_weight="2"
             android:hint="Title of the Book"
+            android:textAlignment="center"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.544"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.062"
+            app:shapeAppearance="@style/Rounded">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="55dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtListedBookPrice"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="248dp"
+            android:layout_height="64dp"
+            android:layout_weight="2"
+            android:hint="Price of the Book"
+            android:textAlignment="center"
             app:counterEnabled="true"
             app:counterMaxLength="20"
             app:endIconMode="clear_text"
@@ -52,37 +80,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.067"
-            app:shapeAppearance="@style/Cut">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtListedBookPrice"
-            android:layout_width="325dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="2"
-            android:hint="Price of the Book"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"
-            app:endIconMode="clear_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtListedBookName"
-            app:shapeAppearance="@style/Cut">
+            app:layout_constraintVertical_bias="0.147"
+            app:shapeAppearance="@style/Rounded">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="55dp" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/txtListedBookDescription"
@@ -134,7 +140,6 @@
             android:elevation="10dp"
             android:gravity="center"
             android:text="POST"
-            android:textColor="@color/element_white"
             android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/btnCancel"
             app:layout_constraintHorizontal_bias="0.206"
@@ -151,7 +156,6 @@
             android:elevation="10dp"
             android:gravity="center"
             android:text="CANCEL"
-            android:textColor="@color/element_white"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnUpload" />
