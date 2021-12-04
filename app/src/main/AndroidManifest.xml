@@ -41,7 +41,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Users" />
-        <activity android:name=".Chat" />
+        <activity android:name=".Chat"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".StoreActivity"
             android:label="@string/store_name"
             android:exported="true"

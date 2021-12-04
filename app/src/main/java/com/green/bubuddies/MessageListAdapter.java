@@ -1,7 +1,6 @@
 package com.green.bubuddies;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.installations.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
@@ -114,10 +111,10 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         ReceivedMessageHolder(View itemView) {
             super(itemView);
 
-            messageText = (TextView) itemView.findViewById(R.id.msgtext_other);
+            messageText = (TextView) itemView.findViewById(R.id.latest_msg);
             timeText = (TextView) itemView.findViewById(R.id.time_other);
-            nameText = (TextView) itemView.findViewById(R.id.user_other);
-            profileImage = (ImageView) itemView.findViewById(R.id.pic_other);
+            nameText = (TextView) itemView.findViewById(R.id.user_name);
+            profileImage = (ImageView) itemView.findViewById(R.id.user_pic);
         }
 
         void bind(Message message) {
