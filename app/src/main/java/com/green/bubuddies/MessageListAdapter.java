@@ -1,7 +1,6 @@
 package com.green.bubuddies;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,7 +155,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
     private class SentMessageTodayHolder extends RecyclerView.ViewHolder {
-        TextView messageText, timeText, nameText;
+        TextView messageText, timeText;
         ImageView profileImage;
 
         SentMessageTodayHolder(View itemView) {
@@ -182,7 +181,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
 
 
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
-        TextView messageText, timeText, nameText, dateText;
+        TextView messageText, timeText, dateText;
         ImageView profileImage;
 
         ReceivedMessageHolder(View itemView) {
@@ -212,7 +211,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
     private class ReceivedMessageTodayHolder extends RecyclerView.ViewHolder {
-        TextView messageText, timeText, nameText;
+        TextView messageText, timeText;
         ImageView profileImage;
 
         ReceivedMessageTodayHolder(View itemView) {

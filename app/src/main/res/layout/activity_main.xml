@@ -24,13 +24,14 @@
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_banner_foreground" />
+            app:srcCompat="@drawable/logo" />
 
         <TextView
             android:id="@+id/welcomeUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/amaranth"
             android:gravity="center"
             android:text="@string/welcomeUser"
             android:textSize="24sp" />
@@ -42,6 +43,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:fontFamily="@font/amaranth"
             android:textSize="16sp" />
 
         <TextView
@@ -52,6 +54,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="0dp"
             android:layout_weight="1"
+            android:fontFamily="@font/amaranth"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -66,6 +69,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1.5"
+                android:fontFamily="@font/amaranth"
                 android:gravity="center"
                 android:text="@string/notVerified"
                 android:textColor="#FA0000" />
@@ -76,6 +80,7 @@
                 android:layout_height="61dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
+                android:fontFamily="@font/amaranth"
                 android:foregroundGravity="center"
                 android:text="@string/resend" />
         </LinearLayout>
@@ -96,6 +101,7 @@
                 android:layout_marginRight="50dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/amaranth"
                 android:text="@string/editProfile" />
 
             <Button
@@ -107,6 +113,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/amaranth"
                 android:text="@string/logout" />
         </LinearLayout>
 

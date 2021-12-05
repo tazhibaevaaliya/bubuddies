@@ -19,11 +19,15 @@
         <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/ic_message.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/ic_pair.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart_icon.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/image.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable/price_button_background.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable/price_button_background_selected.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/recycle_view_item_selected.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/round_button.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/rounded_corner1.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/rounded_corner2.xml" value="0.19947916666666668" />
@@ -32,6 +36,7 @@
         <entry key="app/src/main/res/font/font.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_channel.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.103125" />
         <entry key="app/src/main/res/layout/activity_pair.xml" value="0.24027777777777778" />
         <entry key="app/src/main/res/layout/activity_price_compare.xml" value="0.26721014492753625" />
