@@ -148,6 +148,9 @@ public class StoreActivity extends AppCompatActivity {
 
             //Load Data (title, price and image)
             for (DataSnapshot child : snapshot.getChildren()) {
+                if(child.child("owner").getValue().toString().equals(curr_user)){
+                    continue;
+                }
                 String title = child.child("title").getValue().toString(); //getting the title of each listing
                 String price = child.child("price").getValue().toString(); //getting the price of each listing
                 if(!child.child("picture").exists()){
