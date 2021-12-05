@@ -14,6 +14,14 @@
     <string name="editprofile_name" translatable="false">BU Buddies - Edit Profile</string>
     <string name="message_name" translatable="false">BU Buddies - Message</string>
 
+
+     <!-- Strings for navigation bar   -->
+    <string name="profile">Profile</string>
+    <string name="pair">Pair</string>
+    <string name="message">Message</string>
+    <string name="store">Store</string>
+
+
     <!-- Google Pay/Checkout Implementation Strings -->
     <!-- Payment notification -->
     <string name="channel_name">Payment Channel</string>

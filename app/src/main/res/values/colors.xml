@@ -9,6 +9,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="shrine_pink_100">#ffb6c1</color>
+
     <!-- Colors for GPAY -->
     <color name="price_button_grey">#555</color>
 
