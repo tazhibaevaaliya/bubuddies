@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -28,9 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Chat extends AppCompatActivity {
@@ -91,6 +94,13 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Chat.this,Users.class));
+            }
+        });
+
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupProfile(UserDetails.chatwithid);
             }
         });
 
@@ -258,5 +268,51 @@ public class Chat extends AppCompatActivity {
                 popup.hide();
             }
         });
+    }
+
+    public void popupProfile(String uid){
+        AlertDialog.Builder popup_builder = new AlertDialog.Builder(this,R.style.CustomAlertDialog);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        final View popupView = inflater.inflate(R.layout.profile_popup,null);
+
+
+        TextView name = popupView.findViewById(R.id.profile_name);
+
+        TextView major = popupView.findViewById(R.id.profile_major);
+        TextView gradtime = popupView.findViewById(R.id.profile_gradtime);
+        TextView classes = popupView.findViewById(R.id.profile_class);
+        TextView aboutme = popupView.findViewById(R.id.profile_aboutme);
+        ImageView img = popupView.findViewById(R.id.profile_img);
+
+        FirebaseDatabase.getInstance().getReference().child("Profiles").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                name.setText(snapshot.child("name").getValue().toString());
+                major.setText(snapshot.child("major").getValue().toString());
+                aboutme.setText(snapshot.child("aboutMe").getValue().toString());
+                gradtime.setText("class of "+snapshot.child("graduationYear").getValue().toString());
+                Picasso.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).transform(new CircleTransform()).into(img);
+
+                String classlist = "";
+                Iterator<DataSnapshot> courses = snapshot.child("classes").getChildren().iterator();
+                while(courses.hasNext()){
+                    classlist += courses.next().getKey();
+                    if (courses.hasNext())
+                        classlist += ", ";
+                }
+                classes.setText(classlist);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        popup_builder.setView(popupView);
+        AlertDialog popup = popup_builder.create();
+        popup.show();
+
     }
 }
