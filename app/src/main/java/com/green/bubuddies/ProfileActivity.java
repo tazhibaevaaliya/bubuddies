@@ -173,6 +173,8 @@ public class ProfileActivity extends AppCompatActivity {
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid()).child("username").setValue(name.getText().toString());
+
                 DatabaseReference mData = FirebaseDatabase.getInstance().getReference("Profiles").child(fAuth.getCurrentUser().getUid());
                 mData.child("aboutMe").setValue(about_me.getText().toString());
                 mData.child("graduationYear").setValue(yog.getText().toString());

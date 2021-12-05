@@ -118,9 +118,21 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
                 ((SentMessageTodayHolder) holder).bind(message);
+                ((SentMessageTodayHolder) holder).profileImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popupProfile(message.getUser());
+                    }
+                });
                 break;
             case VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY:
                 ((SentMessageHolder) holder).bind(message);
+                ((SentMessageHolder) holder).profileImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popupProfile(message.getUser());
+                    }
+                });
                 break;
             case VIEW_TYPE_MESSAGE_RECEIVED:
                 ((ReceivedMessageTodayHolder) holder).bind(message);
