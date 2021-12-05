@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
 
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
@@ -30,7 +29,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 3;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY = 4;
 
-    private Date now = new Date();
+    private Date last;
 
 
     private
@@ -51,18 +50,37 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         Message message = mMessageList.get(position);
-        Date temp = new Date(message.getTimestamp());
-        Long diff = now.getTime() - temp.getTime();
-        long day_diff = TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS);
 
-        if (message.getUser().equals(UserDetails.uid)) {
-            // If the current user is the sender of the message
-            if(day_diff > 0 || position == 0) return VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY;
-            else return VIEW_TYPE_MESSAGE_SENT;
-        } else {
-            // If some other user sent the message
-            if(day_diff > 0 || position == 0) return VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY;
-            else return VIEW_TYPE_MESSAGE_RECEIVED;
+        if(position == 0){
+            last = new Date(message.getTimestamp());
+            if(message.getUser().equals(UserDetails.uid)){
+                return VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY;
+            }
+            else{
+                return VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY;
+            }
+        }
+        else{
+            SimpleDateFormat formatter = new SimpleDateFormat("MM-d");
+            String prev = formatter.format(last);
+            String cur = formatter.format(new Date(message.getTimestamp()));
+            last = new Date(message.getTimestamp());
+            if(!prev.equals(cur)){
+                if(message.getUser().equals(UserDetails.uid)){
+                    return VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY;
+                }
+                else{
+                    return VIEW_TYPE_MESSAGE_RECEIVED_BEFORE_TODAY;
+                }
+            }
+            else{
+                if(message.getUser().equals(UserDetails.uid)){
+                    return VIEW_TYPE_MESSAGE_SENT;
+                }
+                else{
+                    return VIEW_TYPE_MESSAGE_RECEIVED;
+                }
+            }
         }
     }
 

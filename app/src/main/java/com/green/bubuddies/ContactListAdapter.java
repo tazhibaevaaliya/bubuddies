@@ -16,7 +16,6 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class ContactListAdapter extends RecyclerView.Adapter{
 
@@ -77,20 +76,17 @@ public class ContactListAdapter extends RecyclerView.Adapter{
             // Display the time of the latest msg
 
             try {
+                SimpleDateFormat formatter = new SimpleDateFormat("MM-d");
+                String cur = formatter.format(new Date(contact.getMsg_time()));
+                String now = formatter.format(new Date());
 
-                Date temp = new Date(contact.getMsg_time());
-                Long diff = new Date().getTime() - temp.getTime();
-                long day_diff = TimeUnit.DAYS.convert(diff,TimeUnit.MILLISECONDS);
-
-                if(day_diff < 1){
-                    SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
-                    String dateString = formatter.format(new Date(contact.getMsg_time()));
-                    timeText.setText(dateString);
+                if(cur.equals(now)){
+                    formatter = new SimpleDateFormat("kk:mm");
+                    String hour = formatter.format(new Date(contact.getMsg_time()));
+                    timeText.setText(hour);
                 }
                 else{
-                    SimpleDateFormat formatter = new SimpleDateFormat("MM-d");
-                    String dateString = formatter.format(new Date(contact.getMsg_time()));
-                    timeText.setText(dateString);
+                    timeText.setText(cur);
                 }
             } catch(Exception e){
                 Log.e("time","Null");
