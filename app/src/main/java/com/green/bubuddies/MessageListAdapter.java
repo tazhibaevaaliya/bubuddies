@@ -254,7 +254,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
     public void popupProfile(String uid){
-        AlertDialog.Builder popup_builder = new AlertDialog.Builder(mContext);
+        AlertDialog.Builder popup_builder = new AlertDialog.Builder(mContext,R.style.CustomAlertDialog);
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
         final View popupView = inflater.inflate(R.layout.profile_popup,null);
 

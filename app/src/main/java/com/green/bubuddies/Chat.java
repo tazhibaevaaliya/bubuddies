@@ -233,7 +233,7 @@ public class Chat extends AppCompatActivity {
 
     // pop up window for deleting user from contacts
     public void popup(){
-        AlertDialog.Builder popup_builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder popup_builder = new AlertDialog.Builder(this,R.style.CustomAlertDialog);
         final View popupView = getLayoutInflater().inflate(R.layout.delete_popup,null);
 
         TextView warn = popupView.findViewById(R.id.warn_msg);

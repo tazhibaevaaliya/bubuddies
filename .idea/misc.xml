@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart_icon.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/image.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/popup_bg.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable/price_button_background.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable/price_button_background_selected.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable/recycle_view_item_selected.xml" value="0.23333333333333334" />
@@ -59,6 +60,7 @@
         <entry key="app/src/main/res/layout/msg_other.xml" value="0.25" />
         <entry key="app/src/main/res/layout/msg_other_today.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/msg_row.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/navigation_bar.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/new_listing_popup.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/profile_popup.xml" value="0.375" />
         <entry key="app/src/main/res/layout/userlist_row.xml" value="0.26721014492753625" />

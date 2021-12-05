@@ -21,4 +21,7 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/popup_bg</item>
+    </style>
 </resources>

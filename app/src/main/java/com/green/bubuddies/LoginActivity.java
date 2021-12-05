@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 passwordReset.setMessage("Enter your email here.");
                 passwordReset.setView(resetPass);
 
+
                 passwordReset.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
