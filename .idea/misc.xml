@@ -37,17 +37,14 @@
         <entry key="app/src/main/res/font/font.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_channel.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.140625" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.31022295270008726" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.103125" />
         <entry key="app/src/main/res/layout/activity_pair.xml" value="0.24027777777777778" />
         <entry key="app/src/main/res/layout/activity_price_compare.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18297101449275363" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.26721014492753625" />
-        <entry key="app/src/main/res/layout/activity_store.xml" value="0.26721014492753625" />
+        <entry key="app/src/main/res/layout/activity_store.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_users.xml" value="0.18297101449275363" />
-        <entry key="app/src/main/res/layout/buy_with_googlepay_button.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/delete_popup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_bottom_menu.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/fragment_listing_form.xml" value="0.18297101449275363" />
@@ -69,9 +66,7 @@
         <entry key="app/src/main/res/layout/userlist_row.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/menu/chat_menu.xml" value="0.2171875" />
         <entry key="app/src/main/res/menu/contextual_menu.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/menu/price_comparison_menu.xml" value="0.2953125" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12135416666666667" />
-        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

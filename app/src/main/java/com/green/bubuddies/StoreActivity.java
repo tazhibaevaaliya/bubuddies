@@ -332,7 +332,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
     }
 
     public void createNewListingWindow(){
-        dialogBuilder = new AlertDialog.Builder(StoreActivity.this);
+        dialogBuilder = new AlertDialog.Builder(StoreActivity.this, R.style.CustomAlertDialog);
         final View listingPopupWindow = getLayoutInflater().inflate(R.layout.new_listing_popup,null);
 
         //creating reference to the Views
