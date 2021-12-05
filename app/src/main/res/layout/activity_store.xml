@@ -41,19 +41,21 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVListing"
-        android:layout_width="match_parent"
+        android:layout_width="411dp"
+        android:layout_height="407dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:background="@drawable/recycle_view_item_selected"
         android:clickable="true"
         android:focusableInTouchMode="true"
-        android:layout_height="426dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="136dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358" />
+        app:layout_constraintVertical_bias="0.218" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -64,18 +66,23 @@
         android:src="@drawable/ic_add_listing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.176" />
 
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/btmFragmentStore"
+        android:name="com.green.bubuddies.BottomMenu"
+        android:layout_width="412dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="0.996"
+        tools:layout="@layout/fragment_bottom_menu"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

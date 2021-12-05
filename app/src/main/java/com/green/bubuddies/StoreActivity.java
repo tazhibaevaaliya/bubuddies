@@ -18,8 +18,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,7 +46,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 
-public class StoreActivity extends AppCompatActivity {
+public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMenuActivity {
 
 
     private AlertDialog.Builder dialogBuilder;
@@ -82,6 +85,14 @@ public class StoreActivity extends AppCompatActivity {
 
         // here we have created new array list and added data to it.
         listingModelArrayList = new ArrayList<>();
+
+//        // Disable back icon in top left and hide app name.
+
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(false);
 
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
@@ -280,13 +291,16 @@ public class StoreActivity extends AppCompatActivity {
         //handle item selection:
         switch(item.getItemId()){
 
+            case R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                break;
+
             case R.id.comparePrice:
                 Intent intent1 = new Intent(StoreActivity.this,PriceComparison.class);
                 startActivity(intent1);
                 break;
 
             //createNewListingWindow();
-
 
         }
 
@@ -447,37 +461,43 @@ public class StoreActivity extends AppCompatActivity {
 
     }
 
-//    public void createNewListingWindow(){
-//        dialogBuilder = new AlertDialog.Builder(MainActivity.this);
-//        final View listingPopupWindow = getLayoutInflater().inflate(R.layout.listing_popup, null);
-//
-//        //creating reference to the Views
-//        btnPost = (Button) findViewById(R.id.btnPost);
-//        btnCancel = (Button) findViewById(R.id.btnCancel);
-//
-//        txtListedBookName = (TextView) findViewById(R.id.txtListedBookName);
-//        txtListedBookPrice = (TextView) findViewById(R.id.txtListedBookPrice);
-//
-//        dialogBuilder.setView(listingPopupWindow);
-//        dialog = dialogBuilder.create();
-//        dialog.show();
-//
-//        //binding an event:
-//        btnPost.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                submitPost();
-//            }
-//        });
-//
-//        btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//    }
+    @Override
+    public void updateClickableButtons() {
+        BottomMenu fragment = (BottomMenu) getSupportFragmentManager().findFragmentById(R.id.btmFragmentStore);
+        fragment.disableClick(BottomMenu.STORE);
+    }
+
+    @Override
+    public void changeActivity(int nextAct) {
+        //switch cases to correct activity in final implementation.
+        switch(nextAct) {
+            case (BottomMenu.PROFILE):
+                Intent i = new Intent(StoreActivity.this, MainActivity.class);
+                i.putExtra("UID", curr_user);
+                startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
+                break;
+            case (BottomMenu.PAIR):
+                i = new Intent(StoreActivity.this, Pair.class);
+                i.putExtra("UID", curr_user);
+                startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
+                break;
+            case (BottomMenu.MESSAGE):
+                i = new Intent(StoreActivity.this, Users.class);
+                i.putExtra("UID",curr_user);
+                startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
+                break;
+            case (BottomMenu.STORE):
+                i = new Intent(StoreActivity.this, StoreActivity.class);
+                i.putExtra("UID", curr_user);
+                startActivity(i);
+                overridePendingTransition(R.anim.abc_fade_in,R.anim.abc_fade_out);
+                break;
+        }
+
+    }
 
 
 }

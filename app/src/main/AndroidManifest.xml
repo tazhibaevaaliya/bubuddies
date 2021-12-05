@@ -54,6 +54,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".PriceComparison"
+            android:parentActivityName=".StoreActivity"
             android:label="@string/store_name"
             android:exported="true"
             android:screenOrientation="portrait" />

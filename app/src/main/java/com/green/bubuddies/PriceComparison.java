@@ -1,6 +1,7 @@
 package com.green.bubuddies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +50,7 @@ public class PriceComparison extends AppCompatActivity {
     private ListView lv_items;
     private ListAdapter lvAdapter;
     private RecyclerView listingRV;
+    Toolbar mToolbar;
     // Arraylist for storing data
     private ArrayList<ListingModel> listingModelArrayList;
     final String default_picture = "https://lh3.googleusercontent.com/proxy/yS_DrYbvuDF-noQIDvVJk9Die3h8Gf1v3eYi0k16S_xxT_NoQTRkSaWF1BSWQZMO-MhLecz_eqyJtLcsPy9WBoBW"; //default picture for each listing
@@ -57,6 +61,11 @@ public class PriceComparison extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_price_compare);
 
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Boiler Plate: creating Views
         btnFind = (Button) findViewById(R.id.btnFindPrice);
@@ -65,9 +74,22 @@ public class PriceComparison extends AppCompatActivity {
         listingModelArrayList = new ArrayList<>();
 
         listingRV = (RecyclerView) findViewById(R.id.idRVListingeBay);
-
+        //mToolbar = (Toolbar) findViewById(R.id.toolbarPriceCompare);
         txtBookName = (TextInputLayout) findViewById(R.id.txtBookName);
-        //lv_items = (ListView) findViewById(R.id.lv_items);
+
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+//            getSupportActionBar().setTitle("");
+//        }
+
+
+//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(PriceComparison.this,StoreActivity.class));
+//            }
+//        });
 
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
