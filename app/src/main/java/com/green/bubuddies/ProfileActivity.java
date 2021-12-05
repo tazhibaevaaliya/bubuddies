@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -113,7 +114,9 @@ public class ProfileActivity extends AppCompatActivity {
         getPFP.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Glide.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).into(PFP);
+//                Glide.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).into(PFP);
+                Picasso.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).transform(new CircleTransform()).into(PFP);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

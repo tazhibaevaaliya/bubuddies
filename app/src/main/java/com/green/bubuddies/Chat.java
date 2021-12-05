@@ -2,11 +2,14 @@ package com.green.bubuddies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +34,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FieldValue;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,7 +105,7 @@ public class Chat extends AppCompatActivity {
         deleteContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteContact();
+                popup();
             }
         });
 
@@ -232,5 +237,34 @@ public class Chat extends AppCompatActivity {
         });
         // jump to the contact page
         startActivity(new Intent(Chat.this,Users.class));
+    }
+
+    // pop up window for deleting user from contacts
+    public void popup(){
+        AlertDialog.Builder popup_builder = new AlertDialog.Builder(this);
+        final View popupView = getLayoutInflater().inflate(R.layout.delete_popup,null);
+
+        TextView warn = popupView.findViewById(R.id.warn_msg);
+        Button confirm = popupView.findViewById(R.id.confirm_btn);
+        Button cancel = popupView.findViewById(R.id.cancel_btn);
+
+        popup_builder.setView(popupView);
+        AlertDialog popup = popup_builder.create();
+        popup.show();
+
+        warn.setText("DELETE "+ UserDetails.chatwithname+ " from contacts");
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteContact();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup.hide();
+            }
+        });
     }
 }

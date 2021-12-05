@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/Transparent"
     tools:context=".Pair">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:weightSum="10"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="2"
+        android:background="@drawable/cardview"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txt_name"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:background="@drawable/txtviewshadow"
-            android:padding="5dp"
+            android:fontFamily="@font/amaranth"
+            android:gravity="center"
+            android:paddingTop="10dp"
             android:text="Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30dp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/img_pfp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="50dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
             android:layout_weight="3"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/txt_bio"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
             android:layout_weight="2"
-            android:background="@drawable/txtviewshadow"
+            android:fontFamily="@font/amaranth"
+            android:gravity="center"
             android:padding="5dp"
             android:text="Bio: Example, I enjoy listening to Taylor Swift while doing programming assignments."
             android:textColor="#000000"
@@ -61,56 +61,54 @@
         <TextView
             android:id="@+id/txt_classes"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:background="@drawable/txtviewshadow"
+            android:fontFamily="@font/amaranth"
+            android:gravity="center"
             android:padding="5dp"
             android:text="Classes: EX101, EX102, EX103, EX104, EX105, EX106, EX107, EX108, EX109"
             android:textColor="#000000"
             android:textSize="16dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            tools:layout_weight="1">
+    </LinearLayout>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_newMsg"
-                android:name="com.green.bubuddies.NewMsg"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="2dp"
-                android:layout_weight="1"
-                android:padding="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout="@layout/fragment_new_msg" />
-
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2dp"
-                android:layout_weight="1"
-                android:padding="2dp"
-                android:text="Next Pairing"
-                android:textSize="14dp" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:theme="@style/Transparent"
+        android:orientation="horizontal">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/btmFragmentPair"
-            android:name="com.green.bubuddies.BottomMenu"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            tools:layout="@layout/fragment_bottom_menu" />
+            android:id="@+id/fragment_newMsg"
+            android:name="com.green.bubuddies.NewMsg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@color/bg_black2"
+            tools:layout="@layout/fragment_new_msg" />
+
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/amaranth"
+            android:text="Next Pairing"
+            android:textColor="@color/purple_500"
+            android:textSize="14dp" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/btmFragmentPair"
+        android:name="com.green.bubuddies.BottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+</LinearLayout>

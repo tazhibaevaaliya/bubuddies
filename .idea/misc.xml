@@ -5,23 +5,41 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.10092592592592593" />
         <entry key="app/src/main/res/drawable-v24/ic_compare.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable-v24/ic_search.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable/buy_with_googlepay_button_content.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/cardview.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/dialog.xml" value="0.12135416666666667" />
+        <entry key="app/src/main/res/drawable/field.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/googlepay_button_content.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/googlepay_button_overlay.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/ic_add_listing.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/ic_banner_foreground.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_more_horiz_24.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/ic_shopping_cart_icon.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable/image.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/price_button_background.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/price_button_background_selected.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/round_button.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/rounded_corner1.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/rounded_corner2.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/drawable/txtviewshadow.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/upload.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/font/font.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_channel.xml" value="0.11865942028985507" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.103125" />
+        <entry key="app/src/main/res/layout/activity_pair.xml" value="0.24027777777777778" />
         <entry key="app/src/main/res/layout/activity_price_compare.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_store.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_users.xml" value="0.18297101449275363" />
+        <entry key="app/src/main/res/layout/delete_popup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_bottom_menu.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/fragment_listing_form.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/fragment_new_msg.xml" value="0.18297101449275363" />
@@ -36,6 +54,8 @@
         <entry key="app/src/main/res/layout/msg_other.xml" value="0.25" />
         <entry key="app/src/main/res/layout/msg_other_today.xml" value="0.16510416666666666" />
         <entry key="app/src/main/res/layout/msg_row.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/new_listing_popup.xml" value="0.140625" />
+        <entry key="app/src/main/res/layout/profile_popup.xml" value="0.375" />
         <entry key="app/src/main/res/layout/userlist_row.xml" value="0.26721014492753625" />
         <entry key="app/src/main/res/menu/chat_menu.xml" value="0.2171875" />
         <entry key="app/src/main/res/menu/contextual_menu.xml" value="0.3333333333333333" />

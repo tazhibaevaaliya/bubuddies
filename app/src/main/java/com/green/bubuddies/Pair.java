@@ -214,7 +214,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
                     );
                 btn_next.setClickable(true);
                 String img = snapshot.child("picture").getValue(String.class);
-                Picasso.with(Pair.this).load(img).into(img_pfp);
+                Picasso.with(Pair.this).load(img).transform(new CircleTransform()).into(img_pfp);
                 String classes = "Current BU Courses: ";
                 Iterator<DataSnapshot> courses = snapshot.child("classes").getChildren().iterator();
                 while(courses.hasNext()){
