@@ -181,7 +181,7 @@ public class ProfileActivity extends AppCompatActivity {
                 mData.child("major").setValue(major.getText().toString());
                 mData.child("name").setValue(name.getText().toString());
                 Log.e("TESTING", classes.getText().toString());
-                List<String> classUpdate = new ArrayList<String>(Arrays.asList(classes.getText().toString().replaceAll("\\s+","").split(",")));
+                List<String> classUpdate = new ArrayList<String>(Arrays.asList(classes.getText().toString().toUpperCase().replaceAll("\\s+","").split(",")));
                 Log.e("TESTING", classUpdate.toString());
                 mData.child("classes").removeValue();
                 for (int i = 0; i < classUpdate.size(); i++) {

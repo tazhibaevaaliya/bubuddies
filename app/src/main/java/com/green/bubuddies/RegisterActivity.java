@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         if (snapshot.getChildrenCount() < 1) {
                                                             Log.d("TESTING", "No profile found. Creating new one.");
-                                                            Profile profile = new Profile(fAuth.getCurrentUser().getUid());
+                                                            Profile profile = new Profile(fAuth.getCurrentUser().getUid(), i_name);
                                                             FirebaseDatabase.getInstance().getReference("Profiles").child(fAuth.getCurrentUser().getUid())
                                                                     .setValue(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override

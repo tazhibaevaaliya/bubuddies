@@ -5,126 +5,131 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg"
-    tools:context=".MainActivity">
+    tools:context=".Pair">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:weightSum="7"
+        android:weightSum="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ImageView
-            android:id="@+id/bubuddies_logo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/welcomeUser"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/amaranth"
-            android:gravity="center"
-            android:text="@string/welcomeUser"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/text_userID"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_height="0dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:fontFamily="@font/amaranth"
-            android:textSize="16sp" />
+            android:padding="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/purple_500"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/text_userEmail"
+        <ImageView
+            android:id="@+id/your_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/amaranth"
-            android:textSize="16sp" />
+            android:layout_height="0dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="50dp"
+            android:layout_weight="3"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/userNotVerified"
-                android:layout_width="225dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="0dp"
-                android:layout_weight="1.5"
-                android:fontFamily="@font/amaranth"
-                android:gravity="center"
-                android:text="@string/notVerified"
-                android:textColor="#FA0000" />
-
-            <Button
-                android:id="@+id/resendVerify"
-                android:layout_width="114dp"
-                android:layout_height="61dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/amaranth"
-                android:foregroundGravity="center"
-                android:text="@string/resend" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            tools:layout_weight="1">
 
             <Button
                 android:id="@+id/button_editProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/amaranth"
-                android:text="@string/editProfile" />
+                android:padding="2dp"
+                android:text="@string/editProfile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/amaranth"
-                android:text="@string/logout" />
+                android:padding="2dp"
+                android:text="@string/logout"
+                android:textSize="14dp" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/label_name2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="0.1"
+            android:fontFamily="@font/amaranth"
+            android:paddingTop="20dp"
+            android:text="@string/profileAboutMe" />
+
+        <TextView
+            android:id="@+id/text_aboutMe"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="2"
+            android:background="@drawable/txtviewshadow2"
+            android:padding="5dp"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/label_name3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="0.1"
+            android:fontFamily="@font/amaranth"
+            android:paddingTop="20dp"
+            android:text="@string/profileClasses" />
+
+        <TextView
+            android:id="@+id/text_myClasses"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/txtviewshadow2"
+            android:padding="5dp"
+            android:textColor="#000000"
+            android:textSize="16dp" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/btmFragmentMain"
             android:name="com.green.bubuddies.BottomMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             tools:layout="@layout/fragment_bottom_menu" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
