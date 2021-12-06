@@ -43,9 +43,9 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirmpassword">Confirm Password</string>
-    <string name="alreadyHaveAccount">Already have an account? Login here.</string>
-    <string name="forgotpassword">Forgot password?</string>
-    <string name="dontHaveAccount">Don\'t have an account? Create one here.</string>
+    <string name="alreadyHaveAccount">Already have an account? <u>Login here.</u></string>
+    <string name="forgotpassword"><u>Forgot password?</u></string>
+    <string name="dontHaveAccount">Don\'t have an account? <u>Create one here.</u></string>
     <string name="resend">resend</string>
     <string name="notVerified">YOU ARE NOT VERIFIED YET! IF THIS IS A MISTAKE, PLEASE RELOG.</string>
     <string name="editProfile">EDIT PROFILE</string>

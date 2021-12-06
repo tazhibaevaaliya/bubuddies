@@ -19,5 +19,6 @@
     <color name="bg_black2">#1c1c1c</color>
     <color name="element_black">#494949</color>
     <color name="element_white">#d3d8e3</color>
+    <color name="app_bg">#FFFDF6</color>
 
 </resources>
