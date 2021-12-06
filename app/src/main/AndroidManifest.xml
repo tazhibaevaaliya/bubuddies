@@ -24,15 +24,18 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:label="@string/profile_name"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".splash"
@@ -47,6 +50,7 @@
         </activity>
         <activity android:name=".Users" />
         <activity android:name=".Chat"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".StoreActivity"
             android:label="@string/store_name"
@@ -58,6 +62,7 @@
             android:parentActivityName=".StoreActivity"
             android:label="@string/store_name"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".CheckoutActivity"

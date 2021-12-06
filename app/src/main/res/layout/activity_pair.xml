@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_bg"
     android:orientation="vertical"
     android:theme="@style/Transparent"
-    android:background="@color/app_bg"
+    android:weightSum="10"
     tools:context=".Pair">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_weight="2"
+        android:layout_weight="8"
         android:background="@drawable/cardview"
         android:orientation="vertical">
 
@@ -78,10 +79,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:theme="@style/Transparent"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:theme="@style/Transparent">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_newMsg"
@@ -110,6 +111,6 @@
         android:id="@+id/btmFragmentPair"
         android:name="com.green.bubuddies.BottomMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>
