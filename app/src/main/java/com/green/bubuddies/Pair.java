@@ -171,7 +171,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         });
     }
     public void findPair3(){
-        Toast.makeText(Pair.this, "No other users share a class with you, showing all users.", Toast.LENGTH_LONG).show();
+        Toast.makeText(Pair.this, "No other users share a class with you, showing all users.", Toast.LENGTH_SHORT).show();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

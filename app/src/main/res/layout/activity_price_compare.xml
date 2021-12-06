@@ -10,14 +10,15 @@
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="209dp"
+        android:layout_marginTop="30dp"
         app:srcCompat="@drawable/stack_of_books" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="388dp"
         android:layout_height="53dp"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/playfair_display_regular"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/amaranth"
         android:text="Compare"
         android:textAlignment="center"
         android:textSize="30dp" />
@@ -25,7 +26,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="0.3"
         android:orientation="horizontal">
@@ -35,7 +36,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="248dp"
             android:layout_height="64dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="45dp"
             android:layout_weight="2"
             android:hint="Title of the Book"
             android:textAlignment="center"
@@ -46,7 +47,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="55dp" />
+                android:layout_height="55dp"
+                android:fontFamily="@font/amaranth"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
