@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@color/app_bg"
+    android:weightSum="8"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -14,66 +16,106 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"
+        android:layout_weight="2"
         android:fontFamily="@font/amaranth"
         android:gravity="center"
         android:text="@string/register"
         android:textColor="@color/purple_700"
         android:textColorHighlight="@color/purple_500"
-        android:textSize="34sp" />
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/reg_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/txtviewshadow2"
+        android:backgroundTint="@color/element_white"
         android:ems="10"
         android:fontFamily="@font/amaranth"
         android:hint="@string/editName"
         android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="10dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/price_button_grey" />
 
     <EditText
         android:id="@+id/reg_email"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/txtviewshadow2"
+        android:backgroundTint="@color/element_white"
         android:ems="10"
         android:fontFamily="@font/amaranth"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="10dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/price_button_grey" />
 
     <EditText
         android:id="@+id/reg_pass"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/txtviewshadow2"
+        android:backgroundTint="@color/element_white"
         android:ems="10"
         android:fontFamily="@font/amaranth"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="10dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/price_button_grey" />
 
     <EditText
         android:id="@+id/reg_confirmPass"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/txtviewshadow2"
+        android:backgroundTint="@color/element_white"
         android:ems="10"
         android:fontFamily="@font/amaranth"
         android:hint="@string/confirmpassword"
         android:inputType="textPassword"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="10dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="10dp"
+        android:textColorHint="@color/price_button_grey" />
 
     <TextView
         android:id="@+id/regButton_login"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
         android:autoText="false"
         android:clickable="true"
         android:elegantTextHeight="false"
@@ -91,7 +133,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="60dp"
+        android:layout_weight="1"
         android:fontFamily="@font/amaranth"
+        android:paddingTop="4dp"
         android:text="@string/register" />
 </LinearLayout>

@@ -45,7 +45,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2171875" />
-        <entry key="app/src/main/res/layout/activity_store.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_store.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_users.xml" value="0.18297101449275363" />
         <entry key="app/src/main/res/layout/buy_with_googlepay_button.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/delete_popup.xml" value="0.25" />
