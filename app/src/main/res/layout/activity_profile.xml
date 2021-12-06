@@ -38,33 +38,39 @@
 
                 <Button
                     android:id="@+id/button_updatePic"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/amaranth"
-                    android:text="@string/updatePicture" />
+                    android:text="@string/updatePicture"
+                    android:textColor="@color/purple_500" />
 
                 <Button
                     android:id="@+id/button_updateProfile"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/amaranth"
-                    android:text="@string/updateProfile" />
+                    android:text="@string/updateProfile"
+                    android:textColor="@color/purple_500" />
 
                 <Button
                     android:id="@+id/button_back"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/amaranth"
-                    android:text="@string/back" />
+                    android:text="@string/back"
+                    android:textColor="@color/purple_500" />
             </LinearLayout>
         </LinearLayout>
 

@@ -128,6 +128,7 @@ public class CheckoutActivity extends AppCompatActivity {
           public void onClick(View view) {
             Intent i = new Intent(CheckoutActivity.this,Chat.class);
             i.putExtra("chatwithid",ownerId);
+            i.putExtra("from","checkout");
             Log.e("Passing chatwithid", ownerId);
             startActivity(i); // change to messaging tab.
           }

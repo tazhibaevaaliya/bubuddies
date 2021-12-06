@@ -20,30 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <TextView
-            android:id="@+id/welcomeUser"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/purple_500"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/your_image"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="50dp"
-            android:layout_weight="3"
-            tools:srcCompat="@tools:sample/avatars" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -57,34 +33,63 @@
 
             <Button
                 android:id="@+id/button_editProfile"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:padding="2dp"
                 android:text="@string/editProfile"
+                android:textColor="@color/purple_500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_logout"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_weight="1"
                 android:padding="2dp"
                 android:text="@string/logout"
+                android:textColor="@color/purple_500"
                 android:textSize="14dp" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/welcomeUser"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/amaranth"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/purple_500"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/your_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
             android:id="@+id/label_name2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
             android:layout_weight="0.1"
             android:fontFamily="@font/amaranth"
+            android:gravity="center"
             android:paddingTop="20dp"
             android:text="@string/profileAboutMe" />
 
@@ -92,11 +97,12 @@
             android:id="@+id/text_aboutMe"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="2"
-            android:background="@drawable/txtviewshadow2"
+            android:background="@drawable/cardview"
+            android:fontFamily="@font/amaranth"
+            android:gravity="center"
             android:padding="5dp"
             android:textColor="#000000"
             android:textSize="16dp" />
@@ -105,10 +111,11 @@
             android:id="@+id/label_name3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="4dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
             android:layout_weight="0.1"
             android:fontFamily="@font/amaranth"
+            android:gravity="center"
             android:paddingTop="20dp"
             android:text="@string/profileClasses" />
 
@@ -116,11 +123,13 @@
             android:id="@+id/text_myClasses"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1.6"
-            android:background="@drawable/txtviewshadow2"
+            android:background="@drawable/cardview"
+            android:fontFamily="@font/amaranth"
+            android:gravity="center"
             android:padding="5dp"
             android:textColor="#000000"
             android:textSize="16dp" />

@@ -276,6 +276,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         Intent i = new Intent(Pair.this,Chat.class);
 //        i.putExtra("uid",curr_user);
         i.putExtra("chatwithid",pair_user);
+        i.putExtra("from","pair");
 //        Log.e("Passing uid",curr_user);
         Log.e("Passing chatwithid", pair_user);
         startActivity(i); // change to messaging tab.

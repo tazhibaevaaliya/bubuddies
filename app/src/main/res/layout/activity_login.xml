@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="7"
     android:background="@color/app_bg"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".LoginActivity">
 
     <TextView
@@ -14,61 +14,89 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:fontFamily="@font/amaranth"
+        android:gravity="center"
         android:text="@string/LOGIN"
         android:textColor="@color/purple_700"
         android:textColorHighlight="@color/purple_500"
         android:textSize="34sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/login_email"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="120dp"
-        android:layout_weight="1"
-        android:background="@drawable/txtviewshadow2"
-        android:backgroundTint="@color/element_white"
-        android:ems="10"
-        android:fontFamily="@font/amaranth"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:paddingLeft="4dp"
-        android:paddingTop="10dp"
-        android:paddingRight="4dp"
-        android:paddingBottom="10dp"
-        android:textColorHint="@color/price_button_grey" />
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:weightSum="4">
 
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:fontFamily="@font/amaranth"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:background="@drawable/txtviewshadow2"
-        android:backgroundTint="@color/element_white"
-        android:paddingLeft="4dp"
-        android:paddingTop="10dp"
-        android:paddingRight="4dp"
-        android:paddingBottom="10dp"
-        android:textColorHint="@color/price_button_grey"
-        android:minHeight="48dp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/txtviewshadow2"
+            android:backgroundTint="@color/element_white"
+            android:ems="10"
+            android:fontFamily="@font/amaranth"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:textColorHint="@color/price_button_grey" />
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/txtviewshadow2"
+            android:backgroundTint="@color/element_white"
+            android:ems="10"
+            android:fontFamily="@font/amaranth"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:textColorHint="@color/price_button_grey" />
+
+        <TextView
+            android:id="@+id/button_forgotPass"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="auto"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/amaranth"
+            android:gravity="top|left"
+            android:text="@string/forgotpassword"
+            android:textColor="@color/purple_700"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/button_register"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
+        android:layout_marginBottom="30dp"
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="auto"
@@ -86,27 +114,9 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="80dp"
         android:layout_weight="1"
         android:fontFamily="@font/amaranth"
         android:text="@string/LOGIN" />
-
-    <TextView
-        android:id="@+id/button_forgotPass"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="auto"
-        android:focusableInTouchMode="true"
-        android:fontFamily="@font/amaranth"
-        android:minHeight="48dp"
-        android:text="@string/forgotpassword"
-        android:textAlignment="center"
-        android:textColor="@color/purple_700"
-        android:textSize="20sp" />
 
 </LinearLayout>

@@ -50,6 +50,7 @@ public class PriceComparison extends AppCompatActivity {
     private ListView lv_items;
     private ListAdapter lvAdapter;
     private RecyclerView listingRV;
+    private ListingFromEbayAdapter courseAdapter;
     Toolbar mToolbar;
     // Arraylist for storing data
     private ArrayList<ListingModel> listingModelArrayList;
@@ -73,6 +74,9 @@ public class PriceComparison extends AppCompatActivity {
         // here we have created new array list and added data to it.
         listingModelArrayList = new ArrayList<>();
 
+        // we are initializing our adapter class and passing our arraylist to it.
+        courseAdapter = new ListingFromEbayAdapter(getBaseContext(), listingModelArrayList);
+
         listingRV = (RecyclerView) findViewById(R.id.idRVListingeBay);
         //mToolbar = (Toolbar) findViewById(R.id.toolbarPriceCompare);
         txtBookName = (TextInputLayout) findViewById(R.id.txtBookName);
@@ -94,6 +98,8 @@ public class PriceComparison extends AppCompatActivity {
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                listingModelArrayList.clear();
+                courseAdapter.notifyDataSetChanged();
                 //url = "https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search?q=" + txtBookName.getText().toString()+"&limit=5";
                 //https://api.ebay.com/buy/browse/v1/item_summary/search?q=drone&limit=3
 //                token = "AgAAAA**AQAAAA**aAAAAA**OmmcYQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4aiDZmKoQqdj6x9nY+seQ**R7YFAA**AAMAAA**yIdyYgpPLCGK2ybuko9Ykb8/eSIls1Oxc+f5F5qRNAw/m3xw4oJQAFX75v2uWnQsipBQmF7fAlb9zzsoVCzT1Q5Pm+tiod2raJh2gXX9USrwo4IB7YjwDishK21d8CKhu4DCXrgEFSIlq/+6KOcMF2nVnS8J6jci3/R9MzwyaJM6ydeBu/3zxRP+3FVoVgpMiDw73cV5xiJaWb2XZZxM7QpU5ae+WD8CXdCkO6/XB1VHrNSfQrJn+tl5Fv0kWtD/iwqxCcQ6ZEca2vHMuSRkvweiisUQGY5eRRNDLY6L1N2W1RYaOcCXmpi56GY6kGntVM7WlRJ2+tXDikSbpxiAE3bwuA9aGpS0f01KpyRE4k/kQoOiJxlP9embaVwBys2R4yP4VNHwiaXd7nluInunCXP+voSkeEe1rKGDLOafGBCSCeJm58rjaG+YpQy70n8Ou84ikRa5Yj6hNm3drssoOZ7I6oBvc9wKgwFE98RO3bXc19vH/EQ16qDmsEOP3NpHojR1IJLd2EyKDPnU0P5oSAY4EtgVPfeF8a7E7+56Bv9OzxOvC+//lSVgm6s3vJl4pnayiIhQS537IohuzfzrHhu/+YfyPQvSZ9/+X112PXarOdHp3BpA+VPS3lvGUwSDzBX+TebC5awjz4SxsrYYKcb+y0sjPH4xBQAkt6p5B/M1zOfyLB+l+BGFY0YGjXX1aiFkBCJ6tmXVLstcxg3viAsLONwTWkv7q5YuJMHwRNWyv+bWcDClaw11c7gjm18y";
@@ -123,7 +129,7 @@ public class PriceComparison extends AppCompatActivity {
                                     Toast.makeText(getBaseContext(),"Successful",Toast.LENGTH_SHORT).show(); //displaying a success message in the case of
                                 }
                                 else{
-                                    Toast.makeText(getBaseContext(), "No items found! Try something else!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getBaseContext(), "No items found! Try something else!", Toast.LENGTH_SHORT).show();
                                 }
 
                                 // successful request of an API
@@ -184,9 +190,8 @@ public class PriceComparison extends AppCompatActivity {
         if(names.size()!=0){
             for(int i=0; i<names.size(); i++){
                 listingModelArrayList.add(new ListingModel(names.get(i),prices.get(i),default_picture,getBaseContext()));
+                courseAdapter.notifyDataSetChanged();
             }
-            // we are initializing our adapter class and passing our arraylist to it.
-            ListingFromEbayAdapter courseAdapter = new ListingFromEbayAdapter(getBaseContext(), listingModelArrayList);
 
             // below line is for setting a layout manager for our recycler view.
             // here we are creating vertical list so we will provide orientation as vertical

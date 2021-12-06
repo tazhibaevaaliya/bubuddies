@@ -93,7 +93,22 @@ public class Chat extends AppCompatActivity {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Chat.this,Users.class));
+                if(extras!= null) {
+                    Log.e("from",extras.getString("from"));
+
+                    if(extras.getString("from").equals("pair")){
+                        Intent i = new Intent(Chat.this, Pair.class);
+                        i.putExtra("UID",UserDetails.uid);
+                        startActivity(i);
+                    }
+                    else{
+                        Intent i = new Intent(Chat.this, StoreActivity.class);
+                        i.putExtra("UID",UserDetails.uid);
+                        startActivity(i);
+                    }
+                }
+                else{
+                startActivity(new Intent(Chat.this,Users.class));}
             }
         });
 

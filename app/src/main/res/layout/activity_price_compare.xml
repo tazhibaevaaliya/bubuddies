@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="388dp"
+        android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/amaranth"
@@ -38,7 +38,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="248dp"
             android:layout_height="64dp"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="55dp"
             android:layout_weight="2"
             android:hint="Title of the Book"
             android:textAlignment="center"
@@ -62,6 +62,7 @@
             android:layout_width="4dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@drawable/field"
             app:icon="@drawable/ic_search" />
