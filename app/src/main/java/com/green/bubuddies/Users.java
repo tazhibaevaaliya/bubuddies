@@ -28,7 +28,7 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
     ArrayList<Contact> contacts = new ArrayList<>();
     ArrayList<String> contacts_id = new ArrayList<>();
     ProgressDialog pd;
-    String curr_user;
+    String curr_user, read_key;
 
 
 
@@ -143,6 +143,59 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
                         @Override
                         public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                    // Get the number of unread msg
+
+                    // Check for the key for already read msg
+                    FirebaseDatabase.getInstance().getReference().child("Track").child(UserDetails.uid+"_"+chatwithid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                // If exist, then get the msg count after the already read msg
+                                for (DataSnapshot data : snapshot.getChildren()) {
+                                    read_key = data.getValue().toString();
+                                    Log.e("read", read_key);
+                                }
+
+                                FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid+"_"+chatwithid).orderByKey().startAfter(read_key).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        user.setUnread_count((int) snapshot.getChildrenCount());
+                                        Log.e("set unread count", String.valueOf(snapshot.getChildrenCount()));
+                                        mContactAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                            catch (Exception e){
+                                //no msg are read
+                                Log.e("msg","no read msg");
+                                FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid+"_"+chatwithid).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        user.setUnread_count((int)snapshot.getChildrenCount());
+                                        Log.e("set unread count", String.valueOf(snapshot.getChildrenCount()));
+
+                                        mContactAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
                         }
 
                         @Override

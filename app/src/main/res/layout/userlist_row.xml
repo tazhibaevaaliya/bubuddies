@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
     android:background="@color/app_bg"
-    android:layout_marginTop="16dp">
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/user_pic"
@@ -18,49 +19,78 @@
         android:maxWidth="50dp" />
 
     <LinearLayout
-        android:layout_width="278dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/amaranth"
-            android:text="John Grady Cole"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="249dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/latest_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/amaranth"
-            android:maxWidth="260dp"
-            android:paddingStart="1dp"
-            android:paddingTop="10dp"
-            android:text="Message"
-            android:textAlignment="viewStart"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amaranth"
+                android:text="John Grady Cole"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/latest_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amaranth"
+                android:maxWidth="260dp"
+                android:paddingStart="1dp"
+                android:paddingTop="10dp"
+                android:text="Message"
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@+id/msg_time"
+            app:layout_constraintTop_toTopOf="@+id/msg_time">
+
+            <TextView
+                android:id="@+id/msg_time"
+                android:layout_width="35dp"
+                android:layout_height="27dp"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="8:00"
+                android:textAlignment="center"
+                android:textColor="#C0C0C0"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/unread_count"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/unread_bg"
+                android:fontFamily="@font/amaranth"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/msg_time"
-        android:layout_width="56dp"
-        android:layout_height="31dp"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="4dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="8:00"
-        android:textAlignment="center"
-        android:textColor="#C0C0C0"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/card_gchat_message_other"
-        app:layout_constraintEnd_toStartOf="@+id/card_gchat_message_other" />
 
 
 </LinearLayout>

@@ -7,17 +7,19 @@ public class Contact {
     String name;
     String msg;
     String pic;
+    int unread_count;
     Long msg_time;
 
     public Contact() {
     }
 
-    public Contact(String id, String name, String msg, String pic, Long msg_time) {
+    public Contact(String id, String name, String msg, String pic, Long msg_time, int unread_count) {
         this.id = id;
         this.name = name;
         this.msg = msg;
         this.pic = pic;
         this.msg_time = msg_time;
+        this.unread_count = unread_count;
     }
 
     public static Comparator<Contact> contactsComparator = new Comparator<Contact>() {
@@ -30,6 +32,14 @@ public class Contact {
             }
         }
     };
+
+    public int getUnread_count() {
+        return unread_count;
+    }
+
+    public void setUnread_count(int unread_count) {
+        this.unread_count = unread_count;
+    }
 
     public Long getMsg_time() {
         return msg_time;

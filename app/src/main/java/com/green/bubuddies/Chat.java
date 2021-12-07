@@ -46,7 +46,7 @@ public class Chat extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     TextView title;
-    String selfimg,img;
+    String selfimg,img,read_key;
     ArrayList<Message> messages = new ArrayList<>();
 
     @Override
@@ -183,7 +183,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-        // Get the previous msgs
+        // Get the msgs
         reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -206,6 +206,23 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // Get the latest read msg key
+        reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot data:snapshot.getChildren()){
+                    read_key = data.getKey();
+                    Log.e("latest read msg time", data.getKey());
+                }
+                reference.child("Track").child(UserDetails.uid + "_" + UserDetails.chatwithid).child("read").setValue(read_key);
             }
 
             @Override
@@ -299,6 +316,7 @@ public class Chat extends AppCompatActivity {
         TextView aboutme = popupView.findViewById(R.id.profile_aboutme);
         ImageView img = popupView.findViewById(R.id.profile_img);
 
+        // Get Profile info for the specified user
         FirebaseDatabase.getInstance().getReference().child("Profiles").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

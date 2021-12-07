@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/drawable/rounded_corner1.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/rounded_corner2.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/drawable/txtviewshadow.xml" value="0.15677083333333333" />
+        <entry key="app/src/main/res/drawable/unread_bg.xml" value="0.1546875" />
         <entry key="app/src/main/res/drawable/upload.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/font/font.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_channel.xml" value="0.11865942028985507" />
@@ -69,7 +70,8 @@
         <entry key="app/src/main/res/layout/navigation_bar.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/new_listing_popup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/profile_popup.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/userlist_row.xml" value="0.26721014492753625" />
+        <entry key="app/src/main/res/layout/user_list_no_unread.xml" value="0.1933876811594203" />
+        <entry key="app/src/main/res/layout/userlist_row.xml" value="0.375" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.625" />
         <entry key="app/src/main/res/menu/chat_menu.xml" value="0.2171875" />
         <entry key="app/src/main/res/menu/contextual_menu.xml" value="0.3333333333333333" />
