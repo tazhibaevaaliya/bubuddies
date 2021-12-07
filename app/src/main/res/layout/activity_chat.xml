@@ -97,8 +97,8 @@
             android:hint="Write a message..."
             android:maxHeight="80dp"
             android:paddingLeft="10dp"
-            android:textColor="#CFD8DC"
-            android:textColorHint="#CFD8DC" />
+            android:textColor="@color/purple_500"
+            android:textColorHint="@color/teal_200" />
 
         <ImageView
             android:id="@+id/sendButton"

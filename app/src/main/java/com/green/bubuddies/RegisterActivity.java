@@ -101,11 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Verification link for email
                                         FirebaseUser fUser = fAuth.getCurrentUser();
-                                        fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                            }
-                                        });
 
                                         // Create the user and put them into database.
                                         User user = new User(i_name, i_email, fUser.getUid());
@@ -113,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(RegisterActivity.this, "User Successfully Created! Check your email for a verification code!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterActivity.this, "User Successfully Created!", Toast.LENGTH_SHORT).show();
 
 
                                                 // Make a profile for the user if one does not exist.

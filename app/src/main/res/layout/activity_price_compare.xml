@@ -23,6 +23,7 @@
         android:fontFamily="@font/amaranth"
         android:text="Compare"
         android:textAlignment="center"
+        android:textColor="@color/purple_500"
         android:textSize="30dp" />
 
     <LinearLayout
