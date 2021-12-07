@@ -40,6 +40,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
     private String pair_user;
     private ArrayList<String> potentialMates;
     private ArrayList<String> deniedMates;
+    private ArrayList<String> msgMates;
 
     //Current User info
     private ArrayList<String> classList;
@@ -127,6 +128,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     deniedMates.add(child.getValue(String.class));
+                    msgMates.add(child.getValue(String.class));
                 }
                 findPair2();
             }
@@ -177,7 +179,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot child : snapshot.getChildren()) {
                     String search_user = child.child("uid").getValue(String.class);
-                    if (!search_user.equals(curr_user)) {
+                    if (!search_user.equals(curr_user) && !msgMates.contains(search_user)) {
                         potentialMates.add(search_user);
                     }
                 }
