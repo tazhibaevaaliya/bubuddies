@@ -452,11 +452,6 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
             //myRef.child("listings").push().setValue(listing); //writing to the database
             btnPost.setEnabled(false); //enabling the button
             Toast.makeText(StoreActivity.this, "Listing successfully posted!", Toast.LENGTH_SHORT).show();
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(getIntent());
-            overridePendingTransition(0, 0);
-
         }
 
     }
