@@ -81,20 +81,6 @@ public class PriceComparison extends AppCompatActivity {
         //mToolbar = (Toolbar) findViewById(R.id.toolbarPriceCompare);
         txtBookName = (TextInputLayout) findViewById(R.id.txtBookName);
 
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-//            getSupportActionBar().setTitle("");
-//        }
-
-
-//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(PriceComparison.this,StoreActivity.class));
-//            }
-//        });
-
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +90,7 @@ public class PriceComparison extends AppCompatActivity {
                 //https://api.ebay.com/buy/browse/v1/item_summary/search?q=drone&limit=3
 //                token = "AgAAAA**AQAAAA**aAAAAA**OmmcYQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wFk4aiDZmKoQqdj6x9nY+seQ**R7YFAA**AAMAAA**yIdyYgpPLCGK2ybuko9Ykb8/eSIls1Oxc+f5F5qRNAw/m3xw4oJQAFX75v2uWnQsipBQmF7fAlb9zzsoVCzT1Q5Pm+tiod2raJh2gXX9USrwo4IB7YjwDishK21d8CKhu4DCXrgEFSIlq/+6KOcMF2nVnS8J6jci3/R9MzwyaJM6ydeBu/3zxRP+3FVoVgpMiDw73cV5xiJaWb2XZZxM7QpU5ae+WD8CXdCkO6/XB1VHrNSfQrJn+tl5Fv0kWtD/iwqxCcQ6ZEca2vHMuSRkvweiisUQGY5eRRNDLY6L1N2W1RYaOcCXmpi56GY6kGntVM7WlRJ2+tXDikSbpxiAE3bwuA9aGpS0f01KpyRE4k/kQoOiJxlP9embaVwBys2R4yP4VNHwiaXd7nluInunCXP+voSkeEe1rKGDLOafGBCSCeJm58rjaG+YpQy70n8Ou84ikRa5Yj6hNm3drssoOZ7I6oBvc9wKgwFE98RO3bXc19vH/EQ16qDmsEOP3NpHojR1IJLd2EyKDPnU0P5oSAY4EtgVPfeF8a7E7+56Bv9OzxOvC+//lSVgm6s3vJl4pnayiIhQS537IohuzfzrHhu/+YfyPQvSZ9/+X112PXarOdHp3BpA+VPS3lvGUwSDzBX+TebC5awjz4SxsrYYKcb+y0sjPH4xBQAkt6p5B/M1zOfyLB+l+BGFY0YGjXX1aiFkBCJ6tmXVLstcxg3viAsLONwTWkv7q5YuJMHwRNWyv+bWcDClaw11c7gjm18y";
                 RequestQueue queue = Volley.newRequestQueue(getBaseContext()); // preparing the request object and requesting a queue using Volley library
-                url = "https://ebay-search.p.rapidapi.com/search.php?query="+txtBookName.getEditText().getText().toString().trim(); // inserting the query parameter (name of object)
+                url = "https://ebay-search.p.rapidapi.com/search.php?query=book"+txtBookName.getEditText().getText().toString().trim(); // inserting the query parameter (name of object)
                 // from user input to TextView "txtBookName"
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, // Request a string response from the provided URL.
@@ -183,13 +169,20 @@ public class PriceComparison extends AppCompatActivity {
 //                                        price = item.isNull("price")?"":item.optString("price"); //getting the field "price"
                 names.add(item.optString("title")); //adding the title information to the ArrayList
                 prices.add(item.optString("price")); //adding the price information to the ArrayList
+
+                if(item.isNull("image") | item.optString("image").equals("")){ //adding the image of search query
+                    images.add(default_picture);
+                }
+                else{
+                    images.add(item.optString("image"));
+                }
                 Log.d("Size", String.valueOf(prices.size()));
             }
         }
 
         if(names.size()!=0){
             for(int i=0; i<names.size(); i++){
-                listingModelArrayList.add(new ListingModel(names.get(i),prices.get(i),default_picture,getBaseContext()));
+                listingModelArrayList.add(new ListingModel(names.get(i),prices.get(i),images.get(i),getBaseContext()));
                 courseAdapter.notifyDataSetChanged();
             }
 

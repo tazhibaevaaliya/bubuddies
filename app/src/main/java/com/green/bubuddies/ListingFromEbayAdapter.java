@@ -43,7 +43,7 @@ public class ListingFromEbayAdapter extends RecyclerView.Adapter<ListingFromEbay
         ListingModel model = listingModelArrayList.get(position);
         holder.courseNameTV.setText(model.getTitle());
         holder.courseRatingTV.setText(model.getPrice());
-        new DownloadImageFromInternet(holder.courseIV).execute("https://pbs.twimg.com/profile_images/630285593268752384/iD1MkFQ0.png");
+        new DownloadImageFromInternet(holder.courseIV).execute(model.getImage());
         //Glide.with(model.getContext()).load(model.getImage()).into(holder.courseIV);
 
     }

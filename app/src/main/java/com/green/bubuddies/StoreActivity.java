@@ -135,15 +135,6 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
                 createNewListingWindow();
             }
         });
-//        FloatingActionButton fab = binding.fab;
-//
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                createNewListingWindow();
-//            }
-//        });
-
     }
 
     public void getData(){
@@ -437,26 +428,6 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
             Listing listing = new Listing(title,price,curr_user,imageURI,description);
             myRef.child("listings").push().setValue(listing); //writing to the database
         }
-
-//        if(txtListedBookName.getEditText().getText().toString().equals("")){
-//            txtListedBookName.setError("REQUIRED");
-//            txtListedBookName.setError(null);
-//        }
-//
-//        if(txtListedBookPrice.getEditText().getText().toString().equals("")){
-//            txtListedBookPrice.setError("REQUIRED");
-//            txtListedBookPrice.setError(null);
-//
-//        }
-//
-//        if(txtListedBookDescription.getText().toString().equals("")){
-//            txtListedBookDescription.setError("REQUIRED");
-//            txtListedBookDescription.setError(null);
-//        }
-
-
-
-
         btnPost.setEnabled(false); //enabling the button
 
     }

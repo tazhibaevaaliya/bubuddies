@@ -52,6 +52,7 @@
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@id/idIVBookImage"
             android:fontFamily="@font/amaranth"
+            android:maxLines="2"
             android:text="Title"
             android:textColor="@color/black"
             android:textSize="16sp"
