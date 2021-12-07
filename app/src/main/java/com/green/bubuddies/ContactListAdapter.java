@@ -114,7 +114,7 @@ public class ContactListAdapter extends RecyclerView.Adapter{
                 String now = formatter.format(new Date());
 
                 if(cur.equals(now)){
-                    formatter = new SimpleDateFormat("kk:mm");
+                    formatter = new SimpleDateFormat("HH:mm");
                     String hour = formatter.format(new Date(contact.getMsg_time()));
                     timeText.setText(hour);
                 }
@@ -155,7 +155,7 @@ public class ContactListAdapter extends RecyclerView.Adapter{
                 String now = formatter.format(new Date());
 
                 if(cur.equals(now)){
-                    formatter = new SimpleDateFormat("kk:mm");
+                    formatter = new SimpleDateFormat("HH:mm");
                     String hour = formatter.format(new Date(contact.getMsg_time()));
                     timeText.setText(hour);
                 }

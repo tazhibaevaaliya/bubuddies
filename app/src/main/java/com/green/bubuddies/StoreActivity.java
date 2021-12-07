@@ -101,6 +101,8 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
             curr_user = UserDetails.uid;
         }
 
+        UserDetails.uid = curr_user;
+
         getData();
 
 
@@ -242,6 +244,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
 
                 Intent intent = new Intent(StoreActivity.this,CheckoutActivity.class);
                 intent.putExtra("Listing ID", ids.get(clickedRow));
+                intent.putExtra("UID",curr_user);
                 startActivity(intent);
                 dialog.dismiss();
             }

@@ -53,6 +53,7 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
             curr_user = UserDetails.uid;
         }
 
+
         // Get the name of current user
 
         Log.e("username",curr_user);
@@ -215,6 +216,20 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
 
             }
         });
+
+        if(extras.getString("from")!=null) {
+            if (extras.getString("from").equals("pair")) {
+                Intent i = new Intent(Users.this, Chat.class);
+                i.putExtra("chatwithid", extras.getString("chatwithid"));
+                i.putExtra("from", "pair");
+                startActivity(i);
+            } else {
+                Intent i = new Intent(Users.this, Chat.class);
+                i.putExtra("chatwithid", extras.getString("chatwithid"));
+                i.putExtra("from", "checkout");
+                startActivity(i);
+            }
+        }
     }
 
 

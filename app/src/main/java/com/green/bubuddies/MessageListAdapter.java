@@ -172,7 +172,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(message.getMsg());
 
             // Format the stored timestamp into a readable String using method.
-            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
             String dateString = formatter.format(new Date(message.getTimestamp()));
             timeText.setText(dateString);
 
@@ -201,7 +201,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(message.getMsg());
 
             // Format the stored timestamp into a readable String using method.
-            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
             String dateString = formatter.format(new Date(message.getTimestamp()));
             timeText.setText(dateString);
 
@@ -228,7 +228,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(message.getMsg());
 
             // Format the stored timestamp into a readable String using method.
-            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
             String dateString = formatter.format(new Date(message.getTimestamp()));
             timeText.setText(dateString);
 
@@ -257,7 +257,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             messageText.setText(message.getMsg());
 
             // Format the stored timestamp into a readable String using method.
-            SimpleDateFormat formatter = new SimpleDateFormat("kk:mm");
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
             String dateString = formatter.format(new Date(message.getTimestamp()));
             timeText.setText(dateString);
 

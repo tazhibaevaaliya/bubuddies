@@ -36,23 +36,23 @@
                 android:fontFamily="@font/amaranth"
                 android:text="John Grady Cole"
                 android:textAlignment="viewStart"
-                android:textColor="@color/teal_700"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="#C88237"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/latest_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/amaranth"
                 android:maxWidth="260dp"
                 android:paddingStart="1dp"
                 android:paddingTop="10dp"
+                android:singleLine="true"
                 android:text="Message"
                 android:textAlignment="viewStart"
-                android:textColor="#4CAF50"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/element_black"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -68,7 +68,7 @@
                 android:layout_height="27dp"
                 android:layout_gravity="bottom"
                 android:layout_marginEnd="7dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="8:00"
