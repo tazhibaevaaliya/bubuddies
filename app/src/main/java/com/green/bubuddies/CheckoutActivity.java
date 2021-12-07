@@ -38,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -64,6 +65,7 @@ public class CheckoutActivity extends AppCompatActivity {
   private String title;
   private Double price;
   private String picture;
+  private String addedDesc;
   private String description = "Message the user for more information on the product and to discuss delivery/pick-up options prior to purchasing";
   private String ownerId;
 
@@ -113,10 +115,17 @@ public class CheckoutActivity extends AppCompatActivity {
       @Override
       public void onDataChange(@NonNull DataSnapshot snapshot) {
         title = snapshot.child("title").getValue(String.class);
+        addedDesc = snapshot.child("description").getValue(String.class);
         price = snapshot.child("price").getValue(Double.class);
+        Double number = Double.valueOf(price);
+
+        DecimalFormat dec = new DecimalFormat("#.## USD");
+        dec.setMinimumFractionDigits(2);
+        String priceVal = dec.format(number);
+
         ownerId = snapshot.child("owner").getValue(String.class);
         try {
-          picture = snapshot.child("picture").getValue(String.class);
+          picture = snapshot.child("imageURI").getValue(String.class);
         } catch (Exception e){
           picture = "https://firebasestorage.googleapis.com/v0/b/bubuddies-3272b.appspot.com/o/defaultcheckoutimg.jpg?alt=media&token=7c03e99d-b526-47cc-9756-f505e2c934c6";
         }
@@ -138,9 +147,9 @@ public class CheckoutActivity extends AppCompatActivity {
         layoutBinding.btnMessageOwner.setClickable(true);
 
         layoutBinding.detailTitle.setText(title);
-        layoutBinding.detailPrice.setText("$" + price.toString());
+        layoutBinding.detailPrice.setText(priceVal);
         Picasso.with(CheckoutActivity.this).load(picture).into(layoutBinding.detailImage);
-        layoutBinding.detailDescription.setText(description);
+        layoutBinding.detailDescription.setText("\"" + addedDesc + "\"" + "\n\n" + description);
 
         // Initialize a Google Pay API client for an environment suitable for testing.
         paymentsClient = PaymentsUtil.createPaymentsClient(CheckoutActivity.this);

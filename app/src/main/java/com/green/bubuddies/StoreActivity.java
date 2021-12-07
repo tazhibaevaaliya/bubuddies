@@ -47,6 +47,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -59,7 +60,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
     private Button btnClose, btnCheckOut;
     private TextInputLayout txtListedBookName;
     private TextInputLayout txtListedBookPrice;
-    private TextView txtListedBookDescription;
+    public TextView txtListedBookDescription;
     private ImageView txtListedBookImage;
     private TextView idPopUpBookPrice, idPopUpBookTitle, idPopUpBookDescription;
     //private ActivityStoreBinding binding;
@@ -161,11 +162,17 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
                 }
                 String title = child.child("title").getValue().toString(); //getting the title of each listing
                 String price = child.child("price").getValue().toString(); //getting the price of each listing
-                if(!child.child("picture").exists()){
+                Double number = Double.valueOf(price);
+
+                DecimalFormat dec = new DecimalFormat("#.## USD");
+                dec.setMinimumFractionDigits(2);
+                String priceVal = dec.format(number);
+
+                if(!child.child("imageURI").exists()){
                     imageURIs.add(default_picture);
                 }
                 else{
-                    imageURIs.add(child.child("picture").getValue().toString()); //getting the image URI String
+                    imageURIs.add(child.child("imageURI").getValue().toString()); //getting the image URI String
                 }
                 if(!child.child("description").exists()){
                     listingDescriptions.add("Sorry! There is not any description");
@@ -174,12 +181,12 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
                     listingDescriptions.add("Empty Description! Nothing to report");
                 }
                 else{
-                    listingDescriptions.add(child.child("picture").getValue().toString());
+                    listingDescriptions.add(child.child("description").getValue().toString());
                 }
 
                 ids.add(child.getKey().toString()); //getting ids of each listing
                 titles.add(title);
-                prices.add(price);
+                prices.add(priceVal);
 
             }
 
@@ -420,8 +427,10 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
         }
         else{
             final String title = txtListedBookName.getEditText().getText().toString().trim();
-            final int price = Integer.parseInt(txtListedBookPrice.getEditText().getText().toString());
-            final String description = txtListedBookDescription.getText().toString();
+            Log.e("TESTING", String.valueOf(Double.parseDouble(txtListedBookPrice.getEditText().getText().toString())));
+            final Double price = Double.parseDouble(txtListedBookPrice.getEditText().getText().toString());
+            String description = txtListedBookDescription.getText().toString();
+            Log.e("TESTING", "This is DESCRIPTION " + description);
 
             //getting a database reference
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -429,6 +438,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
 
             //creating a new instance of listing object
             Listing listing = new Listing(title,price,curr_user,default_picture,description);
+            Log.e("TESTING", listing.getDescription());
             String listingID = myRef.child("listings").push().getKey();
             FirebaseDatabase.getInstance().getReference("listings").child(listingID)
                     .setValue(listing).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -441,6 +451,11 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
             });
             //myRef.child("listings").push().setValue(listing); //writing to the database
             btnPost.setEnabled(false); //enabling the button
+            Toast.makeText(StoreActivity.this, "Listing successfully posted!", Toast.LENGTH_SHORT).show();
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
 
         }
 

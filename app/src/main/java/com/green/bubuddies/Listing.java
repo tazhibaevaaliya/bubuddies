@@ -6,13 +6,13 @@ import android.net.Uri;
 public class Listing {
 
     private String title;
-    private int price;
+    private Double price;
     private String owner;
     private String picture;
     private String description;
 
 
-    public Listing(String title, int price, String owner, String imageURI, String description) {
+    public Listing(String title, Double price, String owner, String imageURI, String description) {
         this.title = title;
         this.price = price;
         this.owner = owner;
@@ -24,7 +24,7 @@ public class Listing {
         return this.title;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return this.price;
     }
 
@@ -36,8 +36,8 @@ public class Listing {
         return this.picture;
     }
 
-    public void setImageURI(String imageURI) {
-        this.picture = imageURI;
+    public String getDescription() {
+        return this.description;
     }
 
 

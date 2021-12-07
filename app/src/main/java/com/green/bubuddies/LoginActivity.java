@@ -34,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-/** Page for logging into the app. Users can alternatively use Google Sign-in to enter here. */
+/** Page for logging into the app.  */
 public class LoginActivity extends AppCompatActivity {
     EditText email, password;
     TextView forgotPass, register;

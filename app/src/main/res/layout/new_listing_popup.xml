@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/amaranth"
-            android:text="Book Details"
+            android:text="Sell Your Book"
             android:textColor="@color/purple_500"
             android:textSize="40dp" />
 
@@ -46,7 +46,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:layout_weight="2"
-            android:hint="Title of the Book"
+            android:hint="Title"
             android:textAlignment="center"
             app:counterEnabled="true"
             app:counterMaxLength="20"
@@ -69,7 +69,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:layout_weight="2"
-            android:hint="Price of the Book"
+            android:hint="Price (e.g. 39.99)"
             android:textAlignment="center"
             app:counterEnabled="true"
             app:counterMaxLength="20"
@@ -80,7 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/amaranth" />
+                android:fontFamily="@font/amaranth"
+                android:inputType="number|numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
