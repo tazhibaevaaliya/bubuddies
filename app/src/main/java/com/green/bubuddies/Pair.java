@@ -84,6 +84,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
 
         classList = new ArrayList<String>();
         potentialMates = new ArrayList<String>();
+        msgMates = new ArrayList<String>();
         findPair();
 
         deniedMates = new ArrayList<String>();
