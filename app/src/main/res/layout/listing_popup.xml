@@ -88,6 +88,7 @@
             android:layout_marginEnd="75dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/field"
+            android:fontFamily="@font/amaranth"
             android:gravity="left"
             app:icon="@drawable/ic_shopping_cart_icon"
             app:iconGravity="end" />
@@ -99,6 +100,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/amaranth"
         android:text="Close"
         android:textColor="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"

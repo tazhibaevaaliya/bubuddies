@@ -276,11 +276,11 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
     @Override
     public void newConversation(){
         //code here to add user as a friend
-        Intent i = new Intent(Pair.this,Chat.class);
-//        i.putExtra("uid",curr_user);
+        Intent i = new Intent(Pair.this,Users.class);
+        i.putExtra("UID",curr_user);
         i.putExtra("chatwithid",pair_user);
         i.putExtra("from","pair");
-//        Log.e("Passing uid",curr_user);
+        Log.e("Passing uid",curr_user);
         Log.e("Passing chatwithid", pair_user);
         startActivity(i); // change to messaging tab.
     }

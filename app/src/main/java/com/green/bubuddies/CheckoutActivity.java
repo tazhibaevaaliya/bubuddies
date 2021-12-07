@@ -126,9 +126,10 @@ public class CheckoutActivity extends AppCompatActivity {
         layoutBinding.btnMessageOwner.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Intent i = new Intent(CheckoutActivity.this,Chat.class);
+            Intent i = new Intent(CheckoutActivity.this,Users.class);
             i.putExtra("chatwithid",ownerId);
             i.putExtra("from","checkout");
+            i.putExtra("UID",getIntent().getExtras().getString("UID"));
             Log.e("Passing chatwithid", ownerId);
             startActivity(i); // change to messaging tab.
           }
