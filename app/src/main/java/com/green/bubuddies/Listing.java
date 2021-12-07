@@ -36,5 +36,9 @@ public class Listing {
         return this.picture;
     }
 
+    public void setImageURI(String imageURI) {
+        this.picture = imageURI;
+    }
+
 
 }

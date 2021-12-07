@@ -27,16 +27,17 @@
             android:textColor="@color/purple_500"
             android:textSize="40dp" />
 
+
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="204dp"
-            android:layout_height="186dp"
+            android:layout_width="190dp"
+            android:layout_height="185dp"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="30dp"
-            android:src="@drawable/stack_of_books" />
-
+            android:src="@drawable/default_image"
+            android:tag="default" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtListedBookName"
