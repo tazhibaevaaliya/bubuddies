@@ -73,7 +73,7 @@
                 android:gravity="center"
                 android:text="8:00"
                 android:textAlignment="center"
-                android:textColor="#C0C0C0"
+                android:textColor="@color/purple_500"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
