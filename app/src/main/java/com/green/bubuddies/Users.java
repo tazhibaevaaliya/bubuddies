@@ -217,6 +217,7 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
             }
         });
 
+        if(extras!=null){
         if(extras.getString("from")!=null) {
             if (extras.getString("from").equals("pair")) {
                 Intent i = new Intent(Users.this, Chat.class);
@@ -229,7 +230,7 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
                 i.putExtra("from", "checkout");
                 startActivity(i);
             }
-        }
+        }}
     }
 
 
