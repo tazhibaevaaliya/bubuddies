@@ -34,7 +34,7 @@
             android:paddingTop="10dp"
             android:text="Name"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="@color/purple_500"
             android:textSize="30dp"
             android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="Bio: Example, I enjoy listening to Taylor Swift while doing programming assignments."
-            android:textColor="#000000"
+            android:textColor="@color/purple_500"
             android:textSize="16dp" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="Classes: EX101, EX102, EX103, EX104, EX105, EX106, EX107, EX108, EX109"
-            android:textColor="#000000"
+            android:textColor="@color/purple_500"
             android:textSize="16dp" />
 
     </LinearLayout>
