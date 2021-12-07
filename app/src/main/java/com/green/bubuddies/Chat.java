@@ -236,6 +236,8 @@ public class Chat extends AppCompatActivity {
         // Delete previous messages in the firebase
         FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).removeValue();
         FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.chatwithid + "_" + UserDetails.uid).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Track").child(UserDetails.uid + "_" + UserDetails.chatwithid).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Track").child(UserDetails.chatwithid + "_" + UserDetails.uid).removeValue();
         // Update contact list
         UserDetails.contacts.remove(UserDetails.chatwithid);
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserDetails.uid).child("Contacts").addListenerForSingleValueEvent(new ValueEventListener() {

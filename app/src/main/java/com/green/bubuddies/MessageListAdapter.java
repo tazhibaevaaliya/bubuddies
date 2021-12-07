@@ -21,7 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-
+// Adapted from the tutorial:
+// https://sendbird.com/developer/tutorials/android-chat-tutorial-building-a-messaging-ui
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY = 2;
