@@ -22,6 +22,7 @@
         android:fontFamily="@font/amaranth"
         android:text="Available Books"
         android:textAlignment="center"
+        android:textColor="@color/purple_500"
         android:textSize="30dp" />
 
     <View

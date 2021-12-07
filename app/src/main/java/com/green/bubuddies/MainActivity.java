@@ -27,8 +27,8 @@ import java.util.List;
 
 /** This is the user's dashboard. They may edit profile, or logout here. It also displays their information. */
 public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMenuActivity{
-    Button logout, resend, editProfile;
-    TextView aboutMe, welcome, classes, warningMessage;
+    Button logout, editProfile;
+    TextView aboutMe, welcome, classes;
     FirebaseAuth fAuth;
     String string_uid;
     ImageView your_image;
@@ -49,33 +49,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
         Log.e("TESTING", fAuth.toString());
         Log.e("TESTING", currentUser.toString());
         string_uid = currentUser.getUid();
-
-
-//        resend = findViewById(R.id.resendVerify);
-//        warningMessage = findViewById(R.id.userNotVerified);
-//        // Is the user email verified? If so, don't show this message. Otherwise show it.
-//        if(!currentUser.isEmailVerified()) {
-//            Log.e("TESTING", Boolean.toString(currentUser.isEmailVerified()));
-//            resend.setVisibility(View.VISIBLE);
-//            warningMessage.setVisibility(View.VISIBLE);
-//            resend.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    currentUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void unused) {
-//                            Toast.makeText(MainActivity.this, "A verification link has been sent to your email!", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//            });
-//        } else {
-//            resend.setVisibility(View.INVISIBLE);
-//            warningMessage.setVisibility(View.INVISIBLE);
-//        }
-
-
-
 
 
         // Grab user data.
