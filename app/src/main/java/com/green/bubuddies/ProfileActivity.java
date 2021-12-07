@@ -192,8 +192,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 Toast.makeText(ProfileActivity.this, "Profile updated.", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
             }
         });
     }
@@ -204,7 +202,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(requestCode == 100) {
             if(resultCode == Activity.RESULT_OK) {
                 Uri imageURI = data.getData();
-                PFP.setImageURI(imageURI);
+                Picasso.with(getApplicationContext()).load(imageURI).transform(new CircleTransform()).into(PFP);
                 uploadImage(imageURI);
             }
         }
