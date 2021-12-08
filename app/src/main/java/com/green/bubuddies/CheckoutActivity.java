@@ -43,7 +43,10 @@ import java.util.Locale;
 import java.util.Optional;
 
 /**
- * This is adapted from Google's google pay implementation
+ * This code calls methods/functions/variables that are adapted from google pay's implementation demo
+ * that can be found in the util folder (i.e. com.green.bubuddies.util)
+ *  https://developers.google.com/pay/api/android/guides/tutorial
+ *
  * Checkout implementation for the app
  */
 public class CheckoutActivity extends AppCompatActivity {
@@ -168,7 +171,6 @@ public class CheckoutActivity extends AppCompatActivity {
    * Determine the viewer's ability to pay with a payment method supported by your app and display a
    * Google Pay payment button.
    */
-  //Disucss this
   @RequiresApi(api = Build.VERSION_CODES.N)
   private void possiblyShowGooglePayButton() {
 

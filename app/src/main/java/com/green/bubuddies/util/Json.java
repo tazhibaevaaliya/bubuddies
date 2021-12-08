@@ -32,6 +32,9 @@ import java.util.stream.Collectors;
 public class Json {
 
   /**
+   * This file is adapted from Google's google pay implementation demo/api
+   * https://developers.google.com/pay/api/android/guides/tutorial
+   *
    * Loads a resource and creates a {@link JSONArray} object with the contents of the binary.
    *
    * @param context  where the execution is taking place.
