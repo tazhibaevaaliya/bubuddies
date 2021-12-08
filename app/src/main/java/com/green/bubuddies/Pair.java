@@ -265,8 +265,8 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
                 });
 
                 txt_bio.setText("About Me: " + snapshot.child("aboutMe").getValue(String.class) +
-                        "\nMajor: " + snapshot.child("major").getValue(String.class) +
-                        "\nGraduation Year: " + snapshot.child("graduationYear").getValue(String.class)
+                        "\n\nMajor: " + snapshot.child("major").getValue(String.class) +
+                        "\n\nGraduation Year: " + snapshot.child("graduationYear").getValue(String.class)
                     );
                 btn_next.setClickable(true);
                 String img = snapshot.child("picture").getValue(String.class);
