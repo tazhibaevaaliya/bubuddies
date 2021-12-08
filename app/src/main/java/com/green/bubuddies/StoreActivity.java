@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -61,7 +62,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
     private TextInputLayout txtListedBookPrice;
     private TextView txtListedBookDescription;
     private TextView idPopUpBookPrice, idPopUpBookTitle, idPopUpBookDescription;
-    private ImageView idPopUpBookPic;
+    private ImageView idPopUpBookPic, ListedBookPic;
     //private ActivityStoreBinding binding;
     private RecyclerView listView;
     ArrayList<String> titles = new ArrayList<String>();
@@ -344,11 +345,14 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
         btnCancel = (Button) listingPopupWindow.findViewById(R.id.btnCancel);
         btnUpload = (Button) listingPopupWindow.findViewById(R.id.btnUpload);
 
-        imageURI = null; //initializing URI for book image
+        imageURI = default_picture; //initializing URI for book image
 
         txtListedBookName = (TextInputLayout) listingPopupWindow.findViewById(R.id.txtListedBookName);
         txtListedBookPrice = (TextInputLayout) listingPopupWindow.findViewById(R.id.txtListedBookPrice);
         txtListedBookDescription = (EditText) listingPopupWindow.findViewById(R.id.txtListedBookDescription);
+        ListedBookPic = (ImageView) listingPopupWindow.findViewById(R.id.imageView2);
+        Picasso.with(getBaseContext()).load(imageURI).into(ListedBookPic);
+
 
         dialogBuilder.setView(listingPopupWindow);
         dialog = dialogBuilder.create();
@@ -400,6 +404,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
                     @Override
                     public void onSuccess(Uri uri) {
                         imageURI = String.valueOf(uri);
+                        Picasso.with(getBaseContext()).load(imageURI).into(ListedBookPic);
                     }
                 });
             }
