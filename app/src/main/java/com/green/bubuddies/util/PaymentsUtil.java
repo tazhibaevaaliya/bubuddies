@@ -30,6 +30,9 @@ import java.math.RoundingMode;
 import java.util.Optional;
 
 /**
+ * This file is adapted from Google's google pay implementation demo/api
+ * https://developers.google.com/pay/api/android/guides/tutorial
+ *
  * Contains helper static methods for dealing with the Payments API.
  */
 public class PaymentsUtil {

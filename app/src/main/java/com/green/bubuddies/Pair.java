@@ -26,6 +26,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
 
+/**
+ * This is the Pair activity/class that matches users with other users based on their shared classes
+ *
+ * As easy as 1,2,3 explanation of pairing
+ * 0) initialize all of the references to the views, variables, etc. and set onClickListener for the next button
+ *                                          -> the next button adds the current pair_user to the deniedMates list.
+ * 1) onCreate calls findPair() -> populate classList with all of the classes that the user is taking
+ *                                 populate deniedMates and msgMates with IDs of users that are already messaging the current user
+ *
+ * 2) findPair() calls findPair2() -> populate potentialMates with IDs of all other users that share atleast one class with
+ *                                      the current user and aren't in the list denied mates
+ *                                    if potentialMates is an empty list continue to step 2.5 else choose the first User
+ *                                      from potential mates as pair_user and call updateGUI
+ *
+ * 2.5) findPair2 calls findPair3() -> findPair3 is called if the user has already denied all the other users that they share a class with,
+ *                                      in this case potentialMates is populated with all other users that are not in msgMates
+ *                                      (i.e. all users that the current user has not previously messaged)
+ *                                      sets the first User in potentialMates as pair_user and calls updateGUI
+ *
+ * 3) findPair2 or 3 calls updateGUI -> Retrieves the pair_user's info from firebase and updates the views appropriately
+ *
+ * Question: Why are there 3 findPair methods? why not just one findPair method?
+ *  Answer: Firebase calls will not be processed one at a time but rather through listeners that will be working in the background
+ *          since we need certain information from firebase to accomplish later queries/retrieval of information the findPair must call
+ *          findPair2 at the end of the onDataChanged listener and similarly if needed findPair2 must call findPair3
+ *
+ */
+
+
 public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivity, NewMsg.newMsgActivity {
 
     //references to views
@@ -52,21 +81,21 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = fAuth.getCurrentUser();
 
+
+    /**
+     * This is step 0 as detailed at the start of the file.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair);
 
-        if(savedInstanceState != null){
-            curr_user = savedInstanceState.getString("UID");
-        } else {
-            curr_user = "2ax0y5TP9gRs9JV31d3JKSRjNz52"; //hard coded user for testing
-        }
+        //the following if statements contain hard coded curr_user that will never be reached
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
             curr_user = extras.getString("UID");
         } else {
-            curr_user = "2ax0y5TP9gRs9JV31d3JKSRjNz52";
+            curr_user = "2ax0y5TP9gRs9JV31d3JKSRjNz52"; //hard coded user for testing
         }
 
         UserDetails.uid = curr_user;
@@ -82,12 +111,13 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         btn_next = findViewById(R.id.btn_next);
         btn_next.setClickable(false);
 
+        //initialize array lists used in the matching process
         classList = new ArrayList<String>();
         potentialMates = new ArrayList<String>();
         msgMates = new ArrayList<String>();
+        deniedMates = new ArrayList<String>();
         findPair();
 
-        deniedMates = new ArrayList<String>();
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,8 +137,12 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
 
     }
 
+    /**
+     * This is step 1 as detailed at the start of the file.
+     */
     public void findPair() {
         txt_bio.setText("finding pair");
+        //find the curr_user's grad year and populate classList for future use.
         ref.child(curr_user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -124,6 +158,8 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
 
             }
         });
+        //find the curr_user's contacts and add them to deniedMates and msgMates
+        //once done processing, calls findPair2
         database.getReference("Users").child(curr_user).child("Contacts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,7 +177,12 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
 
         });
     }
+
+    /**
+     * This is step 2 as detailed at the start of the file.
+     */
     public void findPair2() {
+        //populates potentialMates with other users that they aren't currently messaging and share classes with
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -160,6 +201,8 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
                     }
                 }
                 if(potentialMates.size() == 0) {
+                    //in the event that the user has denied or already messaged all other users
+                    //that they share a class with
                     findPair3();
                 } else  {
                     pair_user = potentialMates.get(0);
@@ -173,8 +216,14 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
             }
         });
     }
+
+    /**
+     * This is step 2.5 as detailed at the start of the file.
+     */
     public void findPair3(){
         Toast.makeText(Pair.this, "No other users share a class with you, showing all users.", Toast.LENGTH_SHORT).show();
+        //populate potential mates with all users that the curr_user has not messaged including
+        //users that they do not share a class with
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -195,7 +244,11 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         });
     }
 
+    /**
+     * This is step 3 as detailed at the start of the file.
+     */
     public void updateGUI(String pair_uid){
+        //get all the info we need and update the views with the correct info for pair_user/pair_uid <- both vars are the same
         ref.child(pair_uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -235,12 +288,14 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         });
     }
 
+    //method for btm menu fragment implementation see BottomMenu.java for more info
     @Override
     public void updateClickableButtons(){
         BottomMenu fragment = (BottomMenu) getSupportFragmentManager().findFragmentById(R.id.btmFragmentPair);
         fragment.disableClick(BottomMenu.PAIR);
     }
 
+    //method for btm menu fragment implementation see BottomMenu.java for more info
     @Override
     public void changeActivity(int nextAct) {
 
@@ -273,6 +328,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         }
     }
 
+    //method for new message fragment implementation see NewMsg.java for more info
     @Override
     public void newConversation(){
         //code here to add user as a friend
