@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+//Activity for message page between two users
 public class Chat extends AppCompatActivity {
 
     private
@@ -66,9 +67,10 @@ public class Chat extends AppCompatActivity {
         mMessageRecycler.setAdapter(mMessageAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-
+        //Check for if the page is directed from pairing page or checkout page
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
+            //get the name of user who sends the msg
             UserDetails.chatwithid = extras.getString("chatwithid");
             Log.e("chatwithid",UserDetails.chatwithid);
             Query query = reference.child("Users").child(UserDetails.chatwithid);
@@ -76,6 +78,7 @@ public class Chat extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     UserDetails.chatwithname = snapshot.child("username").getValue().toString();
+                    //Set the message title to be the user's name
                     title.setText(UserDetails.chatwithname);
                 }
 
@@ -86,10 +89,11 @@ public class Chat extends AppCompatActivity {
             });
         }
         else{
+            // if this page is directed from contacts page, then the other user's information is already retrieved
             title.setText(UserDetails.chatwithname);
         }
 
-
+        // Back button, check which activity initiates the message page and direct back to the activity
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +116,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
+        // Profile popup window for clicking on the title
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,6 +124,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
+        // Delete popup window for delete button
         deleteContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,19 +132,19 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-
+        // sending the msg
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
-
+                // if not empty, store the data in the firebase
                 if(!messageText.equals("")){
                     Map<String, Object> map = new HashMap<>();
                     map.put("message", messageText);
                     map.put("user", UserDetails.uid);
                     map.put("timestamp",ServerValue.TIMESTAMP);
-                    // put the info of user and message to the database
 
+                    // Update users' contact list
                     if(!UserDetails.contacts.contains(UserDetails.chatwithid)) {
                         reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.chatwithid);
                         reference.child("Users").child(UserDetails.chatwithid).child("Contacts").push().setValue(UserDetails.uid);
@@ -183,7 +189,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-        // Get the msgs
+        // Get the msgs, automatically scroll down to the position of latest msg on the recyclerview
         reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -214,7 +220,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-        // Get the latest read msg key
+        // Get the latest read msg key and store the info in firebase
         reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).limitToLast(1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -304,6 +310,7 @@ public class Chat extends AppCompatActivity {
         });
     }
 
+    // pop up window for displaying user profile
     public void popupProfile(String uid){
         AlertDialog.Builder popup_builder = new AlertDialog.Builder(this,R.style.CustomAlertDialog);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService( Context.LAYOUT_INFLATER_SERVICE );

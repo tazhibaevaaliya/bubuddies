@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +40,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -57,6 +61,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
     private TextInputLayout txtListedBookPrice;
     private TextView txtListedBookDescription;
     private TextView idPopUpBookPrice, idPopUpBookTitle, idPopUpBookDescription;
+    private ImageView idPopUpBookPic;
     //private ActivityStoreBinding binding;
     private RecyclerView listView;
     ArrayList<String> titles = new ArrayList<String>();
@@ -157,11 +162,11 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
                 }
                 String title = child.child("title").getValue().toString(); //getting the title of each listing
                 String price = child.child("price").getValue().toString(); //getting the price of each listing
-                if(!child.child("picture").exists()){
+                if(!child.child("imageURI").exists()){
                     imageURIs.add(default_picture);
                 }
                 else{
-                    imageURIs.add(child.child("picture").getValue().toString()); //getting the image URI String
+                    imageURIs.add(child.child("imageURI").getValue().toString()); //getting the image URI String
                 }
                 if(!child.child("description").exists()){
                     listingDescriptions.add("Sorry! There is not any description");
@@ -170,7 +175,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
                     listingDescriptions.add("Empty Description! Nothing to report");
                 }
                 else{
-                    listingDescriptions.add(child.child("picture").getValue().toString());
+                    listingDescriptions.add(child.child("description").getValue().toString());
                 }
 
                 ids.add(child.getKey().toString()); //getting ids of each listing
@@ -211,16 +216,20 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
         btnClose = (Button) listingPopupWindow.findViewById(R.id.btnClose);
         btnCheckOut = (Button) listingPopupWindow.findViewById(R.id.btnCheckOut);
 
-        imageURI = null; //initializing URI for book image
+        imageURI = imageURIs.get(position); //initializing URI for book image
 
         idPopUpBookTitle = (TextView) listingPopupWindow.findViewById(R.id.idPopUpBookTitle);
         idPopUpBookPrice = (TextView) listingPopupWindow.findViewById(R.id.idPopUpBookPrice);
         idPopUpBookDescription = (TextView) listingPopupWindow.findViewById(R.id.idPopUpBookDescription);
+        idPopUpBookPic = (ImageView) listingPopupWindow.findViewById(R.id.idIVBookImage);
+
 
         //populating the title, price and description of the listing
-        idPopUpBookPrice.setText(prices.get(position));
+        idPopUpBookPrice.setText("$" + prices.get(position));
         idPopUpBookTitle.setText(titles.get(position));
         idPopUpBookDescription.setText(listingDescriptions.get(position));
+        Picasso.with(getBaseContext()).load(imageURI).into(idPopUpBookPic);
+
 
         dialogBuilder.setView(listingPopupWindow);
         dialog = dialogBuilder.create();
@@ -322,6 +331,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
             // at last we are passing that filtered
             // list to our adapter class.
             listingAdapter.filterList(filteredlist);
+            listingAdapter.notifyDataSetChanged();
         }
     }
 
@@ -338,7 +348,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
 
         txtListedBookName = (TextInputLayout) listingPopupWindow.findViewById(R.id.txtListedBookName);
         txtListedBookPrice = (TextInputLayout) listingPopupWindow.findViewById(R.id.txtListedBookPrice);
-        txtListedBookDescription = (TextView) listingPopupWindow.findViewById(R.id.txtListedBookDescription);
+        txtListedBookDescription = (EditText) listingPopupWindow.findViewById(R.id.txtListedBookDescription);
 
         dialogBuilder.setView(listingPopupWindow);
         dialog = dialogBuilder.create();
@@ -375,13 +385,13 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 100) {
             if(resultCode == Activity.RESULT_OK) {
-                imageURI = data.getData().toString();
+                uploadImage(data.getData());
             }
         }
     }
 
     private void uploadImage(Uri imageUri) {
-        StorageReference fileRef = storageReference.child(curr_user + ".jpg");
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("books/"+curr_user);
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -389,16 +399,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
                 firebaseUri.addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-
-                        Toast.makeText(StoreActivity.this, "Picture Updated.", Toast.LENGTH_SHORT).show();
-                        String url = uri.toString();
-                        Log.e("TAG:", "the url is: " + url);
-
-                        String ref = storageReference.getName();
-                        Log.e("TAG:", "the ref is: " + ref);
-
-                        DatabaseReference mData = FirebaseDatabase.getInstance().getReference("Profiles").child(fAuth.getCurrentUser().getUid());
-                        mData.child("picture").setValue(url);
+                        imageURI = String.valueOf(uri);
                     }
                 });
             }
@@ -416,8 +417,8 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
         }
         else{
             final String title = txtListedBookName.getEditText().getText().toString().trim();
-            final int price = Integer.parseInt(txtListedBookPrice.getEditText().getText().toString());
-            final String description = txtListedBookDescription.getText().toString();
+            final double price = Double.parseDouble(txtListedBookPrice.getEditText().getText().toString());
+            String description = txtListedBookDescription.getText().toString();
 
             if(imageURI==null){
                 imageURI = default_picture; //if there is no image close Menu window pop-up
@@ -428,7 +429,14 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
             DatabaseReference myRef = database.getReference();
 
             //creating a new instance of listing object
+
             Listing listing = new Listing(title,price,curr_user,imageURI,description);
+            Log.e("description", listing.getDescription());
+            Log.e("description", listing.getPrice().toString());
+            Log.e("description", listing.getOwner());
+            Log.e("description", listing.getTitle());
+
+//            String key = myRef.child("listings").push().getKey();
             myRef.child("listings").push().setValue(listing); //writing to the database
         }
         btnPost.setEnabled(false); //enabling the button

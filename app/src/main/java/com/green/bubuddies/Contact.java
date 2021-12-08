@@ -1,7 +1,7 @@
 package com.green.bubuddies;
 
 import java.util.Comparator;
-
+// Class for storing users' information for rendering the contacts page
 public class Contact {
     String id;
     String name;
@@ -21,7 +21,7 @@ public class Contact {
         this.msg_time = msg_time;
         this.unread_count = unread_count;
     }
-
+    // Implemented for sort the user's depending on their latest msg's timestamp
     public static Comparator<Contact> contactsComparator = new Comparator<Contact>() {
         @Override
         public int compare(Contact contact, Contact t1) {

@@ -22,7 +22,7 @@ import android.graphics.Shader;
 
 import com.squareup.picasso.Transformation;
 
-// For rendering circular imgs
+// For rendering circular imgs using picasso
 // ref: https://gist.github.com/julianshen/5829333
 public class CircleTransform implements Transformation {
     @Override

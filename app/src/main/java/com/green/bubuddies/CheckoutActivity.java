@@ -113,16 +113,21 @@ public class CheckoutActivity extends AppCompatActivity {
       @Override
       public void onDataChange(@NonNull DataSnapshot snapshot) {
         title = snapshot.child("title").getValue(String.class);
-        price = snapshot.child("price").getValue(Double.class);
+        price = Double.parseDouble(snapshot.child("price").getValue().toString());
         ownerId = snapshot.child("owner").getValue(String.class);
         try {
-          picture = snapshot.child("picture").getValue(String.class);
+          picture = snapshot.child("imageURI").getValue(String.class);
         } catch (Exception e){
           picture = "https://firebasestorage.googleapis.com/v0/b/bubuddies-3272b.appspot.com/o/defaultcheckoutimg.jpg?alt=media&token=7c03e99d-b526-47cc-9756-f505e2c934c6";
         }
         if (picture == null){
           picture = "https://firebasestorage.googleapis.com/v0/b/bubuddies-3272b.appspot.com/o/defaultcheckoutimg.jpg?alt=media&token=7c03e99d-b526-47cc-9756-f505e2c934c6";
         }
+        try {
+          description = snapshot.child("description").getValue(String.class);
+        } catch (Exception e){
+        }
+
         layoutBinding.btnMessageOwner.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {

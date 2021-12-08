@@ -1,6 +1,6 @@
 package com.green.bubuddies;
 
-import java.util.Map;
+// Class for storing all the messages going between two users
 
 public class Message {
     String user;

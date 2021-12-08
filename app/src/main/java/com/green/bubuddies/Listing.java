@@ -6,35 +6,57 @@ import android.net.Uri;
 public class Listing {
 
     private String title;
-    private int price;
+    private Double price;
     private String owner;
-    private String picture;
+    private String imageURI;
     private String description;
 
 
-    public Listing(String title, int price, String owner, String imageURI, String description) {
+    public Listing(String title, Double price, String owner, String imageURI, String description) {
         this.title = title;
         this.price = price;
         this.owner = owner;
-        this.picture = imageURI;
+        this.imageURI = imageURI;
         this.description = description;
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
-    public int getPrice() {
-        return this.price;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getOwner(){
-        return this.owner;
+    public Double getPrice() {
+        return price;
     }
 
-    public String getImageURI(){
-        return this.picture;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
+    public String getOwner() {
+        return owner;
+    }
 
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getImageURI() {
+        return imageURI;
+    }
+
+    public void setImageURI(String imageURI) {
+        this.imageURI = imageURI;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

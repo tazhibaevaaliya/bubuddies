@@ -47,11 +47,12 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         return mMessageList.size();
     }
 
-    // Determines the appropriate ViewType according to the sender of the message.
+    // Determines the appropriate ViewType according to the sender of the message and the timestamp
     @Override
     public int getItemViewType(int position) {
         Message message = mMessageList.get(position);
 
+        //render the beginning msg always with its date
         if(position == 0){
             last = new Date(message.getTimestamp());
             if(message.getUser().equals(UserDetails.uid)){
@@ -62,11 +63,13 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             }
         }
         else{
+            //Check if the msg is sent before today(access date)
             SimpleDateFormat formatter = new SimpleDateFormat("MM-d");
             String prev = formatter.format(last);
             String cur = formatter.format(new Date(message.getTimestamp()));
             last = new Date(message.getTimestamp());
             if(!prev.equals(cur)){
+                //Check if the msg is sent or received for the curr user
                 if(message.getUser().equals(UserDetails.uid)){
                     return VIEW_TYPE_MESSAGE_SENT_BEFORE_TODAY;
                 }
@@ -75,6 +78,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
                 }
             }
             else{
+                //Check if the msg is sent or received for the curr user
                 if(message.getUser().equals(UserDetails.uid)){
                     return VIEW_TYPE_MESSAGE_SENT;
                 }
@@ -112,6 +116,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     }
 
     // Passes the message object to a ViewHolder so that the contents can be bound to UI.
+    // Also make the profile pic clickable, which display a popup window for the profile of the selected user
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Message message = (Message) mMessageList.get(position);
@@ -155,6 +160,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // Holder for sent msg showing the msg date in the center and msg hours besides the textview
     private class SentMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText, dateText;
         ImageView profileImage;
@@ -185,6 +191,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // Holder for ent msg showing the msg hours besides the textview holder
     private class SentMessageTodayHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText;
         ImageView profileImage;
@@ -210,7 +217,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
-
+    // Holder for received msg showing the msg date in the center and msg hours besides the textview
     private class ReceivedMessageHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText, dateText;
         ImageView profileImage;
@@ -241,6 +248,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // Holder for sent msg showing the msg hours besides the textview
     private class ReceivedMessageTodayHolder extends RecyclerView.ViewHolder {
         TextView messageText, timeText;
         ImageView profileImage;
@@ -266,6 +274,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 
+    // profile popup window for selected user
     public void popupProfile(String uid){
         AlertDialog.Builder popup_builder = new AlertDialog.Builder(mContext,R.style.CustomAlertDialog);
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
@@ -280,6 +289,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         TextView aboutme = popupView.findViewById(R.id.profile_aboutme);
         ImageView img = popupView.findViewById(R.id.profile_img);
 
+        //Get the profile infomation from firebase
         FirebaseDatabase.getInstance().getReference().child("Profiles").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

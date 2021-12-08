@@ -28,7 +28,7 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
     ArrayList<Contact> contacts = new ArrayList<>();
     ArrayList<String> contacts_id = new ArrayList<>();
     ProgressDialog pd;
-    String curr_user, read_key;
+    String curr_user;
 
 
 
@@ -46,6 +46,8 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
         pd.setMessage("Loading...");
         pd.show();
 
+        // Check if the we already have the info for the current user
+        // if not we are getting the current user's id from other activities
         Bundle extras = getIntent().getExtras();
         if(extras!= null) {
             curr_user = extras.getString("UID");
@@ -156,20 +158,22 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
 
                     // Check for the key for already read msg
                     FirebaseDatabase.getInstance().getReference().child("Track").child(UserDetails.uid+"_"+chatwithid).addValueEventListener(new ValueEventListener() {
+                        String read_key;
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             try {
                                 // If exist, then get the msg count after the already read msg
                                 for (DataSnapshot data : snapshot.getChildren()) {
                                     read_key = data.getValue().toString();
-                                    Log.e("read", read_key);
                                 }
 
                                 FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid+"_"+chatwithid).orderByKey().startAfter(read_key).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         user.setUnread_count((int) snapshot.getChildrenCount());
-                                        Log.e("set unread count", String.valueOf(snapshot.getChildrenCount()));
+//                                        Log.e("read", read_key);
+//                                        Log.e("user", user.getName());
+//                                        Log.e("set unread count", String.valueOf(snapshot.getChildrenCount()));
                                         mContactAdapter.notifyDataSetChanged();
                                     }
 
@@ -181,13 +185,13 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
                             }
                             catch (Exception e){
                                 //no msg are read
-                                Log.e("msg","no read msg");
                                 FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid+"_"+chatwithid).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         user.setUnread_count((int)snapshot.getChildrenCount());
-                                        Log.e("set unread count", String.valueOf(snapshot.getChildrenCount()));
-
+//                                        Log.e("msg","no read msg");
+//                                        Log.e("user", user.getName());
+//                                        Log.e("set unread count", String.valueOf(snapshot.getChildrenCount()));
                                         mContactAdapter.notifyDataSetChanged();
                                     }
 
@@ -217,6 +221,9 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
             }
         });
 
+        // When directed from pairing page or checkout page which initiates the conversation directly
+        // Direct to the Chat activity and tell the activity which page the back button from chat
+        // activity it should return to
         if(extras!=null){
         if(extras.getString("from")!=null) {
             if (extras.getString("from").equals("pair")) {
@@ -233,13 +240,14 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
         }}
     }
 
-
+    // Update the buttons for the bottom menu fragment
     @Override
     public void updateClickableButtons(){
         BottomMenu fragment = (BottomMenu) getSupportFragmentManager().findFragmentById(R.id.users_btmFrag);
         fragment.disableClick(BottomMenu.MESSAGE);
     }
 
+    // method for changing activity when using bottom menu fragment
     @Override
     public void changeActivity(int nextAct) {
         switch(nextAct) {
