@@ -330,9 +330,18 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 name.setText(snapshot.child("name").getValue().toString());
+
                 major.setText(snapshot.child("major").getValue().toString());
                 aboutme.setText(snapshot.child("aboutMe").getValue().toString());
                 gradtime.setText("class of "+snapshot.child("graduationYear").getValue().toString());
+
+                if(snapshot.child("major").getValue().toString().equals("")){
+                    major.setText("no major info");
+                }
+                if(snapshot.child("graduationYear").getValue().toString().equals("")){
+                    Log.e("goy","empty");
+                    gradtime.setText("no graduation date info");
+                }
                 Picasso.with(getApplicationContext()).load(snapshot.child("picture").getValue().toString()).transform(new CircleTransform()).into(img);
 
                 String classlist = "";

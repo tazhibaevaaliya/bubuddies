@@ -395,7 +395,8 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
     }
 
     private void uploadImage(Uri imageUri) {
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("books/"+curr_user);
+        String key = FirebaseDatabase.getInstance().getReference().child("books").push().getKey();
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("books/"+key);
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
