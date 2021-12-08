@@ -48,7 +48,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.Viewhold
         // to set data to textview and imageview of each card layout
         ListingModel model = listingModelArrayList.get(position);
         holder.courseNameTV.setText(model.getTitle());
-        holder.courseRatingTV.setText(model.getPrice());
+        holder.courseRatingTV.setText("$"+model.getPrice());
         Glide.with(model.getContext()).load(model.getImage()).into(holder.courseIV);
         holder.itemView.setSelected(false);
     }

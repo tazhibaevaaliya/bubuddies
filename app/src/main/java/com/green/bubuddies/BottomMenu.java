@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * A fragment for the bottom menu that allows the user to swtich between activities.
+ * A fragment with the bottom menu that allows the user to switch between activities.
+ * Each activity that includes this fragment must implement the BtmMenuActivity interface detailed below
  */
 public class BottomMenu extends Fragment {
 
@@ -51,6 +52,7 @@ public class BottomMenu extends Fragment {
         btn_message = v.findViewById(R.id.btn_message);
         btn_store = v.findViewById(R.id.btn_store);
 
+        //add onClick listeners for each button
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +82,16 @@ public class BottomMenu extends Fragment {
     }
 
     public interface BtmMenuActivity {
+        /**
+         * Within this method each activity will need to create the intent for the next activity,
+         * put any relevant key value pairs, and start the next activity
+         */
         void changeActivity(int nextAct);
+
+        /**
+         * Within this method each activity will need to update the button corresponding to the current
+         * activity such that the button is unclickable and grayed out.
+         */
         void updateClickableButtons();
     }
 
@@ -88,6 +99,11 @@ public class BottomMenu extends Fragment {
         super.onAttach(c);
         currentAct = (BtmMenuActivity) c;
     }
+
+    /**
+     * Called from within each activity's updateClickableButtons method, it grays out and disables
+     * clicking of the button corresponding to the current activity
+     */
     public void disableClick(int act){
         switch(act) {
             case (PROFILE):

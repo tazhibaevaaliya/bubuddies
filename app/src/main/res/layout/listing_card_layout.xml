@@ -24,7 +24,7 @@
         measurements with previous versions.
     -->
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="139dp"
         android:layout_marginTop="15dp">
@@ -35,7 +35,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="17dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:contentDescription="@string/book_image"
@@ -43,35 +43,40 @@
             android:src="@drawable/books" />
 
         <!--Text View to display Course Name-->
-        <TextView
-            android:id="@+id/idPopUpBookTitle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_toEndOf="@id/idIVBookImage"
-            android:fontFamily="@font/amaranth"
-            android:maxLines="2"
-            android:text="Title"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/idPopUpBookTitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:fontFamily="@font/amaranth"
+                android:maxLines="2"
+                android:text="Title"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/idPopUpBookPrice"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:drawablePadding="2dp"
+                android:fontFamily="@font/amaranth"
+                android:text="Price"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <!--Text VIew to display COurse Rating-->
         <!--Image used in present in drawable folder-->
-        <TextView
-            android:id="@+id/idPopUpBookPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/idPopUpBookTitle"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="39dp"
-            android:layout_marginEnd="20dp"
-            android:layout_toEndOf="@id/idIVBookImage"
-            android:drawablePadding="2dp"
-            android:fontFamily="@font/amaranth"
-            android:text="Price"
-            android:textSize="16sp" />
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

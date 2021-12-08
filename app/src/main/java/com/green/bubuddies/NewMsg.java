@@ -14,12 +14,13 @@ import android.widget.EditText;
 
 /**
  * A fragment for starting a new conversation with an individual
+ *
+ * Each activity that uses this fragment must implement newMsgActivity interface
  */
 public class NewMsg extends Fragment {
 
     //references to views in fragment
     private Button btn_newMsg;
-    private EditText txt_msg;
 
     //Reference to context containing the BtmMenu
     newMsgActivity currentAct;
@@ -56,6 +57,10 @@ public class NewMsg extends Fragment {
     }
 
     public interface newMsgActivity {
+        /**
+         * Each activity must have a newConversation method that will create an intent
+         * with appropriate extras and start the messaging activity.
+         */
         void newConversation();
     }
 

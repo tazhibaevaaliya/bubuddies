@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * This file is adapted from Google's google pay implementation demo/api
+ * https://developers.google.com/pay/api/android/guides/tutorial
  * This file contains several constants
  * Please take a look at PaymentsUtil.java to see where the constants are used
  */

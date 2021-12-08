@@ -35,18 +35,16 @@ public class ContactListAdapter extends RecyclerView.Adapter{
         return ContactsList.size();
     }
 
+    // determine the view type by number of unread msgs
     @Override
     public int getItemViewType(int position) {
         Contact contact = ContactsList.get(position);
-        Log.e("curr", String.valueOf(contact.getUnread_count()));
-
         if(contact.getUnread_count() <= 0){
             return VIEW_TYPE_NO_UNREAD;
         }
         else{
             return VIEW_TYPE;
         }
-//        return VIEW_TYPE;
     }
 
     // Inflates the layout.
@@ -63,7 +61,7 @@ public class ContactListAdapter extends RecyclerView.Adapter{
         }
     }
 
-    // Passes the message object to a ViewHolder so that the contents can be bound to UI.
+    // Passes the contact object to a ViewHolder so that the contents can be bound to UI.
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Contact contact = (Contact) ContactsList.get(position);
@@ -75,7 +73,6 @@ public class ContactListAdapter extends RecyclerView.Adapter{
             case VIEW_TYPE_NO_UNREAD:
                 ((ContactListAdapter.ContactHolder) holder).bind(contact);
         }
-//        ((ContactHolder) holder).bind(contact);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +104,8 @@ public class ContactListAdapter extends RecyclerView.Adapter{
             unreadText.setText(unread);
 
             // Display the time of the latest msg
+            // If before today (access date), show the date
+            // else (within one day) show the hours
 
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("MM-d");
@@ -148,6 +147,8 @@ public class ContactListAdapter extends RecyclerView.Adapter{
             nameText.setText(contact.getName());
 
             // Display the time of the latest msg
+            // If before today (access date), show the date
+            // else (within one day) show the hours
 
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("MM-d");
