@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        // Load data
+        // Load data from firebase about user profile
         DatabaseReference getName = FirebaseDatabase.getInstance().getReference("Profiles").child(currentUser.getUid());
         getName.addValueEventListener(new ValueEventListener() {
            @Override
@@ -162,6 +162,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        // call upload picture method
         updatePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,9 +171,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        // update the datbase with all changes made to user.
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // alternatively must change User's name when updating
                 FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid()).child("username").setValue(name.getText().toString());
 
                 DatabaseReference mData = FirebaseDatabase.getInstance().getReference("Profiles").child(fAuth.getCurrentUser().getUid());
@@ -180,9 +183,13 @@ public class ProfileActivity extends AppCompatActivity {
                 mData.child("graduationYear").setValue(yog.getText().toString());
                 mData.child("major").setValue(major.getText().toString());
                 mData.child("name").setValue(name.getText().toString());
+
+                // Convert text into child objects for classes.
                 Log.e("TESTING", classes.getText().toString());
                 List<String> classUpdate = new ArrayList<String>(Arrays.asList(classes.getText().toString().toUpperCase().replaceAll("\\s+","").split(",")));
                 Log.e("TESTING", classUpdate.toString());
+
+                // clear classes child, then update with new ones.
                 mData.child("classes").removeValue();
                 for (int i = 0; i < classUpdate.size(); i++) {
                     String data = classUpdate.get(i);
@@ -209,6 +216,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void uploadImage(Uri imageUri) {
+        // store the uploaded imageURI into Firebase storage.
         StorageReference fileRef = storageReference.child(fAuth.getCurrentUser().getUid() + ".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

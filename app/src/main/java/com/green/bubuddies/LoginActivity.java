@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        // Reset password button.
+        // Reset password button. Sends an email to the name of email inputted.
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                 i_email = email.getText().toString().trim();
                 i_pass = password.getText().toString().trim();
 
+                // Check if parameters entered are valid.
                 if (!Patterns.EMAIL_ADDRESS.matcher(i_email).matches()) {
                     email.setError("Email must be valid.");
                     email.requestFocus();
@@ -149,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 Log.e("TESTING", "attempting login...");
+                // Attempts  to sign in via fAuth. if there is an account, let them in, otherwise, deny.
                 fAuth.signInWithEmailAndPassword(i_email, i_pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

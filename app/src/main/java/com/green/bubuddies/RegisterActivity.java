@@ -26,7 +26,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
-/** Register a new account on the app without Google Sign-in. */
+/** Register a new account on the app. */
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "TESTING";
     EditText name, email, password, confirmPass;
@@ -39,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        // Initialize stuff from .xml
         name = findViewById(R.id.reg_name);
         email = findViewById(R.id.reg_email);
         password = findViewById(R.id.reg_pass);
@@ -57,14 +58,12 @@ public class RegisterActivity extends AppCompatActivity {
                 i_pass = password.getText().toString().trim();
                 i_confirmpass = confirmPass.getText().toString().trim();
 
-
                 // Name guidelines; It cannot be empty
                 if (i_name.length() < 1) {
                     name.setError("Your name cannot be null!");
                     name.requestFocus();
                     return;
                 }
-                // Check Firebase if a username of this kind already exists.
                 // Is email valid ?
                 if (!Patterns.EMAIL_ADDRESS.matcher(i_email).matches()) {
                     email.setError("Email must be valid.");
@@ -93,7 +92,6 @@ public class RegisterActivity extends AppCompatActivity {
                             }
 
 
-
                             // Create a new user in the firebase auth and database.
                             fAuth.createUserWithEmailAndPassword(i_email, i_pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -102,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         // Verification link for email
                                         FirebaseUser fUser = fAuth.getCurrentUser();
 
-                                        // Create the user and put them into database.
+                                        // Create the user using a User object and put them into database.
                                         User user = new User(i_name, i_email, fUser.getUid());
                                         FirebaseDatabase.getInstance().getReference("Users").child(fAuth.getCurrentUser().getUid())
                                                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -111,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 Toast.makeText(RegisterActivity.this, "User Successfully Created!", Toast.LENGTH_SHORT).show();
 
 
-                                                // Make a profile for the user if one does not exist.
+                                                // Make a profile for the user. Check in case it exists already. (bug testing)
                                                 Query query = FirebaseDatabase.getInstance().getReference().child("Profiles").orderByChild("uid").equalTo(fAuth.getCurrentUser().getUid());
                                                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override

@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenu.BtmMen
 
     }
 
+    // Below is for functionality of the bottom hotbar.
     @Override
     public void updateClickableButtons(){
         BottomMenu fragment = (BottomMenu) getSupportFragmentManager().findFragmentById(R.id.btmFragmentMain);

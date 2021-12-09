@@ -1,6 +1,6 @@
 package com.green.bubuddies;
 
-// Profile object. Holds the user's profile information.
+// Profile object. Holds the user's profile information for matching purposes.
 public class Profile {
     public String major, aboutMe, graduationYear, uid, picture, name;
 
