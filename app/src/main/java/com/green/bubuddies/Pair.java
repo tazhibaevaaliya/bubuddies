@@ -160,7 +160,7 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         });
         //find the curr_user's contacts and add them to deniedMates and msgMates
         //once done processing, calls findPair2
-        database.getReference("Users").child(curr_user).child("Contacts").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Users").child(curr_user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChild("BlockedBy")) {
