@@ -33,7 +33,6 @@ tgbubuddies@gmail.com
 Aliya@bubuddies.com (This account was created in our live demo during the presentation)
 deyan@bubuddies.com
 pay@g2pay.com
-gnaienaj@gmail.com
 cs411pr0jekt@gmail.com
 Smith@gmail.com 
 
