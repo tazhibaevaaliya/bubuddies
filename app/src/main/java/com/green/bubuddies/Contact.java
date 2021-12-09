@@ -7,19 +7,21 @@ public class Contact {
     String name;
     String msg;
     String pic;
+    String read_key;
     int unread_count;
     Long msg_time;
 
     public Contact() {
     }
 
-    public Contact(String id, String name, String msg, String pic, Long msg_time, int unread_count) {
+    public Contact(String id, String name, String msg, String pic, Long msg_time, int unread_count, String read_key) {
         this.id = id;
         this.name = name;
         this.msg = msg;
         this.pic = pic;
         this.msg_time = msg_time;
         this.unread_count = unread_count;
+        this.read_key = read_key;
     }
     // Implemented for sort the user's depending on their latest msg's timestamp
     public static Comparator<Contact> contactsComparator = new Comparator<Contact>() {
@@ -32,6 +34,14 @@ public class Contact {
             }
         }
     };
+
+    public String getRead_key() {
+        return read_key;
+    }
+
+    public void setRead_key(String read_key) {
+        this.read_key = read_key;
+    }
 
     public int getUnread_count() {
         return unread_count;
