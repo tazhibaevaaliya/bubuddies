@@ -33,7 +33,7 @@ import java.util.Locale;
  * 0) initialize all of the references to the views, variables, etc. and set onClickListener for the next button
  *                                          -> the next button adds the current pair_user to the deniedMates list.
  * 1) onCreate calls findPair() -> populate classList with all of the classes that the user is taking
- *                                 populate deniedMates and msgMates with IDs of users that are already messaging the current user
+ *                                 populate deniedMates and msgMates with IDs of users that are already messaging the current user or are blocked
  *
  * 2) findPair() calls findPair2() -> populate potentialMates with IDs of all other users that share atleast one class with
  *                                      the current user and aren't in the list denied mates
@@ -163,7 +163,13 @@ public class Pair extends AppCompatActivity implements BottomMenu.BtmMenuActivit
         database.getReference("Users").child(curr_user).child("Contacts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
+                if(snapshot.hasChild("BlockedBy")) {
+                    for (DataSnapshot child : snapshot.child("BlockedBy").getChildren()) {
+                        deniedMates.add(child.getValue(String.class));
+                        msgMates.add(child.getValue(String.class));
+                    }
+                }
+                for (DataSnapshot child : snapshot.child("Contacts").getChildren()) {
                     deniedMates.add(child.getValue(String.class));
                     msgMates.add(child.getValue(String.class));
                 }
