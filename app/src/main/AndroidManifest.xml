@@ -15,6 +15,7 @@
         <activity
             android:name=".Pair"
             android:label="@string/pair_name"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ProfileActivity"
@@ -48,13 +49,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Users" />
+        <activity android:name=".Users" android:screenOrientation="portrait" />
         <activity android:name=".Chat"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".StoreActivity"
             android:label="@string/store_name"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             android:screenOrientation="portrait"></activity>
         <activity
