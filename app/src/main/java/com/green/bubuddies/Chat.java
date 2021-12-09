@@ -47,7 +47,7 @@ public class Chat extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     TextView title;
-    String selfimg,img,read_key;
+    String selfimg,img;
     ArrayList<Message> messages = new ArrayList<>();
 
     @Override
@@ -240,6 +240,7 @@ public class Chat extends AppCompatActivity {
 
         // Get the latest read msg key and store the info in firebase
         reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).limitToLast(1).addValueEventListener(new ValueEventListener() {
+            String read_key;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data:snapshot.getChildren()){
