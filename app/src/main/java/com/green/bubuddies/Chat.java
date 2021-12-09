@@ -48,6 +48,7 @@ public class Chat extends AppCompatActivity {
     EditText messageArea;
     TextView title;
     String selfimg,img;
+    ValueEventListener listener;
     ArrayList<Message> messages = new ArrayList<>();
 
     @Override
@@ -97,6 +98,7 @@ public class Chat extends AppCompatActivity {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).removeEventListener(listener);
                 if(extras!= null) {
                     Log.e("from",extras.getString("from"));
 
@@ -241,7 +243,7 @@ public class Chat extends AppCompatActivity {
         });
 
         // Get the latest read msg key and store the info in firebase
-        reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+        listener = new ValueEventListener() {
             String read_key;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -256,7 +258,8 @@ public class Chat extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).limitToLast(1).addValueEventListener(listener);
     }
 
     public void deleteContact(){
@@ -386,6 +389,10 @@ public class Chat extends AppCompatActivity {
         popup_builder.setView(popupView);
         AlertDialog popup = popup_builder.create();
         popup.show();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }
