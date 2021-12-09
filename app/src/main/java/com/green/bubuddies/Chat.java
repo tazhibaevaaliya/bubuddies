@@ -144,6 +144,24 @@ public class Chat extends AppCompatActivity {
                     map.put("user", UserDetails.uid);
                     map.put("timestamp",ServerValue.TIMESTAMP);
 
+                    // If the msg is sent by the user who blocked the current user but wants to re-pair with the current user
+                    // Remove sender's uid from current user's blocked by list
+                    reference.child("Users").child(UserDetails.chatwithid).child("BlockedBy").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot data:snapshot.getChildren()){
+                                if(data.getValue().toString().equals(UserDetails.uid)){
+                                    data.getRef().removeValue();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                     // Update users' contact list
                     if(!UserDetails.contacts.contains(UserDetails.chatwithid)) {
                         reference.child("Users").child(UserDetails.uid).child("Contacts").push().setValue(UserDetails.chatwithid);
@@ -244,6 +262,7 @@ public class Chat extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.chatwithid + "_" + UserDetails.uid).removeValue();
         FirebaseDatabase.getInstance().getReference().child("Track").child(UserDetails.uid + "_" + UserDetails.chatwithid).removeValue();
         FirebaseDatabase.getInstance().getReference().child("Track").child(UserDetails.chatwithid + "_" + UserDetails.uid).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Users").child(UserDetails.chatwithid).child("BlockedBy").push().setValue(UserDetails.uid);
         // Update contact list
         UserDetails.contacts.remove(UserDetails.chatwithid);
         FirebaseDatabase.getInstance().getReference().child("Users").child(UserDetails.uid).child("Contacts").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -294,7 +313,7 @@ public class Chat extends AppCompatActivity {
         AlertDialog popup = popup_builder.create();
         popup.show();
 
-        warn.setText("DELETE "+ UserDetails.chatwithname+ " from contacts");
+        warn.setText("DELETE "+ UserDetails.chatwithname+ " from contacts\n Note: "+UserDetails.chatwithname+" will be blocked until you send new message to "+UserDetails.chatwithname);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
