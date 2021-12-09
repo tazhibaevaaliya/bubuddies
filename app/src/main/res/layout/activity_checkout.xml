@@ -68,12 +68,11 @@
             android:textColor="#777777"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btn_messageOwner"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView2"
+            android:name="com.green.bubuddies.NewMsg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/amaranth"
-            android:text="Message Owner" />
+            android:layout_height="50dp" />
 
         <include
             android:id="@+id/googlePayButton"

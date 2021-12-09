@@ -47,7 +47,7 @@ import java.util.Optional;
  *
  * Checkout implementation for the app
  */
-public class CheckoutActivity extends AppCompatActivity {
+public class CheckoutActivity extends AppCompatActivity implements NewMsg.newMsgActivity{
 
   // Arbitrarily-picked constant integer you define to track a request for payment data activity.
   private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 991;
@@ -94,8 +94,6 @@ public class CheckoutActivity extends AppCompatActivity {
     layoutBinding = ActivityCheckoutBinding.inflate(getLayoutInflater());
     setContentView(layoutBinding.getRoot());
 
-    layoutBinding.btnMessageOwner.setClickable(false);
-    layoutBinding.btnMessageOwner.setEnabled(false);
 
     // The Google Pay button is a layout file – take the root view
     googlePayButton = layoutBinding.googlePayButton.getRoot();
@@ -129,20 +127,6 @@ public class CheckoutActivity extends AppCompatActivity {
           description = snapshot.child("description").getValue(String.class);
         } catch (Exception e){
         }
-
-        layoutBinding.btnMessageOwner.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            Intent i = new Intent(CheckoutActivity.this,Users.class);
-            i.putExtra("chatwithid",ownerId);
-            i.putExtra("from","checkout");
-            i.putExtra("UID",getIntent().getExtras().getString("UID"));
-            Log.e("Passing chatwithid", ownerId);
-            startActivity(i); // change to messaging tab.
-          }
-        });
-        layoutBinding.btnMessageOwner.setEnabled(true);
-        layoutBinding.btnMessageOwner.setClickable(true);
 
         layoutBinding.detailTitle.setText(title);
         layoutBinding.detailPrice.setText("$" + price.toString());
@@ -324,6 +308,15 @@ public class CheckoutActivity extends AppCompatActivity {
         // Re-enables the Google Pay payment button.
         googlePayButton.setClickable(true);
     }
+  }
+
+  public void newConversation(){
+    Intent i = new Intent(CheckoutActivity.this,Users.class);
+    i.putExtra("chatwithid",ownerId);
+    i.putExtra("from","checkout");
+    i.putExtra("UID",getIntent().getExtras().getString("UID"));
+    Log.e("Passing chatwithid", ownerId);
+    startActivity(i); // change to messaging tab.
   }
 
 }
