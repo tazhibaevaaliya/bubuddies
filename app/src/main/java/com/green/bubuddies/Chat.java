@@ -47,7 +47,7 @@ public class Chat extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     TextView title;
-    String selfimg,img,read_key;
+    String selfimg,img;
     ArrayList<Message> messages = new ArrayList<>();
 
     @Override
@@ -168,7 +168,9 @@ public class Chat extends AppCompatActivity {
                         reference.child("Users").child(UserDetails.chatwithid).child("Contacts").push().setValue(UserDetails.uid);
 
                     }
-                    reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).push().setValue(map);
+                    String read_key = reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).push().getKey();
+                    reference.child("Track").child(UserDetails.uid + "_" + UserDetails.chatwithid).child("read").setValue(read_key);
+                    reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).child(read_key).setValue(map);
                     reference.child("Messages").child(UserDetails.chatwithid + "_" + UserDetails.uid).push().setValue(map);
                     InputMethodManager imm = (InputMethodManager) Chat.this.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(),0);
@@ -239,7 +241,8 @@ public class Chat extends AppCompatActivity {
         });
 
         // Get the latest read msg key and store the info in firebase
-        reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).limitToLast(1).addValueEventListener(new ValueEventListener() {
+        reference.child("Messages").child(UserDetails.uid + "_" + UserDetails.chatwithid).limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            String read_key;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data:snapshot.getChildren()){

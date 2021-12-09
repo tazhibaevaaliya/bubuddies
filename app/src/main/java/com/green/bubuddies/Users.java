@@ -157,17 +157,19 @@ public class Users extends AppCompatActivity implements BottomMenu.BtmMenuActivi
                     // Get the number of unread msg
 
                     // Check for the key for already read msg
+
                     FirebaseDatabase.getInstance().getReference().child("Track").child(UserDetails.uid+"_"+chatwithid).addValueEventListener(new ValueEventListener() {
-                        String read_key;
+//                        String read_key;
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             try {
                                 // If exist, then get the msg count after the already read msg
                                 for (DataSnapshot data : snapshot.getChildren()) {
-                                    read_key = data.getValue().toString();
+//                                    read_key = data.getValue().toString();
+                                    user.setRead_key(data.getValue().toString());
                                 }
 
-                                FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid+"_"+chatwithid).orderByKey().startAfter(read_key).addValueEventListener(new ValueEventListener() {
+                                FirebaseDatabase.getInstance().getReference().child("Messages").child(UserDetails.uid+"_"+chatwithid).orderByKey().startAfter(user.getRead_key()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         user.setUnread_count((int) snapshot.getChildrenCount());
