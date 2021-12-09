@@ -49,6 +49,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMenuActivity {
@@ -78,6 +79,8 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
     StorageReference storageReference;
     String imageURI;
     LinearLayoutManager linearLayoutManager;
+    Map<Integer, Integer> positions;
+    ArrayList<ListingModel> filteredlist;
     ListingAdapter listingAdapter;
     final String default_picture = "https://firebasestorage.googleapis.com/v0/b/bubuddies-3272b.appspot.com/o/books_default.gif?alt=media&token=29717e83-fa20-49f3-8da1-8a082a14c7cc"; //default picture for each listing
 
@@ -120,6 +123,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
         listingRV.addOnItemTouchListener(
                 new RecyclerItemClickListener(getBaseContext(), listingRV ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
+                        int index = positions.get(position);
                         createListingWindow(position);
                     }
 
@@ -313,7 +317,7 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
 
     private void filter(String text) {
         // creating a new array list to filter our data.
-        ArrayList<ListingModel> filteredlist = new ArrayList<>();
+        filteredlist = new ArrayList<>();
 
         // running a for loop to compare elements.
         for (ListingModel item : listingModelArrayList) {
@@ -333,6 +337,13 @@ public class StoreActivity extends AppCompatActivity implements BottomMenu.BtmMe
             // list to our adapter class.
             listingAdapter.filterList(filteredlist);
             listingAdapter.notifyDataSetChanged();
+            for(int i=0; i<filteredlist.size(); i++){
+                for(int j=0; j<titles.size(); j++){
+                    if(filteredlist.get(i).equals(titles.get(j))){
+                        positions.put(i,j);
+                    }
+                }
+            }
         }
     }
 
